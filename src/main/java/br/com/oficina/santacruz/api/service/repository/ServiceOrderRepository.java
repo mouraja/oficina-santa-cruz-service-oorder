@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
  * @author moura
  */
 @Repository
-public interface ServiceOrderRepository extends JpaRepository<ServiceOrderEntity, Long> {
+public interface ServiceOrderRepository 
+        extends JpaRepository<ServiceOrderEntity, Long> {
     
 }

@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author moura
  */
-public interface ServiceOrderTaskRepository extends JpaRepository<ServiceOrderTaskEntity, Long>  {
+public interface ServiceOrderTaskRepository 
+        extends JpaRepository<ServiceOrderTaskEntity, Long>  {
     
 }
