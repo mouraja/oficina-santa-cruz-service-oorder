@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.oficina.santacruz.api.service.controller;
+package br.com.oficina.service.api;
 
-import br.com.oficina.santacruz.api.service.model.ServiceOrderTaskEntity;
-import br.com.oficina.santacruz.api.service.repository.ServiceOrderTaskRepository;
+import br.com.oficina.service.controller.*;
+import br.com.oficina.service.entity.ServiceOrderTaskEntity;
+import br.com.oficina.service.repository.ServiceOrderTaskRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping({"/services/order/{orderId}/tasks"})
-public class ServiceOrderTaskController {
+public class ServiceOrderTaskAPI {
 
     @Autowired
     private ServiceOrderTaskRepository repository;

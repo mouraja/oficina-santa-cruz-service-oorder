@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.oficina.santacruz.api.service.model;
+package br.com.oficina.service.entity;
 
 import java.util.Calendar;
 import javax.persistence.Column;
@@ -26,7 +26,7 @@ import lombok.Data;
 public class ServiceOrderTaskEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long serviceOrderDetailId;
+    private Long serviceOrderTaskId;
     
     @ManyToOne
     @JoinColumn(name="serviceOrderId")

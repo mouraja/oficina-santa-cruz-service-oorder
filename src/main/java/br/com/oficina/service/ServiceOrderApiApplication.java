@@ -1,4 +1,4 @@
-package br.com.oficina.santacruz.api.service;
+package br.com.oficina.service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

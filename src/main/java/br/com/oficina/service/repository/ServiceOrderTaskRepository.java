@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.oficina.santacruz.api.service.repository;
+package br.com.oficina.service.repository;
 
-import br.com.oficina.santacruz.api.service.model.ServiceOrderTaskEntity;
+import br.com.oficina.service.entity.ServiceOrderTaskEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

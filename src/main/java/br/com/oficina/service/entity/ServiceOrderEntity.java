@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.oficina.santacruz.api.service.model;
+package br.com.oficina.service.entity;
 
 import java.util.Calendar;
 import java.util.List;
@@ -30,7 +30,7 @@ public class ServiceOrderEntity {
     private Long serviceOrderId;
     
     @Column(nullable = false)
-    private Integer serviceOrderYear;
+    private Integer serviceOrderIdYear;
     
     @Column(nullable = false)
     private String vehicleModel;
@@ -39,39 +39,38 @@ public class ServiceOrderEntity {
     private String licensePlate;
 
     @Column(nullable = false)
-    private String driverLeftCar;
+    private String driverLeftVehicle;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String releasedMaintenanceBy;
 
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
-    private Calendar entryDateVehicle;
+    private Calendar entryVehicleDate;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     @Temporal(TemporalType.DATE)
     private Calendar requestAutoPartDate;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String entryWaterLevel;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String entryOilLevel;
 
-    @Column(nullable = false)
-    private Integer entryOdometer;
+    @Column(nullable = true)
+    private Integer entryOdometerKm;
 
     @Column(nullable = false)
     private String vehicleObservation;
 
-    @Column(nullable = false)
     @OneToMany(
             targetEntity = ServiceOrderTaskEntity.class,
             mappedBy = "serviceOrder",
             fetch = FetchType.EAGER)
     private List<ServiceOrderTaskEntity> serviceOrderTasks;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     @Temporal(TemporalType.DATE)
-    private Calendar serviceOrderExpectedTimeDuration;
+    private Calendar expectedTimeDuration;
 }

@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.oficina.santacruz.api.service.controller;
-
-import br.com.oficina.santacruz.api.service.repository.ServiceOrderRepository;
-import br.com.oficina.santacruz.api.service.model.ServiceOrderEntity;
+package br.com.oficina.service.controller;
+/**
+import br.com.oficina.service.repository.ServiceOrderRepository;
+import br.com.oficina.service.entity.ServiceOrderEntity;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,14 +18,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
+*/
 /**
  *
  * @author moura
  */
+/**
 @RestController
 @RequestMapping("/services/order")
-public class ServiceOrderController {
+*/
+public class ServiceOrderControllerOld {
+    /**
     @Autowired
     private ServiceOrderRepository repository;
     
@@ -53,13 +56,13 @@ public class ServiceOrderController {
         return repository.findById(id)
                 .map(record -> {
                     record.setVehicleModel(serviceOrder.getVehicleModel());
-                    record.setEntryOdometer(serviceOrder.getEntryOdometer());
+                    record.setEntryOdometerKm(serviceOrder.getEntryOdometerKm());
                     record.setEntryOilLevel(serviceOrder.getEntryOilLevel());
                     record.setEntryWaterLevel(serviceOrder.getEntryWaterLevel());
                     record.setReleasedMaintenanceBy(serviceOrder.getReleasedMaintenanceBy());
                     record.setRequestAutoPartDate(serviceOrder.getRequestAutoPartDate());
                     record.setServiceOrderTasks(serviceOrder.getServiceOrderTasks());
-                    record.setServiceOrderExpectedTimeDuration(serviceOrder.getServiceOrderExpectedTimeDuration());
+                    record.setExpectedTimeDuration(serviceOrder.getExpectedTimeDuration());
                     ServiceOrderEntity updated = repository.save(record);
                     return ResponseEntity.ok().body(updated);
                 }).orElse(ResponseEntity.notFound().build());
@@ -74,5 +77,5 @@ public class ServiceOrderController {
                     return ResponseEntity.ok().build();
                 }).orElse(ResponseEntity.notFound().build());
     }
-    
+    */
 }
