@@ -21,26 +21,35 @@ import org.springframework.stereotype.Service;
 @Service
 
 @RequiredArgsConstructor
-public class ServiceOrderUseCaseImpl  {
+public class ServiceOrderUseCaseImpl implements ServiceOrderUseCase {
 
     private final ServiceOrderRepository repository;
     
+    @Override
     public List<ServiceOrderEntity> findAll() {
         List<ServiceOrderEntity> list = new ArrayList<>();
         repository.findAll().forEach(e -> list.add(e));
         return list;
     }
     
+    @Override
     public Optional<ServiceOrderEntity> findById(Long id){
         return repository.findById(id);
     }
 
+    @Override
     public ServiceOrderEntity save(ServiceOrderEntity serviceOrder){
         return repository.save(serviceOrder);
     }
 
+    @Override
     public void deleteById(Long id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public ServiceOrderEntity update(ServiceOrderEntity serviceOrder) {
+        return repository.save(serviceOrder);
     }
 
 }

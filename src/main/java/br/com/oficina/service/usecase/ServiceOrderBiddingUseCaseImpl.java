@@ -5,7 +5,6 @@
  */
 package br.com.oficina.service.usecase;
 
-import br.com.oficina.service.domain.PublicClientEntity;
 import br.com.oficina.service.domain.ServiceOrderBiddingEntity;
 import java.util.List;
 import java.util.Optional;
@@ -25,6 +24,7 @@ public class ServiceOrderBiddingUseCaseImpl implements ServiceOrderBiddingUseCas
     private final ServiceOrderBiddingRepository repository;
 
 
+    @Override
     public List<ServiceOrderBiddingEntity> findAll() {
         List<ServiceOrderBiddingEntity> list = new ArrayList<>();
         repository.findAll().forEach(e -> list.add(e));
@@ -32,14 +32,17 @@ public class ServiceOrderBiddingUseCaseImpl implements ServiceOrderBiddingUseCas
     }
 
 
+    @Override
     public Optional<ServiceOrderBiddingEntity> findById(Long id){
         return repository.findById(id);
     }
 
+    @Override
     public ServiceOrderBiddingEntity save(ServiceOrderBiddingEntity serviceOrderBidding){
         return repository.save(serviceOrderBidding);
     }
 
+    @Override
     public void deleteById(Long id) {
         repository.deleteById(id);
     }

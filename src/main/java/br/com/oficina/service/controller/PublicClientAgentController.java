@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author moura
  */
 @RestController
-@RequestMapping("/api/client/public")
+@RequestMapping("/api/client/public/agent")
 public class PublicClientAgentController {
 
     @Autowired

@@ -5,7 +5,6 @@
  */
 package br.com.oficina.service.domain;
 
-import br.com.oficina.service.domain.BiddingEntity;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.Calendar;
 import javax.persistence.Column;

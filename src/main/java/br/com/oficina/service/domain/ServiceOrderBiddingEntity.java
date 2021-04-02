@@ -5,9 +5,6 @@
  */
 package br.com.oficina.service.domain;
 
-import br.com.oficina.service.domain.PublicOrderRequestAutoPart;
-import br.com.oficina.service.domain.BiddingStatusEnum;
-import br.com.oficina.service.domain.PublicClientAgentEntity;
 import java.util.Calendar;
 import javax.persistence.Column;
 import javax.persistence.Entity;
