@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.oficina.service.service;
+package br.com.oficina.service.usecase;
 
 import br.com.oficina.service.repository.ServiceOrderRepository;
-import br.com.oficina.service.entity.ServiceOrderEntity;
+import br.com.oficina.service.domain.ServiceOrderEntity;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 @Service
 
 @RequiredArgsConstructor
-public class ServiceOrderService {
+public class ServiceOrderUseCase {
 
     private final ServiceOrderRepository repository;
     
@@ -38,5 +38,6 @@ public class ServiceOrderService {
     public void deleteById(Long id) {
         repository.deleteById(id);
     }
+
     
 }

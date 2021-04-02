@@ -5,8 +5,8 @@
  */
 package br.com.oficina.service.api;
 
-import br.com.oficina.service.entity.ServiceOrderEntity;
-import br.com.oficina.service.service.ServiceOrderService;
+import br.com.oficina.service.domain.ServiceOrderEntity;
+import br.com.oficina.service.usecase.ServiceOrderUseCase;
 import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,7 +32,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequiredArgsConstructor
 public class ServiceOrderAPI {
     
-    private final ServiceOrderService service;
+    private final ServiceOrderUseCase service;
     
     @GetMapping
     public ResponseEntity<List<ServiceOrderEntity>> findAll() {

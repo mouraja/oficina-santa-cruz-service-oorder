@@ -5,9 +5,7 @@
  */
 package br.com.oficina.service.api;
 
-import br.com.oficina.service.controller.*;
-import br.com.oficina.service.entity.ServiceOrderTaskEntity;
-import br.com.oficina.service.repository.ServiceOrderTaskRepository;
+import br.com.oficina.service.domain.ServiceOrderBiddingEntity;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +17,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import br.com.oficina.service.repository.ServiceOrderBiddingRepository;
 
 /**
  *
@@ -26,18 +25,18 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping({"/services/order/{orderId}/tasks"})
-public class ServiceOrderTaskAPI {
+public class ServiceOrderBiddingAPI {
 
     @Autowired
-    private ServiceOrderTaskRepository repository;
+    private ServiceOrderBiddingRepository repository;
 
     @GetMapping
-    public List<ServiceOrderTaskEntity> list() {
+    public List<ServiceOrderBiddingEntity> list() {
         return repository.findAll();
     }
 
     @GetMapping(path = {"/{id}"})
-    public ResponseEntity<ServiceOrderTaskEntity> findById(
+    public ResponseEntity<ServiceOrderBiddingEntity> findById(
             @PathVariable long id){
         return repository.findById(id)
                 .map(record -> ResponseEntity.ok().body(record))
@@ -45,21 +44,26 @@ public class ServiceOrderTaskAPI {
     }
 
     @PostMapping
-    public ServiceOrderTaskEntity create(
-            @RequestBody ServiceOrderTaskEntity serviceOrder){
+    public ServiceOrderBiddingEntity create(
+            @RequestBody ServiceOrderBiddingEntity serviceOrder){
         return repository.save(serviceOrder);
     }
 
     @PutMapping(value="/{id}")
-    public ResponseEntity<ServiceOrderTaskEntity> update(
+    public ResponseEntity<ServiceOrderBiddingEntity> update(
             @PathVariable("id") long id,
-            @RequestBody ServiceOrderTaskEntity serviceOrder){
+            @RequestBody ServiceOrderBiddingEntity serviceOrder){
         return repository.findById(id)
                 .map(record -> {
-                    record.setBiddingId(serviceOrder.getBiddingId());
+                    record.setBidding(serviceOrder.getBidding());
                     record.setTaskDescription(serviceOrder.getTaskDescription());
                     record.setExpectedTimeDuration(serviceOrder.getExpectedTimeDuration());
-                    ServiceOrderTaskEntity updated = repository.save(record);
+                    record.setRequestedAutoPart(serviceOrder.getRequestedAutoPart());
+                    record.setAuthorizerTaskDone(serviceOrder.getAuthorizerTaskDone());
+                    record.setAuthorizerTaskTodo(serviceOrder.getAuthorizerTaskTodo());
+                    record.setServiceOrder(serviceOrder.getServiceOrder());
+                    record.setStatus(serviceOrder.getStatus());
+                    ServiceOrderBiddingEntity updated = repository.save(record);
                     return ResponseEntity.ok().body(updated);
                 }).orElse(ResponseEntity.notFound().build());
     }

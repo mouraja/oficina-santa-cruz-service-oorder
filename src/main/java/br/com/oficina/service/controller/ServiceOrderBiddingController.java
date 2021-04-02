@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @author moura
  */
 @Controller
-public class ServiceOrderTaskController {
+public class ServiceOrderBiddingController {
     @GetMapping("/tasks")
     public String list(){
         return "ServiceOrderTasks";

@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.oficina.service.service;
+package br.com.oficina.service.usecase;
 
-import br.com.oficina.service.entity.ServiceOrderTaskEntity;
-import br.com.oficina.service.repository.ServiceOrderTaskRepository;
+import br.com.oficina.service.domain.ServiceOrderBiddingEntity;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import br.com.oficina.service.repository.ServiceOrderBiddingRepository;
 
 /**
  *
@@ -18,21 +18,21 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @RequiredArgsConstructor
-public class ServiceOrderTaskService {
+public class ServiceOrderBiddingService {
 
-    private final ServiceOrderTaskRepository repository;
+    private final ServiceOrderBiddingRepository repository;
 
 
-    public List<ServiceOrderTaskEntity> findAll() {
+    public List<ServiceOrderBiddingEntity> findAll() {
         return repository.findAll();
     }
 
 
-    public Optional<ServiceOrderTaskEntity> findById(Long id){
+    public Optional<ServiceOrderBiddingEntity> findById(Long id){
         return repository.findById(id);
     }
 
-    public ServiceOrderTaskEntity save(ServiceOrderTaskEntity serviceOrder){
+    public ServiceOrderBiddingEntity save(ServiceOrderBiddingEntity serviceOrder){
         return repository.save(serviceOrder);
     }
 

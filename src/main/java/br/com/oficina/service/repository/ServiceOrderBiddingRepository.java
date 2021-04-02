@@ -5,14 +5,14 @@
  */
 package br.com.oficina.service.repository;
 
-import br.com.oficina.service.entity.ServiceOrderTaskEntity;
+import br.com.oficina.service.domain.ServiceOrderBiddingEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author moura
  */
-public interface ServiceOrderTaskRepository 
-        extends JpaRepository<ServiceOrderTaskEntity, Long>  {
+public interface ServiceOrderBiddingRepository 
+        extends JpaRepository<ServiceOrderBiddingEntity, Long>  {
     
 }

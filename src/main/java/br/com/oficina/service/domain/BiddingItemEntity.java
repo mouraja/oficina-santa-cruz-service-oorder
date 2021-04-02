@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.oficina.service.entity;
+package br.com.oficina.service.domain;
 
+import br.com.oficina.service.domain.BiddingEntity;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.Calendar;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +16,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import lombok.Data;
 
 /**
@@ -23,22 +24,28 @@ import lombok.Data;
  */
 @Data
 @Entity
-public class ServiceOrderTaskEntity {
+public class BiddingItemEntity {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long serviceOrderTaskId;
-    
-    @ManyToOne
-    @JoinColumn(name="serviceOrderId")
-    private ServiceOrderEntity serviceOrder;
-    
-    @Column(nullable = true)
-    private String biddingId;
+    private Long biddingItemId;
     
     @Column(nullable = false)
-    private String taskDescription;
-
+    private String description;
+    
+    @Column(nullable = false)
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Calendar expectedWorkedHours;
+    
     @Column(nullable = true)
-    @Temporal(TemporalType.DATE)
-    private Calendar expectedTimeDuration;    
+    private Float valuePayedByHour;
+    
+    @JsonManagedReference
+    @ManyToOne
+    @JoinColumn(name="biddingId")
+    private BiddingEntity bidding;
+    
+    @Column(nullable = false)
+    private boolean status;
+    
 }

@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.oficina.service.entity;
+package br.com.oficina.service.domain;
 
+import br.com.oficina.service.domain.ServiceOrderBiddingEntity;
+import br.com.oficina.service.domain.PublicClientAgentEntity;
+import br.com.oficina.utils.CommonAudityAttributeEntity;
 import java.util.Calendar;
 import java.util.List;
 import javax.persistence.Column;
@@ -24,33 +27,33 @@ import lombok.Data;
  */
 @Data
 @Entity
-public class ServiceOrderEntity {
+public class ServiceOrderEntity extends CommonAudityAttributeEntity {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long serviceOrderId;
     
     @Column(nullable = false)
-    private Integer serviceOrderIdYear;
+    private Integer serviceOrderYear;
     
     @Column(nullable = false)
-    private String vehicleModel;
+    private VehicleEntity vehicle;
 
     @Column(nullable = false)
     private String licensePlate;
 
     @Column(nullable = false)
-    private String driverLeftVehicle;
+    private PublicClientAgentEntity entryDriver;
 
     @Column(nullable = true)
-    private String releasedMaintenanceBy;
+    private PublicClientAgentEntity controller;
 
+    @Column(nullable = true)
+    private String controllerAprovedAt;
+    
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     private Calendar entryVehicleDate;
-
-    @Column(nullable = true)
-    @Temporal(TemporalType.DATE)
-    private Calendar requestAutoPartDate;
 
     @Column(nullable = true)
     private String entryWaterLevel;
@@ -65,12 +68,31 @@ public class ServiceOrderEntity {
     private String vehicleObservation;
 
     @OneToMany(
-            targetEntity = ServiceOrderTaskEntity.class,
+            targetEntity = ServiceOrderBiddingEntity.class,
             mappedBy = "serviceOrder",
             fetch = FetchType.EAGER)
-    private List<ServiceOrderTaskEntity> serviceOrderTasks;
+    private List<ServiceOrderBiddingEntity> serviceOrderTasks;
 
-    @Column(nullable = true)
+    //@Column(nullable = true)
     @Temporal(TemporalType.DATE)
     private Calendar expectedTimeDuration;
+
+    //@Column(nullable = true)
+    //private String signRevisor;
+   
+    //@Column(nullable = true)
+    //private String signApprover;
+
+    //@Column(nullable = true)
+    //@Temporal(TemporalType.DATE)
+    //private Calendar revisedDate;
+
+    //@Column(nullable = true)
+    //@Temporal(TemporalType.DATE)
+    //private Calendar approvedDate;
+
+    @Column(nullable = true)
+    private ServiceOrderStatusEnum status;
+
+    
 }

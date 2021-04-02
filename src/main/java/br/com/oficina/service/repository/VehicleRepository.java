@@ -5,8 +5,8 @@
  */
 package br.com.oficina.service.repository;
 
-import br.com.oficina.service.domain.ServiceOrderEntity;
-import org.springframework.data.jpa.repository.JpaRepository;
+import br.com.oficina.service.domain.VehicleEntity;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,6 +14,6 @@ import org.springframework.stereotype.Repository;
  * @author moura
  */
 @Repository
-public interface ServiceOrderRepository 
-        extends JpaRepository<ServiceOrderEntity, Long> {
+public interface VehicleRepository  
+        extends CrudRepository<VehicleEntity, Long>  {
 }
