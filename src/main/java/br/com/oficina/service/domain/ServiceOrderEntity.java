@@ -19,7 +19,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -27,6 +29,8 @@ import lombok.Data;
  */
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class ServiceOrderEntity extends CommonAudityAttributeEntity {
     
     @Id

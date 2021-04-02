@@ -17,7 +17,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -25,9 +27,12 @@ import lombok.Data;
  */
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class BiddingEntity extends CommonAudityAttributeEntity {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     private String biddingDescription;
