@@ -5,7 +5,7 @@
  */
 package br.com.oficina.service.repository;
 
-import br.com.oficina.service.domain.ServiceOrderEntity;
+import br.com.oficina.service.domain.PublicClientAgentEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +14,6 @@ import org.springframework.stereotype.Repository;
  * @author moura
  */
 @Repository
-public interface ServiceOrderRepository 
-        extends CrudRepository<ServiceOrderEntity, Long> {
+public interface PublicClientAgentRepository  
+        extends CrudRepository<PublicClientAgentEntity, Long>  {
 }

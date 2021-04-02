@@ -5,8 +5,8 @@
  */
 package br.com.oficina.service.usecase;
 
-import br.com.oficina.service.domain.VehicleEntity;
-import br.com.oficina.service.repository.VehicleRepository;
+import br.com.oficina.service.domain.PublicClientEntity;
+import br.com.oficina.service.repository.PublicClientRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -19,31 +19,32 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @RequiredArgsConstructor
-public class VehicleUseCaseImpl implements VehicleUseCase {
+public class PublicClientUseCaseImpl implements PublicClientUseCase {
     
-    private final VehicleRepository repository;
+    private final PublicClientRepository repository;
     
     @Override
-    public List<VehicleEntity> findAll() {
-        List<VehicleEntity> list = new ArrayList<>();
+    public List<PublicClientEntity> findAll() {
+        List<PublicClientEntity> list = new ArrayList<>();
         repository.findAll().forEach(e -> list.add(e));
         return list;
     }
     
     @Override
-    public Optional<VehicleEntity> findById(Long id){
+    public Optional<PublicClientEntity> findById(Long id){
         return repository.findById(id);
     }
 
     @Override
-    public VehicleEntity save(VehicleEntity vehicle){
-        return repository.save(vehicle);
+    public PublicClientEntity save(PublicClientEntity serviceOrder){
+        return repository.save(serviceOrder);
     }
 
     @Override
-    public VehicleEntity update(VehicleEntity vehicle){
-        return repository.save(vehicle);
+    public PublicClientEntity update(PublicClientEntity serviceOrder){
+        return repository.save(serviceOrder);
     }
+    
     @Override
     public void deleteById(Long id) {
         repository.deleteById(id);

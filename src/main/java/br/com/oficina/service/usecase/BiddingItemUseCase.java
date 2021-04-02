@@ -1,6 +1,6 @@
 package br.com.oficina.service.usecase;
 
-import br.com.oficina.service.domain.VehicleEntity;
+import br.com.oficina.service.domain.BiddingItemEntity;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,15 +14,15 @@ import java.util.Optional;
  *
  * @author moura
  */
-public interface VehicleUseCase {
+public interface BiddingItemUseCase {
     
-    public List<VehicleEntity> findAll();
+    public List<BiddingItemEntity> findAll();
     
-    public Optional<VehicleEntity> findById(Long id);
+    public Optional<BiddingItemEntity> findById(Long id);
 
-    public VehicleEntity save(VehicleEntity vehicle);
+    public BiddingItemEntity save(BiddingItemEntity biddingItem);
 
-    public VehicleEntity update(VehicleEntity vehicle);
+    public BiddingItemEntity update(BiddingItemEntity biddingItem);
 
     public void deleteById(Long id);
 }

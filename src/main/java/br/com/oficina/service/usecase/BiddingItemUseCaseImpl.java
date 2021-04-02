@@ -5,8 +5,8 @@
  */
 package br.com.oficina.service.usecase;
 
-import br.com.oficina.service.domain.VehicleEntity;
-import br.com.oficina.service.repository.VehicleRepository;
+import br.com.oficina.service.domain.BiddingItemEntity;
+import br.com.oficina.service.repository.BiddingItemRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -19,30 +19,30 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @RequiredArgsConstructor
-public class VehicleUseCaseImpl implements VehicleUseCase {
+public class BiddingItemUseCaseImpl implements BiddingItemUseCase {
     
-    private final VehicleRepository repository;
+    private final BiddingItemRepository repository;
     
     @Override
-    public List<VehicleEntity> findAll() {
-        List<VehicleEntity> list = new ArrayList<>();
+    public List<BiddingItemEntity> findAll() {
+        List<BiddingItemEntity> list = new ArrayList<>();
         repository.findAll().forEach(e -> list.add(e));
         return list;
     }
     
     @Override
-    public Optional<VehicleEntity> findById(Long id){
+    public Optional<BiddingItemEntity> findById(Long id){
         return repository.findById(id);
     }
 
     @Override
-    public VehicleEntity save(VehicleEntity vehicle){
-        return repository.save(vehicle);
+    public BiddingItemEntity save(BiddingItemEntity biddingItem){
+        return repository.save(biddingItem);
     }
 
     @Override
-    public VehicleEntity update(VehicleEntity vehicle){
-        return repository.save(vehicle);
+    public BiddingItemEntity update(BiddingItemEntity biddingItem){
+        return repository.save(biddingItem);
     }
     @Override
     public void deleteById(Long id) {

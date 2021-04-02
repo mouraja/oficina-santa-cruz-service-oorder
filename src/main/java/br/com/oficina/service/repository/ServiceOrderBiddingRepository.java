@@ -6,13 +6,13 @@
 package br.com.oficina.service.repository;
 
 import br.com.oficina.service.domain.ServiceOrderBiddingEntity;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
 /**
  *
  * @author moura
  */
 public interface ServiceOrderBiddingRepository 
-        extends JpaRepository<ServiceOrderBiddingEntity, Long>  {
+        extends CrudRepository<ServiceOrderBiddingEntity, Long>  {
     
 }

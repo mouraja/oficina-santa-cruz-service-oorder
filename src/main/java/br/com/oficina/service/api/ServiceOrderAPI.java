@@ -6,7 +6,7 @@
 package br.com.oficina.service.api;
 
 import br.com.oficina.service.domain.ServiceOrderEntity;
-import br.com.oficina.service.usecase.ServiceOrderUseCase;
+import br.com.oficina.service.usecase.ServiceOrderUseCaseImpl;
 import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequiredArgsConstructor
 public class ServiceOrderAPI {
     
-    private final ServiceOrderUseCase service;
+    private final ServiceOrderUseCaseImpl service;
     
     @GetMapping
     public ResponseEntity<List<ServiceOrderEntity>> findAll() {

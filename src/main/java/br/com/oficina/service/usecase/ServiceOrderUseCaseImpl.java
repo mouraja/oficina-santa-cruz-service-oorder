@@ -6,33 +6,36 @@
 package br.com.oficina.service.usecase;
 
 import br.com.oficina.service.domain.ServiceOrderBiddingEntity;
+import br.com.oficina.service.repository.ServiceOrderRepository;
+import br.com.oficina.service.domain.ServiceOrderEntity;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import br.com.oficina.service.repository.ServiceOrderBiddingRepository;
 
 /**
  *
  * @author moura
  */
 @Service
+
 @RequiredArgsConstructor
-public class ServiceOrderBiddingService {
+public class ServiceOrderUseCaseImpl  {
 
-    private final ServiceOrderBiddingRepository repository;
-
-
-    public List<ServiceOrderBiddingEntity> findAll() {
-        return repository.findAll();
+    private final ServiceOrderRepository repository;
+    
+    public List<ServiceOrderEntity> findAll() {
+        List<ServiceOrderEntity> list = new ArrayList<>();
+        repository.findAll().forEach(e -> list.add(e));
+        return list;
     }
-
-
-    public Optional<ServiceOrderBiddingEntity> findById(Long id){
+    
+    public Optional<ServiceOrderEntity> findById(Long id){
         return repository.findById(id);
     }
 
-    public ServiceOrderBiddingEntity save(ServiceOrderBiddingEntity serviceOrder){
+    public ServiceOrderEntity save(ServiceOrderEntity serviceOrder){
         return repository.save(serviceOrder);
     }
 

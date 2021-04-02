@@ -5,39 +5,24 @@
  */
 package br.com.oficina.service.usecase;
 
-import br.com.oficina.service.repository.ServiceOrderRepository;
 import br.com.oficina.service.domain.ServiceOrderEntity;
 import java.util.List;
 import java.util.Optional;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 /**
  *
  * @author moura
  */
-@Service
+public interface ServiceOrderUseCase  {
 
-@RequiredArgsConstructor
-public class ServiceOrderUseCase {
-
-    private final ServiceOrderRepository repository;
+    public List<ServiceOrderEntity> findAll();
     
-    public List<ServiceOrderEntity> findAll() {
-        return repository.findAll();
-    }
-    
-    public Optional<ServiceOrderEntity> findById(Long id){
-        return repository.findById(id);
-    }
+    public Optional<ServiceOrderEntity> findById(Long id);
 
-    public ServiceOrderEntity save(ServiceOrderEntity serviceOrder){
-        return repository.save(serviceOrder);
-    }
+    public ServiceOrderEntity save(ServiceOrderEntity serviceOrder);
 
-    public void deleteById(Long id) {
-        repository.deleteById(id);
-    }
+    public ServiceOrderEntity update(ServiceOrderEntity serviceOrder);
 
+    public void deleteById(Long id);
     
 }

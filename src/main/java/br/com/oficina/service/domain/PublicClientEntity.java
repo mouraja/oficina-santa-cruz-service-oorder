@@ -23,16 +23,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-public class PublicClientEntity 
-        extends CommonAudityAttributeEntity {
+public class PublicClientEntity
+    extends CommonAudityAttributeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long publicClientId;
-    
+
     @Column(nullable = false)
     private String publicName;
- 
+
     @Column(nullable = false)
     private String publicFantasyName;
 
@@ -54,11 +54,14 @@ public class PublicClientEntity
     @Column(nullable = true)
     private String primarySupportContact;
 
+    @Column(nullable = true)
+    private String observation;
 /*    
     @OneToMany(
             targetEntity = PublicClientAgentEntity.class,
             mappedBy = "publicClient",
             fetch = FetchType.EAGER)
     private List<PublicClientAgentEntity> publicClientAgents;
-*/  
+*/
+
 }
