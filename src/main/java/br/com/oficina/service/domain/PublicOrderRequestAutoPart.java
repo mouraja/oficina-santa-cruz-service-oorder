@@ -24,7 +24,7 @@ public class PublicOrderRequestAutoPart {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long publicOrderRequestAutoPart;
+    private Long id;
     
     @Temporal(javax.persistence.TemporalType.DATE)
     @Column(nullable = false)

@@ -24,7 +24,7 @@ and open the template in the editor.
 
   <template id="serviceOrder">
     <div>
-      <h2><i class="glyphicon glyphicon-tint"></i>{{ serviceOrder.serviceOrderId }}</h2> / <h2>{{ serviceOrder.serviceOrderIdYear }}</h2>
+      <h2><i class="glyphicon glyphicon-tint"></i>{{ serviceOrder.serviceOrderYear }}</h2> / <h2>{{ serviceOrder.serviceOrderYear }}</h2>
       <b>Vehicle observation: </b>
       <div><span class="glyphicon glyphicon-comment" style="color:lightsalmon" aria-hidden="true"></span>{{ serviceOrder.vehicleObservation }}</div>
       <b>Vehicle model: </b>
@@ -32,11 +32,11 @@ and open the template in the editor.
       <b>License plate: </b>
       <div><span class="glyphicon glyphicon-file" aria-hidden="true"></span>{{ serviceOrder.licensePlate }}</div>
       <b>Driver left vehicle: </b>
-      <div><span class="glyphicon glyphicon-user" style="color:gold" aria-hidden="true"></span>{{ serviceOrder.driverLeftVehicle }}</div>
+      <div><span class="glyphicon glyphicon-user" style="color:gold" aria-hidden="true"></span>{{ serviceOrder.maintenanceRequester }}</div>
       <b>Entry vehicle At: </b>
       <div><span class="glyphicon glyphicon-time" style="color:lightcoral" aria-hidden="true"></span>{{ serviceOrder.entryVehicleDate }}</div>
       <b>Vehicle Model: </b>
-      <div><span class="glyphicon glyphicon-user" style="color:lightblue" aria-hidden="true"></span>{{ serviceOrder.releasedMaintenanceBy }}</div>
+      <div><span class="glyphicon glyphicon-user" style="color:lightblue" aria-hidden="true"></span>{{ serviceOrder.maintenanceAuthorizer }}</div>
       <b>Request autopart at: </b>
       <div><span class="glyphicon glyphicon-calendar" style="color:lightgreen" aria-hidden="true"></span>{{ serviceOrder.requestAutoPartDate }}</div>
       <b>Entry water level: </b>
@@ -85,7 +85,7 @@ and open the template in the editor.
           <!-- tr v-for="serviceOrder in serviceOrders | filterBy searchKey in 'name'" -->
           <td>
             <a>
-              <router-link :to="{name: 'serviceOrder', params: {serviceOrder_id: serviceOrder.serviceOrderId}}">{{ serviceOrder.serviceOrderId }}/{{ serviceOrder.serviceOrderIdYear }}</router-link>
+              <router-link :to="{name: 'serviceOrder', params: {serviceOrder_id: serviceOrder.serviceOrderId}}">{{ serviceOrder.serviceOrderId }}/{{ serviceOrder.serviceOrderYear }}</router-link>
             </a>
           </td>
           <td>
@@ -118,7 +118,7 @@ and open the template in the editor.
       <form @submit="createServiceOrder">
         <div class="form-group">
           <label for="add-year">Year</label>
-          <input type="number" class="form-control" id="add-year" v-model="serviceOrder.serviceOrderIdYear" required/>
+          <input type="number" class="form-control" id="add-year" v-model="serviceOrder.serviceOrderYear" required/>
         </div>
         <div class="form-group">
           <label for="add-description">Observation</label>
@@ -138,31 +138,31 @@ and open the template in the editor.
         </div>
         <div class="form-group">
           <label for="add-driver">Vehicle left by</label>
-          <input size="72" class="form-control" id="add-driver" v-model="serviceOrder.driverLeftVehicle" required/>
+          <input size="72" class="form-control" id="add-driver" v-model="serviceOrder.maintenanceRequester" required/>
         </div>
         <div class="form-group">
           <label for="add-released">Released for maintenance by</label>
-          <input size="72" class="form-control" id="add-released" v-model="serviceOrder.releasedMaintenanceBy" />
+          <input size="72" class="form-control" id="add-released" v-model="serviceOrder.maintenanceAuthorizer" />
         </div>
         <div class="form-group">
           <label for="add-autopart">Request auto part at</label>
-          <input type="date" class="form-control" id="add-autopart" v-model="serviceOrder.requestAutoPartDate" required/>
+          <input type="date" class="form-control" id="add-autopart" v-model="serviceOrder.requestAutoPartDate" />
         </div>
         <div class="form-group">
           <label for="add-water-up">Water level up</label>
-          <input type="radio" class="form-control" id="add-water-up" value="Up" v-model="serviceOrder.entryWaterLevel"/><br/>
+          <input type="radio" class="form-control" id="add-water-up" value="Up" v-model="serviceOrder.entryWaterLevel" /><br/>
           <label for="add-water-down">Water level down</label>
-          <input type="radio" class="form-control" id="add-water-down" value="Down" v-model="serviceOrder.entryWaterLevel"/>
+          <input type="radio" class="form-control" id="add-water-down" value="Down" v-model="serviceOrder.entryWaterLevel" />
         </div>
         <div class="form-group">
           <label for="add-oil-up">Oil level up</label>
-          <input type="radio" class="form-control" id="add-oil-up" value="Up" v-model="serviceOrder.entryOilLevel"/><br/>
+          <input type="radio" class="form-control" id="add-oil-up" value="Up" v-model="serviceOrder.entryOilLevel" /><br/>
           <label for="add-oil-down">Oil level down</label>
-          <input type="radio" class="form-control" id="add-oil-down" value="Down" v-model="serviceOrder.entryOilLevel"/>
+          <input type="radio" class="form-control" id="add-oil-down" value="Down" v-model="serviceOrder.entryOilLevel" />
         </div>
         <div class="form-group">
           <label for="add-km">Odometer Km</label>
-          <input type="number" class="form-control" id="add-km" v-model="serviceOrder.entryOdometerKm" required/>
+          <input type="number" class="form-control" id="add-km" v-model="serviceOrder.entryOdometerKm" />
         </div>
         <button type="submit" class="btn btn-primary">Create</button>
         <a class="btn btn-default">
@@ -178,7 +178,7 @@ and open the template in the editor.
       <form @submit="updateServiceOrder">
         <div class="form-group">
           <label for="edit-year">Year</label>
-          <input type="number" class="form-control" id="edit-year" v-model="serviceOrder.serviceOrderIdYear" required/>
+          <input type="number" class="form-control" id="edit-year" v-model="serviceOrder.serviceOrderYear" required/>
         </div>
         <div class="form-group">
           <label for="edit-description">Observation</label>
@@ -198,15 +198,15 @@ and open the template in the editor.
         </div>
         <div class="form-group">
           <label for="edit-driver">Vehicle left by</label>
-          <input size="72" class="form-control" id="edit-driver" v-model="serviceOrder.driverLeftVehicle" required/>
+          <input size="72" class="form-control" id="edit-driver" v-model="serviceOrder.maintenanceRequester" required/>
         </div>
         <div class="form-group">
           <label for="edit-released">Released for maintenance by</label>
-          <input size="72" class="form-control" id="edit-released" v-model="serviceOrder.releasedMaintenanceBy" />
+          <input size="72" class="form-control" id="edit-released" v-model="serviceOrder.maintenanceAuthorizer" />
         </div>
         <div class="form-group">
           <label for="edit-autopart">Request auto part at</label>
-          <input type="date" class="form-control" id="edit-autopart" v-model="serviceOrder.requestAutoPartDate" required/>
+          <input type="date" class="form-control" id="edit-autopart" v-model="serviceOrder.requestAutoPartDate" />
         </div>
         <div class="form-group">
           <label for="edit-water-up">Water level up</label>
@@ -222,7 +222,7 @@ and open the template in the editor.
         </div>
         <div class="form-group">
           <label for="edit-km">Odometer Km</label>
-          <input type="number" class="form-control" id="edit-km" v-model="serviceOrder.entryOdometerKm" required/>
+          <input type="number" class="form-control" id="edit-km" v-model="serviceOrder.entryOdometerKm" />
         </div>
 <!--
         <div class="form-group">

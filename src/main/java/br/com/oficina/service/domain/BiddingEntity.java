@@ -28,7 +28,7 @@ import lombok.Data;
 public class BiddingEntity extends CommonAudityAttributeEntity {
     
     @Id
-    private Long biddingId;
+    private Long id;
     
     private String biddingDescription;
     

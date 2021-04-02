@@ -12,8 +12,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 /**
  *
@@ -21,14 +22,16 @@ import lombok.Data;
  */
 @Data
 @Entity
+@RequiredArgsConstructor
+@NoArgsConstructor
 public class PublicClientAgentEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long publicClientAgentId;
+    private Long id;
     
     @ManyToOne
-    @JoinColumn(name="publicClientId")
+    @JoinColumn(name="id")
     private PublicClientEntity publicClient;
 
     @Column(nullable = false)

@@ -30,7 +30,7 @@ public class ServiceOrderBiddingEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long serviceOrderBiddingId;
+    private Long id;
     
     @ManyToOne
     @JoinColumn(name="serviceOrderId")

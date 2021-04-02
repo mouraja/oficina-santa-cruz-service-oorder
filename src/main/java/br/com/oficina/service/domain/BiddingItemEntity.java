@@ -28,7 +28,7 @@ public class BiddingItemEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long biddingItemId;
+    private Long id;
     
     @Column(nullable = false)
     private String description;
@@ -42,7 +42,7 @@ public class BiddingItemEntity {
     
     @JsonManagedReference
     @ManyToOne
-    @JoinColumn(name="biddingId")
+    @JoinColumn(name="id")
     private BiddingEntity bidding;
     
     @Column(nullable = false)

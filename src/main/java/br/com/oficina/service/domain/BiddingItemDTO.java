@@ -24,7 +24,7 @@ import lombok.Data;
  */
 @Data
 public class BiddingItemDTO {
-    private Long biddingItemId;
+    private Long id;
     private String description;
     private Calendar expectedWorkedHours;
 }

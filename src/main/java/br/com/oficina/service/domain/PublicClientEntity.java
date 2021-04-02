@@ -28,7 +28,7 @@ public class PublicClientEntity
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long publicClientId;
+    private Long id;
 
     @Column(nullable = false)
     private String publicName;

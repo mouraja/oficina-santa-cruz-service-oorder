@@ -11,7 +11,7 @@ function findServiceOrder (serviceOrderId) {
 
 function findServiceOrderKey (serviceOrderId) {
   for (var key = 0; key < serviceOrders.length; key++) {
-    if (serviceOrders[key].id == serviceOrderId) {
+    if (serviceOrders[key].id === serviceOrderId) {
       return key;
     }
   }
@@ -22,37 +22,37 @@ var serviceOrderService = {
     axios
       .get('/api/services/order')
       .then(response => fn(response))
-      .catch(error => console.log(error))
+      .catch(error => console.log(error));
   },
 
   findById(id, fn) {
     axios
       .get('/api/services/order/' + id)
       .then(response => fn(response))
-      .catch(error => console.log(error))
+      .catch(error => console.log(error));
   },
 
   create(serviceOrder, fn) {
     axios
       .post('/api/services/order', serviceOrder)
       .then(response => fn(response))
-      .catch(error => console.log(error))
+      .catch(error => console.log(error));
   },
 
   update(id, serviceOrder, fn) {
     axios
       .put('/api/services/order/' + id, serviceOrder)
       .then(response => fn(response))
-      .catch(error => console.log(error))
+      .catch(error => console.log(error));
   },
 
   deleteServiceOrder(id, fn) {
     axios
       .delete('/api/services/order/' + id)
       .then(response => fn(response))
-      .catch(error => console.log(error))
+      .catch(error => console.log(error));
   }
-}
+};
 
 var List = Vue.extend({
   template: '#serviceOrder-list',
@@ -64,8 +64,8 @@ var List = Vue.extend({
       return this.serviceOrders.filter((serviceOrder) => {
       	return serviceOrder.licensePlate.indexOf(this.searchKey) > -1
       	  || serviceOrder.entryVehicleDate.indexOf(this.searchKey) > -1
-      	  || serviceOrder.serviceOrderYear.toString().indexOf(this.searchKey) > -1
-      })
+      	  || serviceOrder.serviceOrderYear.toString().indexOf(this.searchKey) > -1;
+      });
     }
   },
   mounted() {
@@ -99,7 +99,7 @@ var ServiceOrderDelete = Vue.extend({
   },
   methods: {
     deleteServiceOrder: function () {
-      serviceOrderService.deleteServiceOrder(this.serviceOrder.serviceOrderId, r => router.push('/'))
+      serviceOrderService.deleteServiceOrder(this.serviceOrder.serviceOrderId, r => router.push('/'));
     }
   }
 });
@@ -109,11 +109,11 @@ var AddServiceOrder = Vue.extend({
   data() {
     return {
       serviceOrder: {name: '', description: '', price: 0}
-    }
+    };
   },
   methods: {
     createServiceOrder() {
-      serviceOrderService.create(this.serviceOrder, r => router.push('/'))
+      serviceOrderService.create(this.serviceOrder, r => router.push('/'));
     }
   }
 });
@@ -130,4 +130,4 @@ var router = new VueRouter({
 
 new Vue({
   router
-}).$mount('#app')
+}).$mount('#app');

@@ -31,7 +31,7 @@ public class ServiceOrderEntity extends CommonAudityAttributeEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long serviceOrderId;
+    private Long id;
     
     @Column(nullable = false)
     private Integer serviceOrderYear;
