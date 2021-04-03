@@ -6,18 +6,12 @@
 package br.com.oficina.service.domain;
 
 import br.com.oficina.utils.CommonAudityAttributeEntity;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.Calendar;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import lombok.AllArgsConstructor;
@@ -41,14 +35,17 @@ public class ServiceOrderEntity extends CommonAudityAttributeEntity {
     @Column(nullable = false)
     private Integer serviceOrderYear;
 
+/*
     @JsonManagedReference
     @ManyToOne
     @JoinColumn(name="idVehicle", referencedColumnName="id")
     private VehicleEntity vehicle;
-
+*/
+    
     @Column(nullable = false)
     private String licensePlate;
 
+/*
     @JsonManagedReference
     @ManyToOne
     @JoinColumn(name="idDriver", referencedColumnName="id")
@@ -58,7 +55,8 @@ public class ServiceOrderEntity extends CommonAudityAttributeEntity {
     @ManyToOne
     @JoinColumn(name="idController", referencedColumnName="id")
     private PublicClientAgentEntity controller;
-
+*/
+    
     @Column(nullable = true)
     private String controllerAprovedAt;
     
@@ -78,6 +76,7 @@ public class ServiceOrderEntity extends CommonAudityAttributeEntity {
     @Column(nullable = false)
     private String vehicleObservation;
 
+/*
     @JsonManagedReference
     @ManyToOne
     @JoinColumn(name="idBidding", referencedColumnName="id")
@@ -89,7 +88,8 @@ public class ServiceOrderEntity extends CommonAudityAttributeEntity {
             mappedBy = "serviceOrder",
             fetch = FetchType.EAGER)
     private Set<ServiceOrderBiddingEntity> biddingItems;
-
+*/
+    
     //@Column(nullable = true)
     @Temporal(TemporalType.DATE)
     private Calendar expectedTimeDuration;

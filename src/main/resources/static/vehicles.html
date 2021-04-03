@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Service Order - Oficina Santa Cruz</title>
+  <link href="https://unpkg.com/bootstrap@3.4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/vehicle.css" rel="stylesheet"/>
+  
+  <script src="https://unpkg.com/vue@2.5.22/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-router@3.0.2/dist/vue-router.js"></script>
+  <script src="https://unpkg.com/axios@0.18.0/dist/axios.min.js"></script>
+  <script src="/vehicle.js"></script>
+  
+</head>
+<body>
+  <div class="container">
+    <h1>Vehicle Managment System</h1>
+    <main id="app">
+      <router-view></router-view>
+    </main>
+  </div>
+
+  <template id="vehicle">
+    <div>
+      <h2><i class="glyphicon glyphicon-tint"></i>{{ vehicle.vehicleYear }}</h2> / <h2>{{ vehicle.vehicleYear }}</h2>
+      <b>Vehicle observation: </b>
+      <div><span class="glyphicon glyphicon-comment" style="color:lightsalmon" aria-hidden="true"></span>{{ vehicle.vehicleObservation }}</div>
+      <b>Vehicle model: </b>
+      <div><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>{{ vehicle.vehicleModel }}</div>
+      <b>License plate: </b>
+      <div><span class="glyphicon glyphicon-file" aria-hidden="true"></span>{{ vehicle.licensePlate }}</div>
+      <b>Driver left vehicle: </b>
+      <div><span class="glyphicon glyphicon-user" style="color:gold" aria-hidden="true"></span>{{ vehicle.maintenanceRequester }}</div>
+      <b>Entry vehicle At: </b>
+      <div><span class="glyphicon glyphicon-time" style="color:lightcoral" aria-hidden="true"></span>{{ vehicle.entryVehicleDate }}</div>
+      <b>Vehicle Model: </b>
+      <div><span class="glyphicon glyphicon-user" style="color:lightblue" aria-hidden="true"></span>{{ vehicle.maintenanceAuthorizer }}</div>
+      <b>Request autopart at: </b>
+      <div><span class="glyphicon glyphicon-calendar" style="color:lightgreen" aria-hidden="true"></span>{{ vehicle.requestAutoPartDate }}</div>
+      <b>Entry water level: </b>
+      <div><span class="glyphicon glyphicon-tint" style="color:lightblue" aria-hidden="true"></span>{{ vehicle.entryWaterLevel }}</div>
+      <b>Entry oil level: </b>
+      <div><span class="glyphicon glyphicon-tint" style="color:darkslategray" aria-hidden="true"></span>{{ vehicle.entryOilLevel }}</div>
+      <b>Odometer Km: </b>
+      <div><span class="glyphicon glyphicon-road" style="color:gray" aria-hidden="true"></span>{{ vehicle.entryOdometerKm }}</div>
+      <b>Expected time duration: </b>
+      <div><span class="glyphicon glyphicon-hourglass" style="color:lightyellow" aria-hidden="true"></span>{{ vehicle.expectedTimeDuration }}</div>
+      <br/>
+      <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+      <a>
+        <router-link to="/">Back to vehicle list</router-link>
+      </a>
+    </div>
+  </template>
+
+  <template id="vehicle-list">
+    <div>
+      <div class="actions">
+        <a class="btn btn-default">
+          <router-link :to="{path: '/add-vehicle'}">
+            <span class="glyphicon glyphicon-plus"></span>
+            Add service order
+          </router-link>
+        </a>
+      </div>
+      <div class="filters row">
+        <div class="form-group col-sm-3">
+          <input placeholder="Search" v-model="searchKey" class="form-control" id="search-element" requred/>
+        </div>
+      </div>
+      <table class="table">
+        <thead>
+        <tr>
+          <th>id</th>
+          <th>Vehicle</th>
+          <th>observations</th>
+          <th class="col-sm-2">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="vehicle in filteredVehicle">
+          <!-- tr v-for="vehicle in vehicles" -->
+          <!-- tr v-for="vehicle in vehicles | filterBy searchKey in 'name'" -->
+          <td>
+            <a>
+              <router-link :to="{name: 'vehicle', params: {vehicle_id: vehicle.id}}">{{ vehicle.id }}/{{ vehicle.licensePlate }}</router-link>
+            </a>
+          </td>
+          <td>
+              <span>{{ vehicle.licensePlate }}</span> - 
+              <span>{{ vehicle.manufactor }}</span>/<span>{{ vehicle.model }}</span>
+              <span>{{ vehicle.madeYear }}</span>/<span>{{ vehicle.modelYear }}</span>
+          </td>
+          <td>
+              <span>{{ vehicle.observations }}</span>
+          </td>
+          <td>
+            <a class="btn btn-warning btn-xs">
+              <router-link :to="{name: 'vehicle-edit', params: {vehicle_id: vehicle.id}}">Edit</router-link>
+            </a>
+            <a class="btn btn-danger btn-xs">
+              <router-link :to="{name: 'vehicle-delete', params: {vehicle_id: vehicle.id}}">Delete</router-link>
+            </a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </template>
+
+
+  <template id="add-vehicle">
+    <div>
+      <h2>Add new vehicle</h2>
+      <form @submit="createVehicle">
+
+        <div class="form-group">
+          <label for="add-year">Vehicle manufactor</label>
+          <input type="number" class="form-control" id="add-year" v-model="vehicle.manufactor" required/>
+        </div>
+
+        <div class="form-group">
+          <label for="add-year">Vehicle model</label>
+          <input type="number" class="form-control" id="add-year" v-model="vehicle.model" required/>
+        </div>
+
+        <div class="form-group">
+          <label for="add-year">Manufactored Year</label>
+          <input type="number" class="form-control" id="add-year" v-model="vehicle.madeYear" required/>
+        </div>
+
+        <div class="form-group">
+          <label for="add-vehicle">Model year</label>
+          <input size="128" class="form-control" id="add-vehicle" v-model="vehicle.modelYear"/>
+        </div>
+
+        <div class="form-group">
+          <label for="add-license">License plate</label>
+          <input size="10" class="form-control" id="add-license" v-model="vehicle.licensePlate" required/>
+        </div>
+
+        <div class="form-group">
+          <label for="add-driver">Vehicle owner</label>
+          <input size="72" class="form-control" id="add-driver" v-model="vehicle.clientOwner" required/>
+        </div>
+
+        <div class="form-group">
+          <label for="add-entry">Vehicle status</label>
+          <input type="checkbox" class="form-control" id="add-entry" v-model="vehicle.status" required/>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create</button>
+
+        <div class="form-group">
+          <label for="add-description">Observations</label>
+          <textarea class="form-control" id="add-observation" rows="10"  placeholder="Put some observations" v-model="vehicle.observations"></textarea>
+        </div>
+
+        <a class="btn btn-default">
+          <router-link to="/">Cancel</router-link>
+        </a>
+      </form>
+    </div>
+  </template>
+
+  <template id="vehicle-edit">
+    <div>
+      <h2>Edit vehicle</h2>
+      <form @submit="updateVehicle">
+
+        <div class="form-group">
+          <label for="edit-year">Vehicle manufactor</label>
+          <input type="number" class="form-control" id="edit-year" v-model="vehicle.manufactor" required/>
+        </div>
+
+        <div class="form-group">
+          <label for="edit-year">Vehicle model</label>
+          <input type="number" class="form-control" id="edit-year" v-model="vehicle.model" required/>
+        </div>
+
+        <div class="form-group">
+          <label for="edit-year">Manufactored Year</label>
+          <input type="number" class="form-control" id="edit-year" v-model="vehicle.madeYear" required/>
+        </div>
+
+        <div class="form-group">
+          <label for="edit-vehicle">Model year</label>
+          <input size="128" class="form-control" id="edit-vehicle" v-model="vehicle.modelYear"/>
+        </div>
+
+        <div class="form-group">
+          <label for="edit-license">License plate</label>
+          <input size="10" class="form-control" id="edit-license" v-model="vehicle.licensePlate" required/>
+        </div>
+
+        <div class="form-group">
+          <label for="edit-driver">Vehicle owner</label>
+          <input size="72" class="form-control" id="edit-driver" v-model="vehicle.clientOwner" required/>
+        </div>
+
+        <div class="form-group">
+          <label for="edit-entry">Vehicle status</label>
+          <input type="checkbox" class="form-control" id="edit-entry" v-model="vehicle.status" required/>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create</button>
+
+        <div class="form-group">
+          <label for="edit-description">Observations</label>
+          <textarea class="form-control" id="edit-observation" rows="10"  placeholder="Put some observations" v-model="vehicle.observations"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a class="btn btn-default">
+          <router-link to="/">Cancel</router-link>
+        </a>
+      </form>
+    </div>
+  </template>
+
+  <template id="vehicle-delete">
+    <div>
+      <h2>Delete vehicle {{ vehicle.licensePlate }} (id:{{ vehicle.id }})</h2>
+      <form @submit="deleteVehicle">
+        <p>The action cannot be undone.</p>
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a class="btn btn-default">
+          <router-link to="/">Cancel</router-link>
+        </a>
+      </form>
+    </div>
+  </template>
+
+</body>
+</html>

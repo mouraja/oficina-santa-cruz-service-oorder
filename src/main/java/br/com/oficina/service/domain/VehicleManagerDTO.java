@@ -19,44 +19,18 @@ import lombok.NoArgsConstructor;
  * @author moura
  */
 @Data
-@Entity
-@AllArgsConstructor
-@NoArgsConstructor
-public class VehicleEntity {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)    
+public class VehicleManagerDTO {
+     
     private Long id;
-    
-    @Column(nullable = true)
     private String manufactor;
-    
-    @Column(nullable = false)
     private String model;
-    
-    @Column(nullable = true)
     private String madeYear;
-    
-    @Column(nullable = true)
     private String modelYear;
-    
-    @Column(nullable = false)
     private String licensePlate;
-    
-    @Column(nullable = false)
     private String clientOwner;
-    
-    @Column(nullable = true)
     private String observations;
-    
-    @Column(nullable = true)
     private boolean status;
-
 /*
-    @OneToMany(
-            targetEntity = ServiceOrderEntity.class,
-            mappedBy = "vehicle",
-            fetch = FetchType.EAGER)
     private List<ServiceOrderEntity> serviceOrders;    
 */
 

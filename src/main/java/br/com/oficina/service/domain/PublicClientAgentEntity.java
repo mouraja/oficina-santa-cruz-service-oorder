@@ -29,11 +29,13 @@ public class PublicClientAgentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
+/*
     @ManyToOne
     @JoinColumn(name="id")
     private PublicClientEntity publicClient;
-
+*/
+    
     @Column(nullable = false)
     private String publicAgentName;
     

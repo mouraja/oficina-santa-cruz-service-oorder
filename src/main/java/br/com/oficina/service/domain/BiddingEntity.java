@@ -45,14 +45,14 @@ public class BiddingEntity extends CommonAudityAttributeEntity {
     
     @Temporal(javax.persistence.TemporalType.DATE)
     private Calendar biddingExpirateDate;
-    
+
+/*    
     @JsonBackReference
     @OneToMany(
         targetEntity = BiddingItemEntity.class,
         mappedBy = "bidding",
         fetch = FetchType.EAGER)
     private Set<BiddingItemEntity> biddingItems;
-    
         
     @JsonBackReference
     @OneToMany(
@@ -60,6 +60,7 @@ public class BiddingEntity extends CommonAudityAttributeEntity {
         mappedBy = "id",
         fetch = FetchType.EAGER)
     private Set<ServiceOrderEntity> services;
+  */  
 
     private boolean status;
 }

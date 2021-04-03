@@ -5,7 +5,7 @@
  */
 package br.com.oficina.service.controller;
 
-import br.com.oficina.service.domain.VehicleDTO;
+import br.com.oficina.service.domain.VehicleManagerDTO;
 import br.com.oficina.service.domain.VehicleEntity;
 import br.com.oficina.service.usecase.VehicleUseCase;
 import java.util.List;
@@ -29,15 +29,15 @@ import org.springframework.web.bind.annotation.RestController;
  * @author moura
  */
 @RestController
-@RequestMapping("/api/vehicle")
-public class VehicleController {
+@RequestMapping("/api/vehicles")
+public class VehicleManagerController {
 
 	@Autowired
 	private ModelMapper modelMapper;
 
 	private final VehicleUseCase vehicleUseCase;
 
-	public VehicleController(VehicleUseCase vehicleUseCase) {
+	public VehicleManagerController(VehicleUseCase vehicleUseCase) {
 		super();
 		this.vehicleUseCase = vehicleUseCase;
 	}
@@ -47,8 +47,8 @@ public class VehicleController {
      * @return
      */
     @GetMapping
-	public List<VehicleDTO> findAll() {
-            return vehicleUseCase.findAll().stream().map(vehicle -> modelMapper.map(vehicle, VehicleDTO.class))
+	public List<VehicleManagerDTO> findAll() {
+            return vehicleUseCase.findAll().stream().map(vehicle -> modelMapper.map(vehicle, VehicleManagerDTO.class))
 				.collect(Collectors.toList());
 	}
 
@@ -58,17 +58,17 @@ public class VehicleController {
      * @return
      */
     @GetMapping("/{id}")
-	public ResponseEntity<VehicleDTO> findById(@PathVariable(name = "id") Long id) {
+	public ResponseEntity<VehicleManagerDTO> findById(@PathVariable(name = "id") Long id) {
 		Optional<VehicleEntity> vehicle = vehicleUseCase.findById(id);
 
 		// convert entity to DTO
-		VehicleDTO vehicleResponse = modelMapper.map(vehicle, VehicleDTO.class);
+		VehicleManagerDTO vehicleResponse = modelMapper.map(vehicle, VehicleManagerDTO.class);
 
 		return ResponseEntity.ok().body(vehicleResponse);
 	}
 
 	@PostMapping
-	public ResponseEntity<VehicleDTO> create(@RequestBody VehicleDTO vehicleDto) {
+	public ResponseEntity<VehicleManagerDTO> create(@RequestBody VehicleManagerDTO vehicleDto) {
 
 		// convert DTO to entity
 		VehicleEntity vehicleRequest = modelMapper.map(vehicleDto, VehicleEntity.class);
@@ -76,7 +76,7 @@ public class VehicleController {
 		VehicleEntity vehicle = vehicleUseCase.save(vehicleRequest);
 
 		// convert entity to DTO
-		VehicleDTO vehicleResponse = modelMapper.map(vehicle, VehicleDTO.class);
+		VehicleManagerDTO vehicleResponse = modelMapper.map(vehicle, VehicleManagerDTO.class);
 
 		return new ResponseEntity<>(vehicleResponse, HttpStatus.CREATED);
 	}
@@ -84,7 +84,7 @@ public class VehicleController {
 	// change the request for DTO
 	// change the response for DTO
 	@PutMapping("/{id}")
-	public ResponseEntity<VehicleDTO> update(@PathVariable long id, @RequestBody VehicleDTO vehicleDto) {
+	public ResponseEntity<VehicleManagerDTO> update(@PathVariable long id, @RequestBody VehicleManagerDTO vehicleDto) {
 
 		// convert DTO to Entity
 		VehicleEntity vehicleRequest = modelMapper.map(vehicleDto, VehicleEntity.class);
@@ -92,7 +92,7 @@ public class VehicleController {
 		VehicleEntity vehicle = vehicleUseCase.update(vehicleRequest);
 
 		// entity to DTO
-		VehicleDTO vehicleResponse = modelMapper.map(vehicle, VehicleDTO.class);
+		VehicleManagerDTO vehicleResponse = modelMapper.map(vehicle, VehicleManagerDTO.class);
 
 		return ResponseEntity.ok().body(vehicleResponse);
 	}

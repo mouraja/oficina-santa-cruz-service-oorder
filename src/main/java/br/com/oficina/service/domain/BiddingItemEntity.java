@@ -42,11 +42,13 @@ public class BiddingItemEntity {
     
     @Column(nullable = true)
     private Float valuePayedByHour;
-    
+
+/*    
     @JsonManagedReference
     @ManyToOne
     @JoinColumn(name="id")
     private BiddingEntity bidding;
+*/
     
     @Column(nullable = false)
     private boolean status;

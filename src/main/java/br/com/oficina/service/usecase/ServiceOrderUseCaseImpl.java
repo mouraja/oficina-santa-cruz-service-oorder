@@ -5,7 +5,6 @@
  */
 package br.com.oficina.service.usecase;
 
-import br.com.oficina.service.domain.ServiceOrderBiddingEntity;
 import br.com.oficina.service.repository.ServiceOrderRepository;
 import br.com.oficina.service.domain.ServiceOrderEntity;
 import java.util.ArrayList;

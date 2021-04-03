@@ -5,15 +5,12 @@
  */
 package br.com.oficina.service.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.util.Calendar;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import lombok.AllArgsConstructor;
@@ -33,11 +30,13 @@ public class ServiceOrderBiddingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
+/*    
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name="id")
     private ServiceOrderEntity serviceOrder;
+*/
     
     @Column(nullable = true)
     private BiddingStatusEnum bidding;
@@ -48,7 +47,8 @@ public class ServiceOrderBiddingEntity {
     @Column(nullable = true)
     @Temporal(TemporalType.DATE)
     private Calendar expectedTimeDuration;
-            
+
+    /*
     @Column(nullable = true)
     private PublicClientAgentEntity authorizerTaskTodo;
             
@@ -57,8 +57,9 @@ public class ServiceOrderBiddingEntity {
     
     @Column(nullable = true)
     private PublicOrderRequestAutoPart requestedAutoPart;
+    */
     
     @Column(nullable = true)
     private ServiceOrderBiddingStatusEnum status;
-    
+
 }
