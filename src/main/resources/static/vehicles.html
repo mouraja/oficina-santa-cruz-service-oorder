@@ -30,29 +30,23 @@ and open the template in the editor.
 
   <template id="vehicle">
     <div>
-      <h2><i class="glyphicon glyphicon-tint"></i>{{ vehicle.vehicleYear }}</h2> / <h2>{{ vehicle.vehicleYear }}</h2>
-      <b>Vehicle observation: </b>
-      <div><span class="glyphicon glyphicon-comment" style="color:lightsalmon" aria-hidden="true"></span>{{ vehicle.vehicleObservation }}</div>
+      <h2><i class="glyphicon glyphicon-tint"></i>{{ vehicle.id }}</h2> / <h2>{{ vehicle.licensePlate }}</h2>
+      <b>Vehicle manufactor: </b>
+      <div><span class="glyphicon glyphicon-user" style="color:gold" aria-hidden="true"></span>{{ vehicle.manufactor }}</div>
       <b>Vehicle model: </b>
-      <div><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>{{ vehicle.vehicleModel }}</div>
+      <div><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>{{ vehicle.model }}</div>
       <b>License plate: </b>
       <div><span class="glyphicon glyphicon-file" aria-hidden="true"></span>{{ vehicle.licensePlate }}</div>
-      <b>Driver left vehicle: </b>
-      <div><span class="glyphicon glyphicon-user" style="color:gold" aria-hidden="true"></span>{{ vehicle.maintenanceRequester }}</div>
-      <b>Entry vehicle At: </b>
-      <div><span class="glyphicon glyphicon-time" style="color:lightcoral" aria-hidden="true"></span>{{ vehicle.entryVehicleDate }}</div>
-      <b>Vehicle Model: </b>
-      <div><span class="glyphicon glyphicon-user" style="color:lightblue" aria-hidden="true"></span>{{ vehicle.maintenanceAuthorizer }}</div>
-      <b>Request autopart at: </b>
-      <div><span class="glyphicon glyphicon-calendar" style="color:lightgreen" aria-hidden="true"></span>{{ vehicle.requestAutoPartDate }}</div>
-      <b>Entry water level: </b>
-      <div><span class="glyphicon glyphicon-tint" style="color:lightblue" aria-hidden="true"></span>{{ vehicle.entryWaterLevel }}</div>
-      <b>Entry oil level: </b>
-      <div><span class="glyphicon glyphicon-tint" style="color:darkslategray" aria-hidden="true"></span>{{ vehicle.entryOilLevel }}</div>
-      <b>Odometer Km: </b>
-      <div><span class="glyphicon glyphicon-road" style="color:gray" aria-hidden="true"></span>{{ vehicle.entryOdometerKm }}</div>
-      <b>Expected time duration: </b>
-      <div><span class="glyphicon glyphicon-hourglass" style="color:lightyellow" aria-hidden="true"></span>{{ vehicle.expectedTimeDuration }}</div>
+      <b>Vehicle Manufactored Year: </b>
+      <div><span class="glyphicon glyphicon-time" style="color:lightcoral" aria-hidden="true"></span>{{ vehicle.madeYear }}</div>
+      <b>Vehicle Model Year: </b>
+      <div><span class="glyphicon glyphicon-user" style="color:lightblue" aria-hidden="true"></span>{{ vehicle.madelYear }}</div>
+      <b>Owner: </b>
+      <div><span class="glyphicon glyphicon-tint" style="color:lightblue" aria-hidden="true"></span>{{ vehicle.clientOwner }}</div>
+      <b>Vehicle observations: </b>
+      <div><span class="glyphicon glyphicon-comment" style="color:lightsalmon" aria-hidden="true"></span>{{ vehicle.observations }}</div>
+      <b>Status: </b>
+      <div><span class="glyphicon glyphicon-hourglass" style="color:lightyellow" aria-hidden="true"></span>{{ vehicle.status }}</div>
       <br/>
       <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
       <a>
