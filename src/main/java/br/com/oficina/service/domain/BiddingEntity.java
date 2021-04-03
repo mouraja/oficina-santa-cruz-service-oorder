@@ -53,5 +53,13 @@ public class BiddingEntity extends CommonAudityAttributeEntity {
         fetch = FetchType.EAGER)
     private Set<BiddingItemEntity> biddingItems;
     
+        
+    @JsonBackReference
+    @OneToMany(
+        targetEntity = ServiceOrderEntity.class,
+        mappedBy = "id",
+        fetch = FetchType.EAGER)
+    private Set<ServiceOrderEntity> services;
+
     private boolean status;
 }

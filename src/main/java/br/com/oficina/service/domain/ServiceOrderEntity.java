@@ -5,17 +5,18 @@
  */
 package br.com.oficina.service.domain;
 
-import br.com.oficina.service.domain.ServiceOrderBiddingEntity;
-import br.com.oficina.service.domain.PublicClientAgentEntity;
 import br.com.oficina.utils.CommonAudityAttributeEntity;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.Calendar;
-import java.util.List;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -39,17 +40,23 @@ public class ServiceOrderEntity extends CommonAudityAttributeEntity {
     
     @Column(nullable = false)
     private Integer serviceOrderYear;
-    
-    @Column(nullable = false)
+
+    @JsonManagedReference
+    @ManyToOne
+    @JoinColumn(name="idVehicle", referencedColumnName="id")
     private VehicleEntity vehicle;
 
     @Column(nullable = false)
     private String licensePlate;
 
-    @Column(nullable = false)
+    @JsonManagedReference
+    @ManyToOne
+    @JoinColumn(name="idDriver", referencedColumnName="id")
     private PublicClientAgentEntity entryDriver;
 
-    @Column(nullable = true)
+    @JsonManagedReference
+    @ManyToOne
+    @JoinColumn(name="idController", referencedColumnName="id")
     private PublicClientAgentEntity controller;
 
     @Column(nullable = true)
@@ -71,32 +78,23 @@ public class ServiceOrderEntity extends CommonAudityAttributeEntity {
     @Column(nullable = false)
     private String vehicleObservation;
 
+    @JsonManagedReference
+    @ManyToOne
+    @JoinColumn(name="idBidding", referencedColumnName="id")
+    private BiddingEntity bidding;
+    
+    @JsonManagedReference
     @OneToMany(
             targetEntity = ServiceOrderBiddingEntity.class,
             mappedBy = "serviceOrder",
             fetch = FetchType.EAGER)
-    private List<ServiceOrderBiddingEntity> serviceOrderTasks;
+    private Set<ServiceOrderBiddingEntity> biddingItems;
 
     //@Column(nullable = true)
     @Temporal(TemporalType.DATE)
     private Calendar expectedTimeDuration;
 
-    //@Column(nullable = true)
-    //private String signRevisor;
-   
-    //@Column(nullable = true)
-    //private String signApprover;
-
-    //@Column(nullable = true)
-    //@Temporal(TemporalType.DATE)
-    //private Calendar revisedDate;
-
-    //@Column(nullable = true)
-    //@Temporal(TemporalType.DATE)
-    //private Calendar approvedDate;
-
     @Column(nullable = true)
     private ServiceOrderStatusEnum status;
 
-    
 }

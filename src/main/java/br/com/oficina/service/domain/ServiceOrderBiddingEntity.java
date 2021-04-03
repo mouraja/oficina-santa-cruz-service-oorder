@@ -5,6 +5,7 @@
  */
 package br.com.oficina.service.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.util.Calendar;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,8 +34,9 @@ public class ServiceOrderBiddingEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    @JsonBackReference
     @ManyToOne
-    @JoinColumn(name="serviceOrderId")
+    @JoinColumn(name="id")
     private ServiceOrderEntity serviceOrder;
     
     @Column(nullable = true)

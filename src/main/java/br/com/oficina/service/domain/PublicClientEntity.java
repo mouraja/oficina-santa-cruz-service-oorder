@@ -60,6 +60,7 @@ public class PublicClientEntity
     @Column(nullable = true)
     private String observation;
     
+    
     @OneToMany(
             targetEntity = PublicClientAgentEntity.class,
             mappedBy = "publicClient",
