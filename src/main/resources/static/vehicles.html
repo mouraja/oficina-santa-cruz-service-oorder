@@ -12,12 +12,11 @@ and open the template in the editor.
   <meta name="author" content="">
   <title>Service Order - Oficina Santa Cruz</title>
   <link href="https://unpkg.com/bootstrap@3.4.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="/vehicles.css" rel="stylesheet"/>
+  <link href="vehicles.css" rel="stylesheet"/>
   
   <script src="https://unpkg.com/vue@2.5.22/dist/vue.js"></script>
   <script src="https://unpkg.com/vue-router@3.0.2/dist/vue-router.js"></script>
   <script src="https://unpkg.com/axios@0.18.0/dist/axios.min.js"></script>
-  <script src="/vehicles.js"></script>
   
 </head>
 <body>
@@ -80,7 +79,7 @@ and open the template in the editor.
         </tr>
         </thead>
         <tbody>
-        <tr v-for="vehicle in filteredVehicle">
+        <tr v-for="vehicle in filteredVehicles">
           <!-- tr v-for="vehicle in vehicles" -->
           <!-- tr v-for="vehicle in vehicles | filterBy searchKey in 'name'" -->
           <td>
@@ -89,7 +88,6 @@ and open the template in the editor.
             </a>
           </td>
           <td>
-              <span>{{ vehicle.licensePlate }}</span> - 
               <span>{{ vehicle.manufactor }}</span>/<span>{{ vehicle.model }}</span>
               <span>{{ vehicle.madeYear }}</span>/<span>{{ vehicle.modelYear }}</span>
           </td>
@@ -117,47 +115,55 @@ and open the template in the editor.
       <form @submit="createVehicle">
 
         <div class="form-group">
-          <label for="add-year">Vehicle manufactor</label>
-          <input type="number" class="form-control" id="add-year" v-model="vehicle.manufactor" required/>
+          <label for="add-manufactor">Vehicle manufactor</label>
+          <input type="text" class="form-control" id="add-manufactor" v-model="vehicle.manufactor" required/>
         </div>
 
         <div class="form-group">
-          <label for="add-year">Vehicle model</label>
-          <input type="number" class="form-control" id="add-year" v-model="vehicle.model" required/>
+          <label for="add-model">Vehicle model</label>
+          <input type="text" class="form-control" id="add-model" v-model="vehicle.model" required/>
         </div>
 
         <div class="form-group">
-          <label for="add-year">Manufactored Year</label>
-          <input type="number" class="form-control" id="add-year" v-model="vehicle.madeYear" required/>
+          <label for="add-madeYear">Manufactored Year</label>
+          <input type="text" size="4" class="form-control" id="add-madeYear" v-model="vehicle.madeYear" required/>
         </div>
 
         <div class="form-group">
-          <label for="add-vehicle">Model year</label>
-          <input size="128" class="form-control" id="add-vehicle" v-model="vehicle.modelYear"/>
+          <label for="add-modelYear">Model year</label>
+          <input type="text" size="4" class="form-control" id="add-modelYear" v-model="vehicle.modelYear"/>
         </div>
 
         <div class="form-group">
-          <label for="add-license">License plate</label>
-          <input size="10" class="form-control" id="add-license" v-model="vehicle.licensePlate" required/>
+          <label for="add-licensePlate">License plate</label>
+          <input type="text" size="10" class="form-control" id="add-licensePlate" v-model="vehicle.licensePlate" required/>
         </div>
 
         <div class="form-group">
-          <label for="add-driver">Vehicle owner</label>
-          <input size="72" class="form-control" id="add-driver" v-model="vehicle.clientOwner" required/>
+          <label for="add-clientOwner">Vehicle owner</label>
+          <!--<input type="text" size="72" class="form-control" id="add-clientOwner" v-model="vehicle.clientOwner" required/>-->
+          <select class="form-control" id="add-clientOwner" v-model="vehicle.clientOwner">
+            <option selected disabled value="">Please select one</option>
+            <option 
+              v-for="owner in owners" 
+              :key="owner.id" 
+              :value="owner.name">
+              {{ owner.name }}
+            </option>
+          </select>
         </div>
 
         <div class="form-group">
-          <label for="add-entry">Vehicle status</label>
-          <input type="checkbox" class="form-control" id="add-entry" v-model="vehicle.status" required/>
+          <label for="add-status">Vehicle status</label>
+          <input type="checkbox" class="form-control" id="add-status" v-model="vehicle.status" required/>
+        </div>
+
+        <div class="form-group">
+          <label for="add-observations">Observations</label>
+          <textarea class="form-control" id="add-observations" rows="10"  placeholder="Put some observations" v-model="vehicle.observations"></textarea>
         </div>
 
         <button type="submit" class="btn btn-primary">Create</button>
-
-        <div class="form-group">
-          <label for="add-description">Observations</label>
-          <textarea class="form-control" id="add-observation" rows="10"  placeholder="Put some observations" v-model="vehicle.observations"></textarea>
-        </div>
-
         <a class="btn btn-default">
           <router-link to="/">Cancel</router-link>
         </a>
@@ -171,38 +177,38 @@ and open the template in the editor.
       <form @submit="updateVehicle">
 
         <div class="form-group">
-          <label for="edit-year">Vehicle manufactor</label>
-          <input type="number" class="form-control" id="edit-year" v-model="vehicle.manufactor" required/>
+          <label for="edit-manufactor">Vehicle manufactor</label>
+          <input type="text" class="form-control" id="edit-manufactor" v-model="vehicle.manufactor" required/>
         </div>
 
         <div class="form-group">
-          <label for="edit-year">Vehicle model</label>
-          <input type="number" class="form-control" id="edit-year" v-model="vehicle.model" required/>
+          <label for="edit-model">Vehicle model</label>
+          <input type="text" class="form-control" id="edit-model" v-model="vehicle.model" required/>
         </div>
 
         <div class="form-group">
-          <label for="edit-year">Manufactored Year</label>
-          <input type="number" class="form-control" id="edit-year" v-model="vehicle.madeYear" required/>
+          <label for="edit-madeYear">Manufactored Year</label>
+          <input type="text" size="4" class="form-control" id="edit-madeYear" v-model="vehicle.madeYearmadeYear" required/>
         </div>
 
         <div class="form-group">
-          <label for="edit-vehicle">Model year</label>
-          <input size="128" class="form-control" id="edit-vehicle" v-model="vehicle.modelYear"/>
+          <label for="edit-modelYear">Model year</label>
+          <input type="text" size="4" class="form-control" id="edit-modelYear" v-model="vehicle.modelYear"/>
         </div>
 
         <div class="form-group">
-          <label for="edit-license">License plate</label>
-          <input size="10" class="form-control" id="edit-license" v-model="vehicle.licensePlate" required/>
+          <label for="edit-licensePlate">License plate</label>
+          <input type="text" size="10" class="form-control" id="edit-licensePlate" v-model="vehicle.licensePlate" required/>
         </div>
 
         <div class="form-group">
-          <label for="edit-driver">Vehicle owner</label>
-          <input size="72" class="form-control" id="edit-driver" v-model="vehicle.clientOwner" required/>
+          <label for="edit-clientOwner">Vehicle owner</label>
+          <input type="text" size="72" class="form-control" id="edit-clientOwner" v-model="vehicle.clientOwner" required/>
         </div>
 
         <div class="form-group">
-          <label for="edit-entry">Vehicle status</label>
-          <input type="checkbox" class="form-control" id="edit-entry" v-model="vehicle.status" required/>
+          <label for="edit-status">Vehicle status</label>
+          <input type="checkbox" class="form-control" id="edit-status" v-model="vehicle.status" required/>
         </div>
 
         <button type="submit" class="btn btn-primary">Create</button>
@@ -216,6 +222,7 @@ and open the template in the editor.
         <a class="btn btn-default">
           <router-link to="/">Cancel</router-link>
         </a>
+        
       </form>
     </div>
   </template>
@@ -232,6 +239,8 @@ and open the template in the editor.
       </form>
     </div>
   </template>
+    
+  <script src="vehicles.js"></script>
 
 </body>
 </html>

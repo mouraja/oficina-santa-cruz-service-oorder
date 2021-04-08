@@ -5,6 +5,7 @@
  */
 package br.com.oficina.service.domain;
 
+import br.com.oficina.enums.ServiceOrderStatusEnum;
 import br.com.oficina.utils.CommonAudityAttributeEntity;
 import java.util.Calendar;
 import javax.persistence.Column;

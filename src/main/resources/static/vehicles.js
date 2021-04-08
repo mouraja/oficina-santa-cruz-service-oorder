@@ -3,15 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-var vehicle = [];
-
+var vehicles = [];
+var clients = [];
+var base_path = '/api/vehicles';
+var base_client = '/api/client/public';
 function findVehicle (id) {
-  return vehicle[findVehicleKey(id)];
+  return vehicles[findVehicleKey(id)];
 }
 
 function findVehicleKey (id) {
-  for (var key = 0; key < vehicle.length; key++) {
-    if (vehicle[key].id === id) {
+  for (var key = 0; key < vehicles.length; key++) {
+    if (vehicles[key].id === id) {
       return key;
     }
   }
@@ -20,54 +22,65 @@ function findVehicleKey (id) {
 var vehicleService = {
   findAll(fn) {
     axios
-      .get('/api/vehicles')
+      .get(base_path)
       .then(response => fn(response))
       .catch(error => console.log(error));
   },
 
   findById(id, fn) {
     axios
-      .get('/api/vehicles/' + id)
+      .get(base_path + id)
       .then(response => fn(response))
       .catch(error => console.log(error));
   },
 
   create(vehicle, fn) {
     axios
-      .post('/api/vehicles', vehicle)
+      .post(base_path, vehicle)
       .then(response => fn(response))
       .catch(error => console.log(error));
   },
 
   update(id, vehicle, fn) {
     axios
-      .put('/api/vehicles/' + id, vehicle)
+      .put(base_path + id, vehicle)
       .then(response => fn(response))
       .catch(error => console.log(error));
   },
 
   deleteVehicle(id, fn) {
     axios
-      .delete('/api/vehicles/' + id)
+      .delete(base_path + id)
+      .then(response => fn(response))
+      .catch(error => console.log(error));
+  },
+
+  listClients(fn) {
+    axios
+      .get(base_client)
       .then(response => fn(response))
       .catch(error => console.log(error));
   }
+
 };
 
 var List = Vue.extend({
   template: '#vehicle-list',
   data: function () {
-    return {vehicle: [], searchKey: ''};
+    return {vehicles: [], searchKey: ''};
   },
   computed: {
     filteredVehicles() {
-      return this.vehicle.filter((vehicle) => {
-      	return vehicle.licensePlate.indexOf(this.searchKey) > -1;
+        console.log(this.vehicles.length);
+      return this.vehicles.filter((vehicle) => {
+      	return vehicle.licensePlate.indexOf(this.searchKey) > -1
+            || vehicle.manufactor.indexOf(this.searchKey) > -1
+            || vehicle.model.indexOf(this.searchKey) > -1;
       });
     }
   },
   mounted() {
-    vehicleService.findAll(r => {this.vehicle = r.data; vehicle = r.data})
+    vehicleService.findAll(r => {this.vehicles = r.data; vehicles = r.data})
   }
 });
 
@@ -106,7 +119,16 @@ var AddVehicle = Vue.extend({
   template: '#add-vehicle',
   data() {
     return {
-      vehicle: {name: '', description: '', price: 0}
+      vehicle: {
+        manufactor: '',
+        model: '',
+        madeYear: '',
+        modelYear: '',
+        licensePlate: '',
+        clientOwner: 0,
+        observations: '',
+        status: true
+      }
     };
   },
   methods: {
@@ -125,6 +147,21 @@ var router = new VueRouter({
 		{path: '/vehicle/:vehicle_id/delete', component: VehicleDelete, name: 'vehicle-delete'}
 	]
 });
+
+var ListClients = new Vue({
+  el: 'add-clientOwner',
+  data: () => ({
+    clients: []
+  }),
+  methods: {
+    async getClients () {
+      await vehicleService.listClients(r => {this.clients = r.data; clients = r.data})
+    }
+  },
+  created () {
+    this.getClients
+  }
+})
 
 new Vue({
   router

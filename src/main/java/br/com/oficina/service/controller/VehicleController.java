@@ -5,7 +5,7 @@
  */
 package br.com.oficina.service.controller;
 
-import br.com.oficina.service.domain.VehicleDTO;
+import br.com.oficina.service.dao.VehicleDTO;
 import br.com.oficina.service.domain.VehicleEntity;
 import br.com.oficina.service.usecase.VehicleUseCase;
 import java.util.List;

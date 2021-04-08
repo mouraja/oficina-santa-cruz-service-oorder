@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.oficina.service.domain;
+package br.com.oficina.service.dao;
 
 import lombok.Data;
 
@@ -12,7 +12,12 @@ import lombok.Data;
  * @author moura
  */
 @Data
-public class PublicClientAgentDTO {
+public class PublicClientDTO {
+
     private Long id;
-    private String publicAgentName;
+
+    private String publicName;
+
+    private String publicFantasyName;
+
 }

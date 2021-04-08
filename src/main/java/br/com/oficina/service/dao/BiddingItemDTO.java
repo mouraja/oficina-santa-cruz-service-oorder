@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.oficina.service.domain;
+package br.com.oficina.service.dao;
 
 import br.com.oficina.service.domain.BiddingEntity;
 import com.fasterxml.jackson.annotation.JsonManagedReference;

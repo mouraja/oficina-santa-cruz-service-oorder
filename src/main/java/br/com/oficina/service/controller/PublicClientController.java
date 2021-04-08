@@ -5,7 +5,7 @@
  */
 package br.com.oficina.service.controller;
 
-import br.com.oficina.service.domain.PublicClientDTO;
+import br.com.oficina.service.dao.PublicClientDTO;
 import br.com.oficina.service.domain.PublicClientEntity;
 import br.com.oficina.service.usecase.PublicClientUseCase;
 import java.util.List;

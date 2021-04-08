@@ -5,6 +5,8 @@
  */
 package br.com.oficina.service.domain;
 
+import br.com.oficina.enums.ServiceOrderBiddingStatusEnum;
+import br.com.oficina.enums.BiddingStatusEnum;
 import java.util.Calendar;
 import javax.persistence.Column;
 import javax.persistence.Entity;
