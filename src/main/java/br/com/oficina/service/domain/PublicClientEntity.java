@@ -59,7 +59,10 @@ public class PublicClientEntity
 
     @Column(nullable = true)
     private String observation;
-
+    
+    @Column(nullable = true)
+    private Boolean status;
+ 
 /*    
     @OneToMany(
             targetEntity = VehicleEntity.class,

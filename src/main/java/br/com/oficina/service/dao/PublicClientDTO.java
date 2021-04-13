@@ -19,5 +19,7 @@ public class PublicClientDTO {
     private String publicName;
 
     private String publicFantasyName;
+    
+    private Boolean status;
 
 }
