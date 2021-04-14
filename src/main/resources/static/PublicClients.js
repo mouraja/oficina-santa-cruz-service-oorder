@@ -1,16 +1,18 @@
-var publicClients = [
+//var publicClients = [
   /*{id: 1, name: 'Laravel', description: 'Provide Laravel Information.', price: 100},
   {id: 2, name: 'AngularJS', description: 'Provide AngularJS Information.', price: 100},
   {id: 3, name: 'PHP', description: 'Provide PHP Information.', price: 100}*/
-];
+//];
 
+publicClients: [];
+            
 function findPublicClient (id) {
-  return publicClients[findPublicClientKey(id)];
+  return this.publicClients[findPublicClientKey(id)];
 };
 
 function findPublicClientKey (id) {
   for (var key = 0; key < publicClients.length; key++) {
-    if (publicClients[key].id == id) {
+    if (publicClients[key].id === id) {
       return key;
     }
   }
@@ -21,10 +23,12 @@ var PublicClientService = {
   api_path: 'http://localhost:8080/api/manager/client/public',
 
   findAll(fn) {
-    console.info("Salvando um Mané");
-    console.info(this.api_path);
     axios
-      .get(this.api_path)
+      .get(this.api_path, {
+          'headers': {
+            "Content-type": "application/json"
+          }
+      })
       .then(response => fn(response))
       .catch(error => console.log(error));
   },
@@ -64,13 +68,15 @@ var PublicClientService = {
 var List = Vue.extend({
   template: '#public-client-list',
   data: function () {
-    return {publicClients: publicClients, searchKey: ''};
+    return {publicClients: [], searchKey: ''};
   },
-  computed : {
-    filteredPublicClients: function () {
-      console.log(this.searchKey);
-      return this.publicClients.filter(function (publicClient) {
-        return (publicClient.publicName.indexOf(this.searchKey) !== -1 || publicClient.publicFantasyName.indexOf(this.searchKey) !== -1);
+  computed: {
+    filteredPublicClients() {
+      return this.publicClients.filter((publicClient) => {
+      	return publicClient.publicName.indexOf(this.searchKey) > -1
+      	  || publicClient.primaryContact.indexOf(this.searchKey) > -1
+      	  || publicClient.primaryEmail.indexOf(this.searchKey) > -1
+      	  || publicClient.publicFantasyName.toString().indexOf(this.searchKey) > -1;
       });
     }
   },

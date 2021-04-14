@@ -5,7 +5,7 @@
  */
 package br.com.oficina.service.controller;
 
-import br.com.oficina.service.dao.PublicClientDTO;
+import br.com.oficina.service.dao.PublicClientManagerDTO;
 import br.com.oficina.service.domain.PublicClientEntity;
 import br.com.oficina.service.usecase.PublicClientUseCase;
 import java.util.List;
@@ -46,8 +46,8 @@ public class PublicClientManagerController {
      * @return
      */
     @GetMapping
-    public List<PublicClientDTO> findAll() {
-        return publicClientUseCase.findAll().stream().map(publicClient -> modelMapper.map(publicClient, PublicClientDTO.class))
+    public List<PublicClientManagerDTO> findAll() {
+        return publicClientUseCase.findAll().stream().map(publicClient -> modelMapper.map(publicClient, PublicClientManagerDTO.class))
                 .collect(Collectors.toList());
     }
 
@@ -57,30 +57,30 @@ public class PublicClientManagerController {
      * @return
      */
     @GetMapping("/{id}")
-    public ResponseEntity<PublicClientDTO> findById(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<PublicClientManagerDTO> findById(@PathVariable(name = "id") Long id) {
         Optional<PublicClientEntity> publicClient = publicClientUseCase.findById(id);
         // convert entity to DTO
-        PublicClientDTO publicClientResponse = modelMapper.map(publicClient, PublicClientDTO.class);
+        PublicClientManagerDTO publicClientResponse = modelMapper.map(publicClient, PublicClientManagerDTO.class);
         return ResponseEntity.ok().body(publicClientResponse);
     }
 
     @PostMapping
-    public ResponseEntity<PublicClientDTO> create(@RequestBody PublicClientDTO publicClientDto) {
+    public ResponseEntity<PublicClientManagerDTO> create(@RequestBody PublicClientManagerDTO publicClientDto) {
         // convert DTO to entity
         PublicClientEntity publicClientRequest = modelMapper.map(publicClientDto, PublicClientEntity.class);
         PublicClientEntity publicClient = publicClientUseCase.save(publicClientRequest);
         // convert entity to DTO
-        PublicClientDTO publicClientResponse = modelMapper.map(publicClient, PublicClientDTO.class);
+        PublicClientManagerDTO publicClientResponse = modelMapper.map(publicClient, PublicClientManagerDTO.class);
         return new ResponseEntity<>(publicClientResponse, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PublicClientDTO> update(@PathVariable long id, @RequestBody PublicClientDTO publicClientDto) {
+    public ResponseEntity<PublicClientManagerDTO> update(@PathVariable long id, @RequestBody PublicClientManagerDTO publicClientDto) {
         // convert DTO to Entity
         PublicClientEntity publicClientRequest = modelMapper.map(publicClientDto, PublicClientEntity.class);
         PublicClientEntity publicClient = publicClientUseCase.update(publicClientRequest);
         // entity to DTO
-        PublicClientDTO publicClientResponse = modelMapper.map(publicClient, PublicClientDTO.class);
+        PublicClientManagerDTO publicClientResponse = modelMapper.map(publicClient, PublicClientManagerDTO.class);
         return ResponseEntity.ok().body(publicClientResponse);
     }
 
