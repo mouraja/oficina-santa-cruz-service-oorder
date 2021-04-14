@@ -11,11 +11,14 @@ function findPublicClient (id) {
 };
 
 function findPublicClientKey (id) {
-  for (var key = 0; key < publicClients.length; key++) {
-    if (publicClients[key].id === id) {
+  return this.publicClients.filter(key => key.id === id);
+  /*
+  for (var key = 0; key < this.publicClients.length; key++) {
+    if (this.publicClients[key].id === id) {
       return key;
     }
   }
+  */
 };
 
 var PublicClientService = {
@@ -65,7 +68,7 @@ var PublicClientService = {
 
 };
 
-var List = Vue.extend({
+var publicClientList = Vue.extend({
   template: '#public-client-list',
   data: function () {
     return {publicClients: [], searchKey: ''};
@@ -85,8 +88,8 @@ var List = Vue.extend({
   }
 });
 
-var publicClient = Vue.extend({
-  template: '#public-client',
+var publicClientView = Vue.extend({
+  template: '#public-client-view',
   data: function () {
     return {publicClient: findPublicClient(this.$route.params.publicClient_id)};
   }
@@ -100,7 +103,7 @@ var publicClientEdit = Vue.extend({
   methods: {
     updatePublicClient: function () {
       var publicClient = this.publicClient;
-      publicClients[findPublicClientKey(publicClient.id)] = {
+      this.publicClients[findPublicClientKey(publicClient.id)] = {
         id: publicClient.id,
         publicName: publicClient.publicName,
         publicFantasyName: publicClient.publicFantasyName,
@@ -125,7 +128,7 @@ var publicClientDelete = Vue.extend({
   },
   methods: {
     deletePublicClient: function () {
-      publicClients.splice(findPublicClientKey(this.$route.params.publicClient_id), 1);
+      this.publicClients.splice(findPublicClientKey(this.$route.params.publicClient_id), 1);
       router.push('/');
     }
   }
@@ -151,7 +154,6 @@ var publicClientAdd = Vue.extend({
   },
   methods: {
     createPublicClient() {
-      console.log(this.publicClient)
       PublicClientService.create(this.publicClient, r => router.push('/'));
     }
   }
@@ -159,11 +161,11 @@ var publicClientAdd = Vue.extend({
 
 var router = new VueRouter({
   routes: [
-    {path: '/', component: List},
-    {path: '/public-client/:publicClient_id', component: publicClient, name: 'public-client'},
-    {path: '/public-client-add', component: publicClientAdd},
-    {path: '/public-client/:publicClient_id/edit', component: publicClientEdit, name: 'public-client-edit'},
-    {path: '/public-client/:publicClient_id/delete', component: publicClientDelete, name: 'public-client-delete'}
+    {path: '/', component: publicClientList},
+    {path: '/public-client/view/:publicClient_id', component: publicClientView, name: 'public-client-view'},
+    {path: '/public-client/add', component: publicClientAdd, name: 'public-client-add'},
+    {path: '/public-client/edit/:publicClient_id', component: publicClientEdit, name: 'public-client-edit'},
+    {path: '/public-client/delete/:publicClient_id', component: publicClientDelete, name: 'public-client-delete'}
   ]
 });
 
@@ -172,7 +174,7 @@ new Vue({
   data: {
     company: "Oficina Santa Cruz",
     title: "Public Client Managment",
-    subtitle: "Add a new public client" 
+    subtitle: "" 
   },
   router: router
 });

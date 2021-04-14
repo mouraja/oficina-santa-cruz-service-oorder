@@ -52,7 +52,8 @@
 <template id="public-client-list">
   <section>
   <div class="actions">
-    <router-link class="btn btn-primary" :to="{path: '/public-client-add'}">
+    <!--<router-link class="btn btn-primary" :to="{path: '/public-client/add'}">-->
+    <router-link class="btn btn-primary" :to="{name: 'public-client-add'}">
       <span class="glyphicon glyphicon-plus"></span>
       Add public client
     </router-link>
@@ -63,7 +64,8 @@
       <input v-model="searchKey" class="form-control" id="search-element" requred/>
     </div>
   </div>
-  <div class="alert alert-danger">{{publicClients}}</div>
+  <div v-if="publicClients.length == 0" 
+       class="alert alert-danger">No public client found.</div>
   <table class="table table-striped">
     <thead>
     <tr>
@@ -80,7 +82,7 @@
     <tbody>
     <tr v-for="publicClient in filteredPublicClients">
       <th scope="row">
-        <router-link :to="{name: 'publicClient', params: {publicClient_id: publicClient.id}}">{{ publicClient.id }}</router-link>
+        <router-link :to="{name: 'public-client-view', params: {publicClient_id: publicClient.id}}">{{ publicClient.id }}</router-link>
       </th>
       <td>{{ publicClient.publicName }}</td>
       <td>{{ publicClient.publicFantasyName }}</td>
@@ -148,7 +150,7 @@
 </section>
 </template>
 
-<template id="public-client">
+<template id="public-client-view">
   <section>
   <h2>{{ publicClient.name }}</h2>
   <b>Fantasy Name: </b>
