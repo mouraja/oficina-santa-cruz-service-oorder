@@ -55,7 +55,7 @@ public class PublicClientEntity
     private String primarySupportContact;
 
     @Column(nullable = true)
-    private String observation;
+    private String observations;
     
     @Column(nullable = true)
     private Boolean status;

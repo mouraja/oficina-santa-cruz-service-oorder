@@ -23,7 +23,7 @@ public class PublicClientManagerDTO {
     private String primaryEmail;
     private String primaryPhoneNumber;
     private String primarySupportContact;
-    private String observation;
+    private String observations;
     private Boolean status;
 /*    
     private List<VehicleEntity> vehicles;

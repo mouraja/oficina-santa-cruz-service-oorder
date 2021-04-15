@@ -7,11 +7,13 @@
 publicClients: [];
             
 function findPublicClient (id) {
-  return this.publicClients[findPublicClientKey(id)];
+  //return this.publicClients[findPublicClientKey(id)];
+  return findPublicClientKey(id)[0];
 };
 
 function findPublicClientKey (id) {
-  return this.publicClients.filter(key => key.id === id);
+  //console.log(id + "-" + this.publicClients.filter(key => key.id === id));
+  return this.publicClients.filter( key => key.id === id );
   /*
   for (var key = 0; key < this.publicClients.length; key++) {
     if (this.publicClients[key].id === id) {
@@ -23,7 +25,7 @@ function findPublicClientKey (id) {
 
 var PublicClientService = {
 
-  api_path: 'http://localhost:8080/api/manager/client/public',
+  api_path: 'http://localhost:8080/api/manager/client/public/',
 
   findAll(fn) {
     axios
@@ -37,8 +39,6 @@ var PublicClientService = {
   },
 
   findById(id, fn) {
-    console.info("Procurando um Mané");
-    console.info(this.api_path); 
     axios
       .get(this.api_path + id)
       .then(response => fn(response))
@@ -59,7 +59,7 @@ var PublicClientService = {
       .catch(error => console.log(error));
   },
 
-  deleteVehicle(id, fn) {
+  delete(id, fn) {
     axios
       .delete(this.api_path + id)
       .then(response => fn(response))
@@ -102,21 +102,7 @@ var publicClientEdit = Vue.extend({
   },
   methods: {
     updatePublicClient: function () {
-      var publicClient = this.publicClient;
-      this.publicClients[findPublicClientKey(publicClient.id)] = {
-        id: publicClient.id,
-        publicName: publicClient.publicName,
-        publicFantasyName: publicClient.publicFantasyName,
-        addressDelivery: publicClient.addressDelivery,
-        addressBilling: publicClient.addressBilling,
-        primaryContact: publicClient.primaryContact,
-        primaryEmail: publicClient.primaryEmail,
-        primaryPhoneNumber: publicClient.primaryPhoneNumber,
-        primarySupportContact: publicClient.primarySupportContact,
-        observations: publicClient.observations,
-        status: publicClient.status
-      };
-      router.push('/');
+      PublicClientService.update(this.publicClient.id, this.publicClient, r => router.push('/'));
     }
   }
 });
@@ -128,8 +114,7 @@ var publicClientDelete = Vue.extend({
   },
   methods: {
     deletePublicClient: function () {
-      this.publicClients.splice(findPublicClientKey(this.$route.params.publicClient_id), 1);
-      router.push('/');
+      PublicClientService.delete(this.publicClient.id, r => router.push('/'));
     }
   }
 });
