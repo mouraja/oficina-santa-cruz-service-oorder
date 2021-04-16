@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html >
-<head>
+  <head>
     <meta charset="UTF-8">
     <link href="https://unpkg.com/bootstrap@4.6.0/dist/css/bootstrap.css" rel="stylesheet">
-     
-<!--
-    <script src="https://unpkg.com/browse/jquery@3.6.0/dist/jquery.js"></script>
-    <script src="https://unpkg.com/bootstrap@4.6.0/dist/js/bootstrap.js"></script>
--->
+
+    <!--
+        <script src="https://unpkg.com/browse/jquery@3.6.0/dist/jquery.js"></script>
+        <script src="https://unpkg.com/bootstrap@4.6.0/dist/js/bootstrap.js"></script>
+    -->
     <script src="https://unpkg.com/vue@2.6.12/dist/vue.js"></script>
     <script src="https://unpkg.com/vue-router@3.5.1/dist/vue-router.js"></script>
-    
+
     <script src="https://unpkg.com/axios@0.21.1/dist/axios.js"></script>
 
 
@@ -18,54 +18,126 @@
     <link href="main.css" rel="stylesheet">
 
 
-</head>
+  </head>
 
-<body>
-<header>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light text-white">
-    <div class="container-fluid">
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-mdb-toggle="collapse"
-        data-mdb-target="#navbarExample01"
-        aria-controls="navbarExample01"
-        aria-expanded="false"
-        aria-label="Toggle navigation">
-        <i class="fas fa-bars"></i>
-      </button>
-      <div class="collapse navbar-collapse text-white" id="navbarExample01">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item active">
-            <a class="nav-link" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="ServiceOrders.html">Service Orders</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="Vehicles.html">Vehicles</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="PublicClients.html">Public Clients</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-          </li>
-        </ul>
+  <body>
+    <header>
+      
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        
+        <!-- Container wrapper -->
+        <div class="container-fluid">
+          
+          <!-- Navbar brand -->
+          <a class="navbar-brand" href="#">Brand</a>
+
+          <!-- Toggle button -->
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-mdb-toggle="collapse"
+            data-mdb-target="#navbarMainMenu"
+            aria-controls="navbarMainMenu"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+          </button>
+
+          <!-- Collapsible wrapper -->
+          <div class="collapse navbar-collapse" id="navbarMainMenu">
+            <!-- Left links -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              
+              <!-- Navbar Home -->
+              <li class="nav-item active">
+                <a class="nav-link" aria-current="page" href="#">Home</a>
+              </li>
+              
+              <!-- Navbar dropdown Services -->
+              <li class="nav-item">
+                <a class="nav-link" href="ServiceOrders.html">Services</a>
+              </li>
+              
+              <!-- Navbar dropdown Manager -->
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="navbarService"
+                  role="button"
+                  data-mdb-toggle="dropdown"
+                  aria-expanded="false"
+                  >
+                  Manager
+                </a>
+                <!-- Dropdown Manager -->
+                <ul class="dropdown-menu" aria-labelledby="navbarService">
+                  <li><a class="nav-link" href="ServiceOrders.html">Services Orders</a></li>
+                  <li><a class="dropdown-item" href="Autoparts.html">Autopart Buy Orders</a></li>
+                </ul>
+              </li>              
+              <!-- Navbar dropdown Manager -->
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="navbarManager"
+                  role="button"
+                  data-mdb-toggle="dropdown"
+                  aria-expanded="false"
+                  >
+                  Manager
+                </a>
+                <!-- Dropdown Manager -->
+                <ul class="dropdown-menu" aria-labelledby="navbarManager">
+                  <li><a class="dropdown-item" href="Vehicles.html">Vehicles</a></li>
+                  <li><a class="dropdown-item" href="Biddings.html">Biddings</a></li>
+                </ul>
+              </li>
+              
+              <!-- Navbar dropdown Relationship -->
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="navbarRelationship"
+                  role="button"
+                  data-mdb-toggle="dropdown"
+                  aria-expanded="false"
+                  >
+                  Manager
+                </a>
+                <!-- Dropdown relationship -->
+                <ul class="dropdown-menu" aria-labelledby="navbarRelationship">
+                  <li><a class="dropdown-item" href="PublicClients.html">Public clients</a></li>
+                  <li><a class="dropdown-item" href="LegalClients.html">Legal clients</a></li>
+                  <li><a class="dropdown-item" href="LegalClients.html">Clients</a></li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li>
+                    <a class="dropdown-item disabled" tabindex="-1" aria-disabled="true" href="#">Reserved</a>
+                  </li>
+                </ul>
+              </li>
+              
+              <!-- Navbar About -->
+              <li class="nav-item">
+                <a class="nav-link disabled" tabindex="-1" aria-disabled="true" href="#">About</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- Navbar -->
+
+      <!-- Jumbotron -->
+      <div class="p-5 text-center bg-light">
+        <h1 class="mb-3">Oficina Santa Cruz</h1>
+        <h4 class="mb-3">Total System Promisse Control</h4>
       </div>
-    </div>
-  </nav>
-  <!-- Navbar -->
+      <!-- Jumbotron -->
+    </header>
 
-  <!-- Jumbotron -->
-  <div class="p-5 text-center bg-light">
-    <h1 class="mb-3">Oficina Santa Cruz</h1>
-    <h4 class="mb-3">Total System Promisse Control</h4>
-  </div>
-  <!-- Jumbotron -->
-</header>
-
-</body>
+  </body>
 
 </html>
