@@ -1,5 +1,6 @@
 
 vehicles: [];
+owners: [];
 
 function findVehicle(id) {
   return findVehicleKey(id);
@@ -106,15 +107,28 @@ const VehicleView = Vue.extend({
 const VehicleEdit = Vue.extend({
   template: '#vehicle-edit',
   data: function () {
-    return {vehicle: findVehicle(this.$route.params.vehicle_id)};
+    return {
+      vehicle: findVehicle(this.$route.params.vehicle_id),
+      owners: []
+    };
   },
   methods: {
     updateVehicle: function () {
       VehicleService.update(this.vehicle.id, this.vehicle, r => router.push('/'))
+    },
+    async listClients() {
+      await VehicleService.findClients(r => {
+        this.owners = r.data;
+        owners = r.data;
+        console.log("owners: " + this.owners);
+      });
     }
   },
   mounted() {
     this.$data.subtitle = "Vehicle Delete";
+  },
+  created() {
+    this.listClients();
   }
 });
 
@@ -134,7 +148,7 @@ const VehicleDelete = Vue.extend({
 });
 
 const VehicleAdd = Vue.extend({
-  template: '#add-vehicle',
+  template: '#vehicle-add',
   data() {
     return {
       vehicle: {
@@ -146,13 +160,24 @@ const VehicleAdd = Vue.extend({
         clientOwner: 0,
         observations: '',
         status: false
-      }
+      },
+      owners: []
     };
   },
   methods: {
     createVehicle() {
       VehicleService.create(this.vehicle, r => router.push('/'));
+    },
+    async listClients() {
+      await VehicleService.findClients(r => {
+        this.owners = r.data;
+        owners = r.data;
+        console.log("owners: " + this.owners);
+      });
     }
+  },
+  created() {
+    this.listClients();
   },
   mounted() {
     this.$data.subtitle = "Add Vehicle";
@@ -162,37 +187,40 @@ const VehicleAdd = Vue.extend({
 const router = new VueRouter({
   routes: [
     {path: '/', component: VehicleList},
-    {path: '/vehicle/:vehicle_id', component: VehicleView, name: 'vehicle-view'},
-    {path: '/vehicle/add', component: VehicleAdd},
+    {path: '/vehicle/view/:vehicle_id', component: VehicleView, name: 'vehicle-view'},
+    {path: '/vehicle/add', component: VehicleAdd, name: 'vehicle-add'},
     {path: '/vehicle/edit/:vehicle_id', component: VehicleEdit, name: 'vehicle-edit'},
     {path: '/vehicle/edit/:vehicle_id', component: VehicleDelete, name: 'vehicle-delete'}
   ]
 });
 
-const ClientList = new Vue({
-  el: 'add-client-owner',
-  data: () => ({
-      clients: []
-    }),
-  methods: {
-    async getClients() {
-      await VehicleService.listClients(r => {
-        this.clients = r.data;
-        clients = r.data;
-      });
-    }
-  },
-  created() {
-    this.getClients;
-  }
-});
+/*
+ const ClientList = new Vue({
+ el: 'add-client-owner',
+ data: () => ({
+ clients: []
+ }),
+ methods: {
+ async getClients() {
+ await VehicleService.listClients(r => {
+ this.clients = r.data;
+ clients = r.data;
+ });
+ }
+ },
+ created() {
+ this.getClients;
+ }
+ });
+ */
 
 new Vue({
   el: '#app',
   data: {
     company: "Oficina Santa Cruz",
     title: "Vehicle Managment",
-    subtitle: ""
+    subtitle: "",
+    owners: []
   },
   router: router
 });

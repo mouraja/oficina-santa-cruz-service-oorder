@@ -2,22 +2,30 @@
 <html >
   <head>
     <meta charset="UTF-8">
-    <link href="https://unpkg.com/bootstrap@4.6.0/dist/css/bootstrap.css" rel="stylesheet">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
     <!--
-        <script src="https://unpkg.com/browse/jquery@3.6.0/dist/jquery.js"></script>
-        <script src="https://unpkg.com/bootstrap@4.6.0/dist/js/bootstrap.js"></script>
+    <link href="https://unpkg.com/bootstrap@4.6.0/dist/css/bootstrap.css" rel="stylesheet">
+    <script src="https://unpkg.com/browse/jquery@3.6.0/dist/jquery.js"></script>
+    <script src="https://unpkg.com/bootstrap@4.6.0/dist/js/bootstrap.js"></script>
+    <script src="https://unpkg.com/browse/popper@1.16.1/dist/popper.js"></script>
+    -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.js"></script>
+    <!--	
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.6.0/css/bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.6.0/js/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.js"></script>
     -->
     <script src="https://unpkg.com/vue@2.6.12/dist/vue.js"></script>
     <script src="https://unpkg.com/vue-router@3.5.1/dist/vue-router.js"></script>
-
     <script src="https://unpkg.com/axios@0.21.1/dist/axios.js"></script>
-
-
     <title>Aprendendo Vue</title>
     <link href="main.css" rel="stylesheet">
-
-
   </head>
 
   <body>
@@ -25,55 +33,44 @@
       
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        
         <!-- Container wrapper -->
         <div class="container-fluid">
-          
           <!-- Navbar brand -->
           <a class="navbar-brand" href="#">Brand</a>
-
           <!-- Toggle button -->
           <button
-            class="navbar-toggler"
+            class="navbar-toggle"
             type="button"
-            data-mdb-toggle="collapse"
-            data-mdb-target="#navbarMainMenu"
+            data-toggle="collapse"
+            data-target="#navbarMainMenu"
             aria-controls="navbarMainMenu"
             aria-expanded="false"
             aria-label="Toggle navigation">
             <i class="fas fa-bars"></i>
           </button>
-
           <!-- Collapsible wrapper -->
           <div class="collapse navbar-collapse" id="navbarMainMenu">
             <!-- Left links -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              
               <!-- Navbar Home -->
               <li class="nav-item active">
                 <a class="nav-link" aria-current="page" href="#">Home</a>
               </li>
-              
               <!-- Navbar dropdown Services -->
-              <li class="nav-item">
-                <a class="nav-link" href="ServiceOrders.html">Services</a>
-              </li>
-              
-              <!-- Navbar dropdown Manager -->
               <li class="nav-item dropdown">
                 <a
                   class="nav-link dropdown-toggle"
                   href="#"
                   id="navbarService"
                   role="button"
-                  data-mdb-toggle="dropdown"
+                  data-toggle="dropdown"
                   aria-expanded="false"
                   >
-                  Manager
+                  Services
                 </a>
                 <!-- Dropdown Manager -->
-                <ul class="dropdown-menu" aria-labelledby="navbarService">
-                  <li><a class="nav-link" href="ServiceOrders.html">Services Orders</a></li>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="navbarService">
+                  <li><a class="dropdown-item" href="ServiceOrders.html">Services Orders</a></li>
                   <li><a class="dropdown-item" href="Autoparts.html">Autopart Buy Orders</a></li>
                 </ul>
               </li>              
@@ -84,7 +81,7 @@
                   href="#"
                   id="navbarManager"
                   role="button"
-                  data-mdb-toggle="dropdown"
+                  data-toggle="dropdown"
                   aria-expanded="false"
                   >
                   Manager
@@ -95,7 +92,7 @@
                   <li><a class="dropdown-item" href="Biddings.html">Biddings</a></li>
                 </ul>
               </li>
-              
+
               <!-- Navbar dropdown Relationship -->
               <li class="nav-item dropdown">
                 <a
@@ -103,10 +100,10 @@
                   href="#"
                   id="navbarRelationship"
                   role="button"
-                  data-mdb-toggle="dropdown"
+                  data-toggle="dropdown"
                   aria-expanded="false"
                   >
-                  Manager
+                  Relationship
                 </a>
                 <!-- Dropdown relationship -->
                 <ul class="dropdown-menu" aria-labelledby="navbarRelationship">
@@ -119,7 +116,7 @@
                   </li>
                 </ul>
               </li>
-              
+
               <!-- Navbar About -->
               <li class="nav-item">
                 <a class="nav-link disabled" tabindex="-1" aria-disabled="true" href="#">About</a>
