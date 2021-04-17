@@ -62,7 +62,7 @@ const VehicleService = {
     axios
             .get(this.base_client, {
               'headers': {
-                "Content-type": "application/json"
+                'Content-type': 'application/json'
               }
             })
             .then(response => fn(response))
@@ -120,7 +120,7 @@ const VehicleEdit = Vue.extend({
       await VehicleService.findClients(r => {
         this.owners = r.data;
         owners = r.data;
-        console.log("owners: " + this.owners);
+        console.log("owners: " + this.owners[0].id);
       });
     }
   },
@@ -172,7 +172,6 @@ const VehicleAdd = Vue.extend({
       await VehicleService.findClients(r => {
         this.owners = r.data;
         owners = r.data;
-        console.log("owners: " + this.owners);
       });
     }
   },

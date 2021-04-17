@@ -16,6 +16,6 @@ public class PublicClientDTO {
     private Long id;
     private String publicName;
     private String publicFantasyName;
-    private Boolean observations;    
+    private String observations;    
     private Boolean status;
 }

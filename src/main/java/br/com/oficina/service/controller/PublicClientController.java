@@ -66,7 +66,8 @@ public class PublicClientController {
 
     @PostMapping
     public ResponseEntity<PublicClientDTO> create(@RequestBody PublicClientDTO publicClientDto) {
-        // convert DTO to entity
+        // convert DTO to entity     
+        System.out.print("publicClientDtoPost: " + publicClientDto.toString());
         PublicClientEntity publicClientRequest = modelMapper.map(publicClientDto, PublicClientEntity.class);
         PublicClientEntity publicClient = publicClientUseCase.save(publicClientRequest);
         // convert entity to DTO
@@ -77,6 +78,7 @@ public class PublicClientController {
     @PutMapping("/{id}")
     public ResponseEntity<PublicClientDTO> update(@PathVariable long id, @RequestBody PublicClientDTO publicClientDto) {
         // convert DTO to Entity
+        System.out.print("publicClientDtoPut: " + publicClientDto.toString());
         PublicClientEntity publicClientRequest = modelMapper.map(publicClientDto, PublicClientEntity.class);
         PublicClientEntity publicClient = publicClientUseCase.update(publicClientRequest);
         // entity to DTO
