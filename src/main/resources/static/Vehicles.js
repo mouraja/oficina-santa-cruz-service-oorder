@@ -4,12 +4,15 @@ owners: [];
 
 function findVehicle(id) {
   return findVehicleKey(id);
-}
-;
+};
 
 function findVehicleKey(id) {
   return (this.vehicles.find(key => key.id === id));
-}
+};
+
+function findItem(id, list) {
+  return (list.find(key => key.id === id));
+};
 
 const VehicleService = {
   base_url: 'http://localhost:8080/api/manager/vehicle/',
@@ -79,9 +82,11 @@ const VehicleList = Vue.extend({
   computed: {
     filteredVehicles() {
       return this.vehicles.filter((vehicle) => {
-        return vehicle.licensePlate.indexOf(this.searchKey) > -1
-                || vehicle.manufactor.indexOf(this.searchKey) > -1
-                || vehicle.model.indexOf(this.searchKey) > -1;
+        return  vehicle.status && (
+                    vehicle.licensePlate.indexOf(this.searchKey) > -1 ||
+                    vehicle.manufactor.indexOf(this.searchKey) > -1 ||
+                    vehicle.model.indexOf(this.searchKey) > -1
+                );
       });
     }
   },
@@ -114,18 +119,17 @@ const VehicleEdit = Vue.extend({
   },
   methods: {
     updateVehicle: function () {
-      VehicleService.update(this.vehicle.id, this.vehicle, r => router.push('/'))
+        VehicleService.update(this.vehicle.id, this.vehicle, r => router.push('/'));
     },
     async listClients() {
       await VehicleService.findClients(r => {
         this.owners = r.data;
         owners = r.data;
-        console.log("owners: " + this.owners[0].id);
       });
     }
   },
   mounted() {
-    this.$data.subtitle = "Vehicle Delete";
+    this.$data.subtitle = "Vehicle Edit";
   },
   created() {
     this.listClients();
@@ -143,7 +147,7 @@ const VehicleDelete = Vue.extend({
     }
   },
   mounted() {
-    this.$data.subtitle = "Vehicle Edit";
+    this.$data.subtitle = "Vehicle Delete";
   }
 });
 
@@ -157,7 +161,13 @@ const VehicleAdd = Vue.extend({
         madeYear: '',
         modelYear: '',
         licensePlate: '',
-        clientOwner: 0,
+        clientOwner: {
+            id: 0,
+            publicName: '',
+            fantasyName: '',
+            observations: '',
+            status: ''
+        },
         observations: '',
         status: false
       },
@@ -218,8 +228,7 @@ new Vue({
   data: {
     company: "Oficina Santa Cruz",
     title: "Vehicle Managment",
-    subtitle: "",
-    owners: []
+    subtitle: ""
   },
   router: router
 });

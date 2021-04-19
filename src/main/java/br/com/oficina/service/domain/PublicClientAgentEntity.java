@@ -29,26 +29,26 @@ public class PublicClientAgentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @Column(nullable = false)
+    private String name;
+    
+    @Column(nullable = false)
+    private String role;
+
+    @Column(nullable = true)
+    private String phonenumber;
+
+    @Column(nullable = true)
+    private String email;
+
+    @Column(nullable = true)
+    private Boolean status;
 
 /*
     @ManyToOne
     @JoinColumn(name="id")
     private PublicClientEntity publicClient;
 */
-    
-    @Column(nullable = false)
-    private String publicAgentName;
-    
-    @Column(nullable = false)
-    private String publicAgentRole;
-
-    @Column(nullable = true)
-    private String publicAgentPhonenumber;
-
-    @Column(nullable = true)
-    private String publicAgentEmail;
-
-    @Column(nullable = true)
-    private boolean status;
 
 }
