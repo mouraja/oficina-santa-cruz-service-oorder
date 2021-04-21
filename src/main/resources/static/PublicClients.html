@@ -26,9 +26,10 @@
     <script src="https://unpkg.com/vue-router@3.5.1/dist/vue-router.js"></script>
     <script src="https://unpkg.com/axios@0.21.1/dist/axios.js"></script>
 
-    <title>Service Order - Oficina Santa Cruz</title>
+    <title>Oficina Santa Cruz</title>
+    <link rel="shortcut icon" href="./img/logo-imagem.ico" />
     <link href="main.css" rel="stylesheet">
-    
+
   </head>
 
   <body>
@@ -36,13 +37,13 @@
     <div id="app" class="container container-fluid">
       <div class="container">
         <div class="row" >
-          <div class="col-lg-3">
+          <div class="col-lg-5">
             <div class="branding">
-              <img src="logo.png" alt="Logo" :title="company" class="logo"/>
+              <img src="./img/logo-pinguim.png" alt="Logo" :title="company" class="logo"/>
             </div>
             <h4>{{ company }}</h4>
           </div>
-          <div class="col-lg-9">
+          <div class="col-lg-7">
             <div class="row">
               <div class="col-lg-12 bg-light">
                 <h3>{{ title }}</h3>
@@ -56,7 +57,9 @@
                   <!-- Container wrapper -->
                   <div class="container-fluid">
                     <!-- Navbar brand -->
-                    <a class="navbar-brand" href="#">Brand</a>
+                    <a class="navbar-brand" href="./index.html">
+                      <img src="./img/logo-imagem.png" :title="company" width="35%" height="35%" />
+                    </a>
                     <!-- Toggle button -->
                     <button
                       class="navbar-toggle"
@@ -252,8 +255,8 @@
             <input type="checkbox" class="form-control" id="add-status" v-model="publicClient.status"/>
           </div>
           <button type="submit" class="btn btn-primary">
-              <i class="bi bi.remove"></i>
-              Create
+            <i class="bi bi.remove"></i>
+            Create
           </button>
           <button type="reset" class="btn btn-danger">
             <router-link :to="{path: '/'}">Cancel</router-link>
@@ -283,8 +286,8 @@
         </div>
         <button class="btn btn-warning">
           <router-link :to="{path: '/'}">
-              <i class="bi bi.list"></i>
-              Back
+            <i class="bi bi.list"></i>
+            Back
           </router-link>
         </button>
       </section>
@@ -336,13 +339,13 @@
             <input type="checkbox" class="form-control" id="edit-status" v-model="publicClient.status"></input>
           </div>
           <button type="submit" class="btn btn-primary">
-              <i class="bi bi.pencil"></i>
-              Update
+            <i class="bi bi.pencil"></i>
+            Update
           </button>
           <button type="submit" class="btn btn-danger">
             <router-link :to="{path: '/'}">
-                <i class="bi bi.x"></i>
-                Cancel
+              <i class="bi bi.x"></i>
+              Cancel
             </router-link>
           </button>
         </form>
@@ -355,13 +358,13 @@
         <form v-on:submit.prevent="deletePublicClient">
           <p>The action cannot be undone.</p>
           <button type="submit" class="btn btn-danger">
-              <i class="bi bi.trash"></i>
-              Delete
+            <i class="bi bi.trash"></i>
+            Delete
           </button>
           <button type="submit" class="btn btn-info">
             <router-link :to="{path: '/'}">
-                <i class="bi bi.x"></i>
-                Cancel
+              <i class="bi bi.x"></i>
+              Cancel
             </router-link>
           </button>
         </form>

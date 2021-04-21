@@ -1,7 +1,9 @@
 package br.com.oficina.service;
 
 import br.com.oficina.service.domain.PublicClientEntity;
+import br.com.oficina.service.domain.VehicleEntity;
 import br.com.oficina.service.repository.PublicClientRepository;
+import br.com.oficina.service.repository.VehicleRepository;
 import java.util.stream.LongStream;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.CommandLineRunner;
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @SpringBootApplication
 public class ServiceOrderApiApplication {
 
+  /*
     @Bean
     CommandLineRunner init(PublicClientRepository repository) {
         return args -> {
@@ -39,8 +42,10 @@ public class ServiceOrderApiApplication {
                     .map(v -> repository.save(v))
                     .forEach(System.out::println);
         };
+        
     }
-    
+    */
+  
     /**
      *
      * @return
