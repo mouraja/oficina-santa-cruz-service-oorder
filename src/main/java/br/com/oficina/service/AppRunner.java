@@ -5,10 +5,13 @@
  */
 package br.com.oficina.service;
 
+import br.com.oficina.service.domain.BiddingEntity;
 import br.com.oficina.service.domain.PublicClientEntity;
 import br.com.oficina.service.domain.VehicleEntity;
+import br.com.oficina.service.repository.BiddingRepository;
 import br.com.oficina.service.repository.PublicClientRepository;
 import br.com.oficina.service.repository.VehicleRepository;
+import java.util.Calendar;
 import java.util.stream.LongStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -24,43 +27,64 @@ public class AppRunner implements CommandLineRunner {
     
     @Autowired 
     private VehicleRepository vehicle;
-
+    
+    @Autowired 
+    private BiddingRepository bidding;
+    
     @Override
     public void run(String... args) throws Exception {
             client.deleteAll();
-            LongStream.range(1, 11)
-                    .mapToObj(i -> {
-                        PublicClientEntity p = new PublicClientEntity();
-                        p.setPublicName("publicName " + i);
-                        p.setPublicFantasyName("publicFantasyName " + i);
-                        p.setAddressDelivery("Rua addressDelivery" + i);
-                        p.setAddressBilling("Rua addressBilling" + i);
-                        p.setPrimaryContact("primaryContact " + i);
-                        p.setPrimaryEmail("primaryEmail" + i + "@prefeitura.gov.br");
-                        p.setPrimaryPhoneNumber("(18) " + i + "-1111");
-                        p.setPrimarySupportContact("0800-" + i + "-1111");
-                        p.setObservations("observations " + i);
-                        p.setStatus(i % 2 == 0);
-                        return p;
-                    })
-                    .map(n -> client.save(n))
-                    .forEach(System.out::println);
+            PublicClientEntity p = new PublicClientEntity();
+            p.setPublicName("Prefeitura Municipal de Maracaí");
+            p.setPublicFantasyName("PM-Maracai");
+            p.setAddressDelivery("Av. José Bonifácio, 517, Centro, Maracaí, SP");
+            p.setAddressBilling("Av. José Bonifácio, 517, Centro, Maracaí, SP");
+            p.setPrimaryContact("Paulo Eduardo da Silva");
+            p.setPrimaryEmail("paulo.eduardo@maracai.sp.gov.br");
+            p.setPrimaryPhoneNumber("(18) 3371-9500");
+            p.setPrimarySupportContact("gabinete@maracai.sp.gov.br");
+            p.setObservations("Dados para licitações em Maracaí.");
+            p.setStatus(true);
+            client.save(p);
             
             vehicle.deleteAll();
             LongStream.range(1, 11)
                     .mapToObj(i -> {
                         VehicleEntity v = new VehicleEntity();
                         v.setLicensePlate("ABC-" + (1000 + i));
-                        v.setManufactor("manufactor " + i);
-                        v.setModel("Model " + i);
+                        v.setManufactor("Mercedes-Benz");
+                        v.setModel("1935");
                         v.setMadeYear("" + (1990 + i));
                         v.setModelYear("" + (1990 + i));
-                        v.setObservations("observations " + i);
-                        v.setStatus(i % 2 == 0);
-                        v.setClientOwner(client.findById(i).get());
+                        v.setObservations("Caminhão com barulho no eixo dianteiro.");
+                        v.setStatus(true);
+                        v.setClientOwner(client.findById(1L).get());
                         return v;
                     })
                     .map(n -> vehicle.save(n))
+                    .forEach(System.out::println);
+             
+            bidding.deleteAll();
+            LongStream.range(1, 11)
+                    .mapToObj(i -> {
+                        BiddingEntity v = new BiddingEntity();
+                        int initialMonth = 7;
+                        int month = (int) ((initialMonth + i > 11) ? (initialMonth + i) - 12 : (initialMonth + i));
+                        int year = (initialMonth + i > 11) ? 2021 : 2020;
+                        Calendar init = Calendar.getInstance();
+                        Calendar end = Calendar.getInstance();
+                        init.set(year, month, (int) (i+2));
+                        end.set(year+1, month, (int) (i+2));
+                        v.setAlias("alias-" + i);
+                        v.setDescription("description " + i);
+                        v.setInitialDate(init);
+                        v.setExpirateDate(end);
+                        v.setObservations("observations " + i);
+                        v.setStatus(true);
+                        v.setPublicInstitution(client.findById(1L).get());
+                        return v;
+                    })
+                    .map(n -> bidding.save(n))
                     .forEach(System.out::println);
     }
 }

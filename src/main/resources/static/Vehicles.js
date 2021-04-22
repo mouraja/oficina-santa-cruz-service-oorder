@@ -85,7 +85,9 @@ const VehicleList = Vue.extend({
         return  vehicle.status && (
                     vehicle.licensePlate.indexOf(this.searchKey) > -1 ||
                     vehicle.manufactor.indexOf(this.searchKey) > -1 ||
-                    vehicle.model.indexOf(this.searchKey) > -1
+                    vehicle.model.indexOf(this.searchKey) > -1 ||
+                    vehicle.clientOwner.publicFantasyName.indexOf(this.searchKey) > -1 ||
+                    vehicle.clientOwner.publicName.indexOf(this.searchKey) > -1
                 );
       });
     }
@@ -143,7 +145,7 @@ const VehicleDelete = Vue.extend({
   },
   methods: {
     deleteVehicle: function () {
-      VehicleService.deleteVehicle(this.vehicle.id, r => router.push('/'));
+      VehicleService.delete(this.vehicle.id, r => router.push('/'));
     }
   },
   mounted() {
@@ -164,7 +166,7 @@ const VehicleAdd = Vue.extend({
         clientOwner: {
             id: 0,
             publicName: '',
-            fantasyName: '',
+            publicFantasyName: '',
             observations: '',
             status: ''
         },

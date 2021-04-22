@@ -5,13 +5,11 @@
  */
 package br.com.oficina.service.domain;
 
-import java.util.Calendar;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Temporal;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,17 +27,28 @@ public class BiddingItemEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
+    private Integer item;
+    
+    @Column(nullable = false)
+    private String itemCode;
     
     @Column(nullable = false)
     private String description;
     
     @Column(nullable = false)
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Calendar expectedWorkedHours;
-    
+    private String itemUnitService;
+
+    @Column(nullable = false)
+    private Integer itemAmountService;
+
     @Column(nullable = true)
-    private Float valuePayedByHour;
-    
+    private Float unitValueService;
+
+    @Column(nullable = true)
+    private Float totalValueService;
+        
     @Column(nullable = false)
     private boolean status;
 

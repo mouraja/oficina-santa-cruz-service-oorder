@@ -5,7 +5,6 @@
  */
 package br.com.oficina.service.dao;
 
-import javax.persistence.Column;
 import lombok.Data;
 
 /**

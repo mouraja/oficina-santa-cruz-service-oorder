@@ -6,13 +6,18 @@
 package br.com.oficina.service.domain;
 
 import br.com.oficina.utils.CommonAudityAttributeEntity;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.Calendar;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -37,10 +42,14 @@ public class BiddingEntity extends CommonAudityAttributeEntity {
     @Column
     private String alias;    
 
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Column
+    @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Calendar initialDate;
     
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Column    
+    @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Calendar expirateDate;
     
     @Column
@@ -49,10 +58,11 @@ public class BiddingEntity extends CommonAudityAttributeEntity {
     @Column
     private Boolean status;
     
-    /*
+    @JsonManagedReference
     @ManyToOne
+    @JoinColumn(name="idInstitution", referencedColumnName="id")
     private PublicClientEntity publicInstitution;
-    */
+
 
 /*    
     @JsonBackReference

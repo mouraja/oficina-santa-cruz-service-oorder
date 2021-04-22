@@ -17,12 +17,12 @@ public class BiddingManagerDTO {
     private Long id;
     private String alias;
     private String description;
+    private PublicClientDTO publicInstitution;
     private Calendar initialDate;
     private Calendar expirateDate;
     private String observations;
     private Boolean status;
     /*
-    private PublicClientEntity publicInstitution;
     private Set<BiddingItemEntity> biddingItems;
     private Set<ServiceOrderEntity> services;
     */

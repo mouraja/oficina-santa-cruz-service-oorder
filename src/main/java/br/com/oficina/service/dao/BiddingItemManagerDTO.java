@@ -5,7 +5,6 @@
  */
 package br.com.oficina.service.dao;
 
-import java.util.Calendar;
 import lombok.Data;
 
 /**
@@ -15,6 +14,15 @@ import lombok.Data;
 @Data
 public class BiddingItemManagerDTO {
     private Long id;
+    private Integer item;
+    private String itemCode;
     private String description;
-    private Calendar expectedWorkedHours;
+    private String itemUnitService;
+    private Integer itemAmountService;
+    private Float unitValueService;
+    private Float totalValueService;
+    private boolean status;
+/*    
+    private BiddingEntity bidding;
+*/
 }

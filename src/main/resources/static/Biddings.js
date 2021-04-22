@@ -1,6 +1,6 @@
 
 biddings: [];
-owners: [];
+institutions: [];
 
 function findBidding(id) {
   return findBiddingKey(id);
@@ -84,7 +84,9 @@ const BiddingList = Vue.extend({
       return this.biddings.filter((bidding) => {
         return  bidding.status && (
                     bidding.alias.indexOf(this.searchKey) > -1 ||
-                    bidding.description.indexOf(this.searchKey) > -1
+                    bidding.description.indexOf(this.searchKey) > -1 ||
+                    bidding.publicInstitution.publicFantasyName.indexOf(this.searchKey) > -1 ||
+                    bidding.publicInstitution.publicName.indexOf(this.searchKey) > -1
                 );
       });
     }
@@ -92,8 +94,16 @@ const BiddingList = Vue.extend({
   mounted() {
     this.$data.subtitle = "Biddings List";
     BiddingService.findAll(r => {
-      this.biddings = r.data;
-      biddings = r.data;
+      this.biddings = r.data.map((bidding) => {
+        bidding.initialDate = (new Date(bidding.initialDate)).toJSON().substring(0,10);
+        bidding.expirateDate = (new Date(bidding.expirateDate)).toJSON().substring(0,10);
+        return bidding;
+      });
+      //this.biddings = r.data;
+      //biddings = r.data;
+      biddings = this.biddings;
+      
+      //console.log("DEBUG biddings: " + JSON.stringify(biddings));
     });
   }
 });
@@ -113,7 +123,7 @@ const BiddingEdit = Vue.extend({
   data: function () {
     return {
       bidding: findBidding(this.$route.params.bidding_id),
-      owners: []
+      institutions: []
     };
   },
   methods: {
@@ -122,8 +132,9 @@ const BiddingEdit = Vue.extend({
     },
     async listClients() {
       await BiddingService.findClients(r => {
-        this.owners = r.data;
-        owners = r.data;
+        this.institutions = r.data;
+        institutions = r.data;
+        console.log(institutions);
       });
     }
   },
@@ -155,44 +166,39 @@ const BiddingAdd = Vue.extend({
   data() {
     return {
       bidding: {
-        alias: '',
-        description: '',
-        initialDate: '',
+        id: null,
+        alias: null,
+        description: null,
+        initialDate: null,
         expirateDate: null,
+        publicInstitution: {
+            id: 0,
+            publicName: null,
+            publicFantasyName: null,
+            observations: '',
+            status: false
+        },
         observations: null,
         status: false
-/*
-        clientOwner: {
-            id: 0,
-            publicName: '',
-            fantasyName: '',
-            observations: '',
-            status: ''
-        },
-*/
       },
-      owners: []
+      institutions: []
     };
   },
   methods: {
     createBidding() {
+      console.log(JSON.stringify(this.bidding));
       BiddingService.create(this.bidding, r => router.push('/'));
-    }
-    /*
-    ,
+    },
     async listClients() {
       await BiddingService.findClients(r => {
-        this.owners = r.data;
-        owners = r.data;
+        this.institutions = r.data;
+        institutions = r.data;
       });
     }
-    */
   },
-  /*
   created() {
     this.listClients();
   },
-*/
   mounted() {
     this.$data.subtitle = "Add Bidding";
   }
@@ -210,7 +216,7 @@ const router = new VueRouter({
 
 /*
  const ClientList = new Vue({
- el: 'add-client-owner',
+ el: 'add-client-institution',
  data: () => ({
  clients: []
  }),
