@@ -6,6 +6,7 @@
 package br.com.oficina.service.dao;
 
 import java.util.Calendar;
+import java.util.List;
 import lombok.Data;
 
 /**
@@ -22,8 +23,8 @@ public class BiddingManagerDTO {
     private Calendar expirateDate;
     private String observations;
     private Boolean status;
+    private List<BiddingItemDTO> biddingItems;
     /*
-    private Set<BiddingItemEntity> biddingItems;
     private Set<ServiceOrderEntity> services;
     */
 }

@@ -35,11 +35,11 @@ public class BiddingItemManagerController {
 	@Autowired
 	private ModelMapper modelMapper;
 
-	private final BiddingItemUseCase biddingItemItemUseCase;
+	private final BiddingItemUseCase biddingItemUseCase;
 
-	public BiddingItemManagerController(BiddingItemUseCase biddingItemItemUseCase) {
+	public BiddingItemManagerController(BiddingItemUseCase biddingItemUseCase) {
 		super();
-		this.biddingItemItemUseCase = biddingItemItemUseCase;
+		this.biddingItemUseCase = biddingItemUseCase;
 	}
 
     /**
@@ -48,8 +48,18 @@ public class BiddingItemManagerController {
      */
     @GetMapping
 	public List<BiddingItemManagerDTO> findAll() {
-            return biddingItemItemUseCase.findAll().stream().map(biddingItem -> modelMapper.map(biddingItem, BiddingItemManagerDTO.class))
+            return this.biddingItemUseCase.findAll().stream().map(biddingItem -> modelMapper.map(biddingItem, BiddingItemManagerDTO.class))
 				.collect(Collectors.toList());
+	}
+
+    /**
+     *
+     * @return
+     */
+    @GetMapping("/bidding/{id}")
+	public List<BiddingItemManagerDTO> findByBidding(Long biddinId) {
+            return this.biddingItemUseCase.findByBidding(biddinId).stream().map(biddingItem -> modelMapper.map(biddingItem, BiddingItemManagerDTO.class))
+                                .collect(Collectors.toList());
 	}
 
     /**
@@ -59,7 +69,7 @@ public class BiddingItemManagerController {
      */
     @GetMapping("/{id}")
 	public ResponseEntity<BiddingItemManagerDTO> findById(@PathVariable(name = "id") Long id) {
-		Optional<BiddingItemEntity> biddingItem = biddingItemItemUseCase.findById(id);
+		Optional<BiddingItemEntity> biddingItem = biddingItemUseCase.findById(id);
 
 		// convert entity to DTO
 		BiddingItemManagerDTO biddingItemResponse = modelMapper.map(biddingItem, BiddingItemManagerDTO.class);
@@ -73,7 +83,7 @@ public class BiddingItemManagerController {
 		// convert DTO to entity
 		BiddingItemEntity biddingItemRequest = modelMapper.map(biddingItemDto, BiddingItemEntity.class);
 
-		BiddingItemEntity biddingItem = biddingItemItemUseCase.save(biddingItemRequest);
+		BiddingItemEntity biddingItem = biddingItemUseCase.save(biddingItemRequest);
 
 		// convert entity to DTO
 		BiddingItemManagerDTO biddingItemResponse = modelMapper.map(biddingItem, BiddingItemManagerDTO.class);
@@ -89,7 +99,7 @@ public class BiddingItemManagerController {
 		// convert DTO to Entity
 		BiddingItemEntity biddingItemRequest = modelMapper.map(biddingItemDto, BiddingItemEntity.class);
 
-		BiddingItemEntity biddingItem = biddingItemItemUseCase.update(biddingItemRequest);
+		BiddingItemEntity biddingItem = biddingItemUseCase.update(biddingItemRequest);
 
 		// entity to DTO
 		BiddingItemManagerDTO biddingItemResponse = modelMapper.map(biddingItem, BiddingItemManagerDTO.class);
@@ -99,9 +109,9 @@ public class BiddingItemManagerController {
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
-            return biddingItemItemUseCase.findById(id)
+            return biddingItemUseCase.findById(id)
                 .map(record -> {
-                    biddingItemItemUseCase.deleteById(id);
+                    biddingItemUseCase.deleteById(id);
                return ResponseEntity.ok().build();
            }).orElse(ResponseEntity.notFound().build());
 	}

@@ -31,6 +31,17 @@ public class BiddingItemUseCaseImpl implements BiddingItemUseCase {
     }
     
     @Override
+    public List<BiddingItemEntity> findByBidding(Long biddingId) {
+        List<BiddingItemEntity> list = new ArrayList<>();
+        repository.findAll().forEach(e -> {
+                if (e.getBidding().getId().equals(biddingId)) {
+                  list.add(e);
+                }
+        });
+        return list;
+    }
+    
+    @Override
     public Optional<BiddingItemEntity> findById(Long id){
         return repository.findById(id);
     }

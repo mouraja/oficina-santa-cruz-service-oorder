@@ -5,7 +5,6 @@
  */
 package br.com.oficina.service.dao;
 
-import br.com.oficina.service.domain.BiddingEntity;
 import lombok.Data;
 
 /**
@@ -13,15 +12,13 @@ import lombok.Data;
  * @author moura
  */
 @Data
-public class BiddingItemManagerDTO {
+public class BiddingItemDTO {
     private Long id;
     private Integer item;
     private String itemCode;
     private String description;
-    private String itemUnitService;
-    private Integer itemAmountService;
-    private Float unitValueService;
-    private Float totalValueService;
     private Boolean status;
+/*    
     private BiddingEntity bidding;
+*/
 }

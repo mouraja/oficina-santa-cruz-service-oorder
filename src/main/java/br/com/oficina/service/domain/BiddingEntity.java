@@ -9,13 +9,16 @@ import br.com.oficina.utils.CommonAudityAttributeEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.Calendar;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import lombok.AllArgsConstructor;
@@ -57,7 +60,7 @@ public class BiddingEntity extends CommonAudityAttributeEntity {
 
     @Column
     private Boolean status;
-    
+  
     @JsonManagedReference
     @ManyToOne
     @JoinColumn(name="idInstitution", referencedColumnName="id")
@@ -70,14 +73,18 @@ public class BiddingEntity extends CommonAudityAttributeEntity {
         targetEntity = BiddingItemEntity.class,
         mappedBy = "bidding",
         fetch = FetchType.EAGER)
-    private Set<BiddingItemEntity> biddingItems;
         
     @JsonBackReference
     @OneToMany(
         targetEntity = ServiceOrderEntity.class,
         mappedBy = "id",
         fetch = FetchType.EAGER)
-    private Set<ServiceOrderEntity> services;
-  */
+*/
+    @JsonManagedReference
+    @OneToMany(
+            targetEntity = BiddingItemEntity.class,
+            mappedBy = "bidding",
+            fetch = FetchType.EAGER)
+    private List<BiddingItemEntity> biddingItems;
 
 }
