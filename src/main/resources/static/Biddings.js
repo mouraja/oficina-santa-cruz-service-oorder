@@ -214,6 +214,7 @@ const router = new VueRouter({
   ]
 });
 
+
 /*
  const ClientList = new Vue({
  el: 'add-client-institution',

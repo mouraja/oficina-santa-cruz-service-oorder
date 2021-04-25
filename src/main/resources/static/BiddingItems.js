@@ -217,6 +217,7 @@ const BiddingItemAdd = Vue.extend({
   }
 });
 
+/*
 const routerBiddingItem = new VueRouter({
   routes: [
     {path: '/', component: BiddingItemList},
@@ -226,8 +227,9 @@ const routerBiddingItem = new VueRouter({
     {path: '/biddingItem/edit/:biddingItem_id', component: BiddingItemDelete, name: 'bidding-item-delete'}
   ]
 });
+*/
 
-/*
+/****
  const ClientList = new Vue({
  el: 'add-client-institution',
  data: () => ({
@@ -245,8 +247,9 @@ const routerBiddingItem = new VueRouter({
  this.getClients;
  }
  });
- */
+ ****/
 
+/*
 new Vue({
   el: '#app',
   data: {
@@ -256,3 +259,4 @@ new Vue({
   },
   router: routerBiddingItem
 });
+*/
