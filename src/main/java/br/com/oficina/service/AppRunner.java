@@ -99,6 +99,10 @@ public class AppRunner implements CommandLineRunner {
                 b.setItem(i);
                 b.setDescription("Description " + i);
                 b.setItemCode("101.30" + i);
+                b.setItemUnitService("h");
+                b.setUnitValueService(new Float(35.43));
+                b.setItemAmountService(850);
+                b.setTotalValueService(b.getUnitValueService() * b.getItemAmountService());
                 b.setBidding( e );
                 b.setStatus(true);
                 biddingItem.save(b);
