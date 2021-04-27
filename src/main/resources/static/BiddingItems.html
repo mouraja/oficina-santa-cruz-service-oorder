@@ -170,7 +170,7 @@
             <input v-model="searchKey" class="form-control" id="search-element" requred/>
           </div>
         </div>
-        <div v-if="biddings.length == 0"
+        <div v-if="biddings"
              class="alert alert-warning">No bidding found.</div>
         <table class="table table-striped">
           <thead>
@@ -264,10 +264,9 @@
           </button>
         </form>
         </div>
-      </section>    
+
         
-      <section>
-        <div v-if="bidding.biddingItems.length == 0"
+        <div v-if="bidding.biddingItems"
              class="alert alert-warning">No bidding items found.
         </div>
         <table class="table table-striped">
@@ -335,16 +334,15 @@
             <router-link to="/">Back to bidding list</router-link>
           </a>
         </div>
-      </section>
 
-      <section>
+        
         <div class="actions">
           <router-link class="btn btn-primary" :to="{name: 'bidding-item-add'}">
             <span class="glyphicon glyphicon-plus"></span>
             Add bidding item
           </router-link>
         </div>
-        <div v-if="bidding.biddingItems.length == 0"
+        <div v-if="bidding.biddingItems"
              class="alert alert-info">No bidding items found.
         </div>
         <table class="table table-striped">
@@ -432,11 +430,8 @@
 
           </form>
         </div>
-      </section>
-      
-      
-      <section>
-        <div v-if="bidding.biddingItems.length == 0"
+
+        <div v-if="bidding.biddingItems"
              class="alert alert-warning">No bidding items found.
         </div>
         <table class="table table-striped">
@@ -512,29 +507,29 @@
         <form @submit.prevent="createBiddingItem">
 
           <div class="form-group">
-            <label for="add-bidingitem-item">Bidding item</label>
-            <input type="text" class="form-control" id="add-bidingitem-item" v-model="biddingItem.item" required/>
+            <label for="add-biding-item-item">Bidding item</label>
+            <input type="text" class="form-control" id="add-biding-item-item" v-model="biddingItem.item" required/>
           </div>
 
           <div class="form-group">
-            <label for="add-bidingitem-code">Bidding item code</label>
-            <input type="date" size="4" class="form-control" id="add-bidingitem-code" v-model="biddingItem.code"/>
+            <label for="add-biding-item-code">Bidding item code</label>
+            <input type="text" size="4" class="form-control" id="add-biding-item-code" v-model="biddingItem.code"/>
           </div>
 
           <div class="form-group">
-            <label for="add-bidingitem-description">Bidding description</label>
-            <input type="text" class="form-control" id="add-bidingitem-description" v-model="biddingItem.description" required/>
+            <label for="add-biding-item-description">Bidding description</label>
+            <input type="text" class="form-control" id="add-biding-item-description" v-model="biddingItem.description" required/>
           </div>
 
           <div class="form-group">
-            <label for="add-bidingitem-bidding">Bidding</label>
-            <input type="text" class="form-control" id="add-bidingitem-description" v-model="biddingItem.bidding.item" required/>
+            <label for="add-biding-item-bidding">Bidding</label>
+            <input type="text" class="form-control" id="add-biding-item-bidding" v-model="biddingItem.bidding.id" readonly/>
             <div>{{ biddingItem.bidding.alias }}</div>
           </div>
           
           <div class="form-group">
-            <label for="add-bidingitem-status">Bidding status</label>
-            <input type="checkbox" class="form-control" id="add-bidingitem-status" v-model="biddingItem.status" required/>
+            <label for="add-biding-item-status">Bidding status</label>
+            <input type="checkbox" class="form-control" id="add-biding-item-status" v-model="biddingItem.status" required/>
           </div>
           <button type="submit" class="btn btn-primary">
             <i class="bi bi-check"></i>
@@ -599,8 +594,8 @@
     </template>
 
 
-    <script src="Biddings.js"></script>
     <script src="BiddingItems.js"></script>
+    <script src="Biddings.js"></script>
     
   </body>
 </html>

@@ -45,7 +45,7 @@ const BiddingItemService = {
             .then(response => fn(response))
             .catch(error => console.log(error));
   },
-  
+
   create(biddingItem, fn) {
     axios
             .post(this.base_url, biddingItem)
@@ -142,20 +142,10 @@ const BiddingItemEdit = Vue.extend({
   methods: {
     updateBiddingItem: function () {
         BiddingItemService.update(this.biddingItem.id, this.biddingItem, r => router.push('/'));
-    },
-    async listClients() {
-      await BiddingItemService.findClients(r => {
-        this.institutions = r.data;
-        institutions = r.data;
-        console.log(institutions);
-      });
     }
   },
   mounted() {
     this.$data.subtitle = "BiddingItem Edit";
-  },
-  created() {
-    this.listClients();
   }
 });
 
@@ -180,54 +170,30 @@ const BiddingItemAdd = Vue.extend({
     return {
       biddingItem: {
         id: null,
-        alias: null,
+        item: null,
         description: null,
-        initialDate: null,
-        expirateDate: null,
-        publicInstitution: {
-            id: 0,
-            publicName: null,
-            publicFantasyName: null,
-            observations: '',
-            status: false
+        code: null,
+        bidding: {
+          id: null,
+          alias: null,
+          description: null,
+          status: false
         },
         observations: null,
         status: false
-      },
-      institutions: []
+      }
     };
   },
   methods: {
     createBiddingItem() {
       console.log(JSON.stringify(this.biddingItem));
       BiddingItemService.create(this.biddingItem, r => router.push('/'));
-    },
-    async listClients() {
-      await BiddingItemService.findClients(r => {
-        this.institutions = r.data;
-        institutions = r.data;
-      });
     }
-  },
-  created() {
-    this.listClients();
   },
   mounted() {
     this.$data.subtitle = "Add BiddingItem";
   }
 });
-
-/*
-const routerBiddingItem = new VueRouter({
-  routes: [
-    {path: '/', component: BiddingItemList},
-    {path: '/biddingItem/view/:biddingItem_id', component: BiddingItemView, name: 'bidding-item-view'},
-    {path: '/biddingItem/add', component: BiddingItemAdd, name: 'bidding-item-add'},
-    {path: '/biddingItem/edit/:biddingItem_id', component: BiddingItemEdit, name: 'bidding-item-edit'},
-    {path: '/biddingItem/edit/:biddingItem_id', component: BiddingItemDelete, name: 'bidding-item-delete'}
-  ]
-});
-*/
 
 /****
  const ClientList = new Vue({
@@ -248,15 +214,28 @@ const routerBiddingItem = new VueRouter({
  }
  });
  ****/
-
 /*
-new Vue({
-  el: '#app',
-  data: {
-    company: "Oficina Santa Cruz",
-    title: "BiddingItem Managment",
-    subtitle: ""
-  },
-  router: routerBiddingItem
-});
-*/
+if ( vm === 'undefined' ) {
+
+  const router = new VueRouter({
+    routes: [
+      {path: '/biddingItem', component: BiddingItemList},
+      {path: '/biddingItem/view/:biddingItem_id', component: BiddingItemView, name: 'bidding-item-view'},
+      {path: '/biddingItem/add', component: BiddingItemAdd, name: 'bidding-item-add'},
+      {path: '/biddingItem/edit/:biddingItem_id', component: BiddingItemEdit, name: 'bidding-item-edit'},
+      {path: '/biddingItem/delete/:biddingItem_id', component: BiddingItemDelete, name: 'bidding-item-delete'}
+    ]
+  });  
+
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      company: "Oficina Santa Cruz",
+      title: "BiddingItem Managenment",
+      subtitle: ""
+    },
+    router: router
+  });
+
+} 
+ */

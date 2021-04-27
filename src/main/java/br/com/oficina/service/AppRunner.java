@@ -6,8 +6,10 @@
 package br.com.oficina.service;
 
 import br.com.oficina.service.domain.BiddingEntity;
+import br.com.oficina.service.domain.BiddingItemEntity;
 import br.com.oficina.service.domain.PublicClientEntity;
 import br.com.oficina.service.domain.VehicleEntity;
+import br.com.oficina.service.repository.BiddingItemRepository;
 import br.com.oficina.service.repository.BiddingRepository;
 import br.com.oficina.service.repository.PublicClientRepository;
 import br.com.oficina.service.repository.VehicleRepository;
@@ -30,6 +32,9 @@ public class AppRunner implements CommandLineRunner {
     
     @Autowired 
     private BiddingRepository bidding;
+    
+    @Autowired 
+    private BiddingItemRepository biddingItem;
     
     @Override
     public void run(String... args) throws Exception {
@@ -86,5 +91,19 @@ public class AppRunner implements CommandLineRunner {
                     })
                     .map(n -> bidding.save(n))
                     .forEach(System.out::println);
+
+            //bidding.deleteAll();
+            bidding.findAll().forEach(e -> { 
+            for (int i=1; i<4; i++) {
+                BiddingItemEntity b = new BiddingItemEntity();
+                b.setItem(i);
+                b.setDescription("Description " + i);
+                b.setItemCode("101.30" + i);
+                b.setBidding( e );
+                b.setStatus(true);
+                biddingItem.save(b);
+            }
+            });
+
     }
 }

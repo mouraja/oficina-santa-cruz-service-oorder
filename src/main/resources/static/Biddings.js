@@ -204,16 +204,27 @@ const BiddingAdd = Vue.extend({
   }
 });
 
-const router = new VueRouter({
-  routes: [
-    {path: '/', component: BiddingList},
-    {path: '/bidding/view/:bidding_id', component: BiddingView, name: 'bidding-view'},
-    {path: '/bidding/add', component: BiddingAdd, name: 'bidding-add'},
-    {path: '/bidding/edit/:bidding_id', component: BiddingEdit, name: 'bidding-edit'},
-    {path: '/bidding/edit/:bidding_id', component: BiddingDelete, name: 'bidding-delete'}
-  ]
-});
+routesBiddingItem = [
+  {path: '/biddingItem', component: BiddingItemList},
+  {path: '/biddingItem/view/:biddingItem_id', component: BiddingItemView, name: 'bidding-item-view'},
+  {path: '/biddingItem/add', component: BiddingItemAdd, name: 'bidding-item-add'},
+  {path: '/biddingItem/edit/:biddingItem_id', component: BiddingItemEdit, name: 'bidding-item-edit'},
+  {path: '/biddingItem/delete/:biddingItem_id', component: BiddingItemDelete, name: 'bidding-item-delete'}
+];
 
+routesBidding = [
+  {path: '/', component: BiddingList},
+  {path: '/bidding/view/:bidding_id', component: BiddingView, name: 'bidding-view'},
+  {path: '/bidding/add', component: BiddingAdd, name: 'bidding-add'},
+  {path: '/bidding/edit/:bidding_id', component: BiddingEdit, name: 'bidding-edit'},
+  {path: '/bidding/edit/:bidding_id', component: BiddingDelete, name: 'bidding-delete'}
+];
+
+routes = [ ...routesBidding, ...routesBiddingItem];
+  
+const router = new VueRouter({
+  routes
+});
 
 /*
  const ClientList = new Vue({
@@ -235,7 +246,7 @@ const router = new VueRouter({
  });
  */
 
-new Vue({
+const vm = new Vue({
   el: '#app',
   data: {
     company: "Oficina Santa Cruz",
