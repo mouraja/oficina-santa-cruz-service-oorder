@@ -11,7 +11,7 @@ function findBiddingItemKey(id) {
 
 
 const BiddingItemService = {
-  base_url: 'http://localhost:8080/api/manager/biddingitem/',
+  base_url: 'http://localhost:8080/api/manager/biddingItem/',
 
   findAll(fn) {
     axios
@@ -172,13 +172,12 @@ const BiddingItemAdd = Vue.extend({
         id: null,
         item: null,
         description: null,
-        code: null,
-        bidding: {
-          id: null,
-          alias: null,
-          description: null,
-          status: false
-        },
+        itemCode: null,
+        itemUnitService: null,
+        itemAmountService: null,
+        unitValueService: null,
+        totalValueService: null,
+        bidding: findBidding(this.$route.params.bidding_id),
         observations: null,
         status: false
       }
@@ -186,8 +185,10 @@ const BiddingItemAdd = Vue.extend({
   },
   methods: {
     createBiddingItem() {
-      console.log(JSON.stringify(this.biddingItem));
       BiddingItemService.create(this.biddingItem, r => router.push('/'));
+    },
+    recalculate() {
+      this.biddingItem.totalValueService = this.biddingItem.unitValueService * this.biddingItem.itemAmountService;
     }
   },
   mounted() {

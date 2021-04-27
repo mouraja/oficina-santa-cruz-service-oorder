@@ -337,7 +337,7 @@
 
         
         <div class="actions">
-          <router-link class="btn btn-primary" :to="{name: 'bidding-item-add'}">
+          <router-link class="btn btn-primary" :to="{name: 'bidding-item-add', params: {bidding_id: bidding.id}}">
             <span class="glyphicon glyphicon-plus"></span>
             Add bidding item
           </router-link>
@@ -513,12 +513,32 @@
 
           <div class="form-group">
             <label for="add-biding-item-code">Bidding item code</label>
-            <input type="text" size="4" class="form-control" id="add-biding-item-code" v-model="biddingItem.code"/>
+            <input type="text" size="4" class="form-control" id="add-biding-item-code" v-model="biddingItem.itemCode"/>
           </div>
 
           <div class="form-group">
             <label for="add-biding-item-description">Bidding description</label>
             <input type="text" class="form-control" id="add-biding-item-description" v-model="biddingItem.description" required/>
+          </div>
+
+          <div class="form-group">
+            <label for="add-biding-item-unit">Bidding unit</label>
+            <input type="text" class="form-control" id="add-biding-item-unit" v-model="biddingItem.itemUnitService" required/>
+          </div>
+
+          <div class="form-group">
+            <label for="add-biding-item-value">Bidding unit value</label>
+            <input type="text" class="form-control" id="add-biding-item-value" @change="recalculate" v-model="biddingItem.unitValueService" required/>
+          </div>
+
+          <div class="form-group">
+            <label for="add-biding-item-amount">Bidding unit amount</label>
+            <input type="text" class="form-control" id="add-biding-item-amount" @change="recalculate" v-model="biddingItem.itemAmountService" required/>
+          </div>
+
+          <div class="form-group">
+            <label for="add-biding-item-total">Bidding value total</label>
+            <input type="text" class="form-control" id="add-biding-item-total" v-model="biddingItem.totalValueService" readonly/>
           </div>
 
           <div class="form-group">
