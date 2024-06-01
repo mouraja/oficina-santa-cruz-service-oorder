@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+    <!--
+    <link href="https://unpkg.com/bootstrap@4.6.0/dist/css/bootstrap.css" rel="stylesheet">
+    <script src="https://unpkg.com/browse/jquery@3.6.0/dist/jquery.js"></script>
+    <script src="https://unpkg.com/bootstrap@4.6.0/dist/js/bootstrap.js"></script>
+    <script src="https://unpkg.com/browse/popper@1.16.1/dist/popper.js"></script>
+    -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.js"></script>
+    <!--	
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.6.0/css/bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.6.0/js/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.js"></script>
+    -->
+    <script src="https://unpkg.com/vue@2.6.12/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.5.1/dist/vue-router.js"></script>
+    <script src="https://unpkg.com/axios@0.21.1/dist/axios.js"></script>
+
+    <title>Oficina Santa Cruz</title>
+    <link rel="shortcut icon" href="./img/logo-imagem.ico" />
+    <link href="main.css" rel="stylesheet">
+    <link href="Vehicles.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="app" class="container container-fluid">
+      <div class="container">
+        <div class="row" >
+          <div class="col-lg-5">
+            <div class="branding">
+              <img src="./img/logo-pinguim.png" alt="Logo" :title="company" class="logo"/>
+            </div>
+            <h4>{{ company }}</h4>
+          </div>
+          <div class="col-lg-7">
+            <div class="row">
+              <div class="col-lg-12">
+                <h3>{{ title }}</h3>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <!-- Navbar -->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                  <!-- Container wrapper -->
+                  <div class="container-fluid">
+                    <!-- Navbar brand -->
+                    <a class="navbar-brand" href="./index.html">
+                      <img src="./img/logo-imagem.png" :title="company" width="35%" height="35%" />
+                    </a>
+                    <!-- Toggle button -->
+                    <button
+                      class="navbar-toggle"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#navbarMainMenu"
+                      aria-controls="navbarMainMenu"
+                      aria-expanded="false"
+                      aria-label="Toggle navigation">
+                      <i class="fas fa-bars"></i>
+                    </button>
+                    <!-- Collapsible wrapper -->
+                    <div class="collapse navbar-collapse" id="navbarMainMenu">
+                      <!-- Left links -->
+                      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <!-- Navbar Home -->
+                        <li class="nav-item active">
+                          <a class="nav-link" aria-current="page" href="#">Home</a>
+                        </li>
+                        <!-- Navbar dropdown Services -->
+                        <li class="nav-item dropdown">
+                          <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="navbarService"
+                            role="button"
+                            data-toggle="dropdown"
+                            aria-expanded="false"
+                            >
+                            Services
+                          </a>
+                          <!-- Dropdown Manager -->
+                          <ul class="dropdown-menu" role="menu" aria-labelledby="navbarService">
+                            <li><a class="dropdown-item" href="ServiceOrders.html">Services Orders</a></li>
+                            <li><a class="dropdown-item" href="Autoparts.html">Autopart Buy Orders</a></li>
+                          </ul>
+                        </li>              
+                        <!-- Navbar dropdown Manager -->
+                        <li class="nav-item dropdown">
+                          <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="navbarManager"
+                            role="button"
+                            data-toggle="dropdown"
+                            aria-expanded="false"
+                            >
+                            Manager
+                          </a>
+                          <!-- Dropdown Manager -->
+                          <ul class="dropdown-menu" aria-labelledby="navbarManager">
+                            <li><a class="dropdown-item" href="Vehicles.html">Vehicles</a></li>
+                            <li><a class="dropdown-item" href="Biddings.html">Biddings</a></li>
+                          </ul>
+                        </li>
+
+                        <!-- Navbar dropdown Relationship -->
+                        <li class="nav-item dropdown">
+                          <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="navbarRelationship"
+                            role="button"
+                            data-toggle="dropdown"
+                            aria-expanded="false"
+                            >
+                            Relationship
+                          </a>
+                          <!-- Dropdown relationship -->
+                          <ul class="dropdown-menu" aria-labelledby="navbarRelationship">
+                            <li><a class="dropdown-item" href="PublicClients.html">Public clients</a></li>
+                            <li><a class="dropdown-item" href="LegalClients.html">Legal clients</a></li>
+                            <li><a class="dropdown-item" href="LegalClients.html">Clients</a></li>
+                            <li><hr class="dropdown-divider" /></li>
+                            <li>
+                              <a class="dropdown-item disabled" tabindex="-1" aria-disabled="true" href="#">Reserved</a>
+                            </li>
+                          </ul>
+                        </li>
+                        <!-- Navbar About -->
+                        <li class="nav-item">
+                          <a class="nav-link disabled" tabindex="-1" aria-disabled="true" href="#">About</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </nav>
+                <!-- Navbar -->
+              </div>
+            </div>
+            <div v-if='subtitle'>{{subtitle}}</div>
+          </div>
+        </div>
+      </div>
+      <router-view></router-view>
+    </div>
+
+
+    <template id="vehicle-list">
+      <section>
+        <div class="actions">
+          <router-link class="btn btn-primary" :to="{name: 'vehicle-add'}">
+            <span class="glyphicon glyphicon-plus"></span>
+            Add vehicle
+          </router-link>
+        </div>
+        <div class="filters row">
+          <div class="form-group col-sm-5">
+            <label for="search-element">Seach</label>
+            <input v-model="searchKey" class="form-control" id="search-element" requred/>
+          </div>
+        </div>
+        <div v-if="vehicles.length == 0"
+             class="alert alert-warning">No vehicle found.</div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">id</th>
+              <th scope="col">License plate</th>
+              <th scope="col">Manufactor</th>
+              <th scope="col">Model</th>
+              <th scope="col">Owner</th>
+              <th scope="colgroup" colspan="2">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="vehicle in filteredVehicles">
+              <th scope="row">
+          <router-link :to="{name: 'vehicle-view', params: {vehicle_id: vehicle.id}}">{{ vehicle.id }}</router-link>
+          </th>
+          <td>{{ vehicle.licensePlate }}</td>
+          <td>{{ vehicle.manufactor }}</td>
+          <td>{{ vehicle.model }}</td>
+          <td>{{ vehicle.clientOwner.publicFantasyName }}</td>
+          <td>
+          <router-link :to="{name: 'vehicle-edit', params: {vehicle_id: vehicle.id}}">
+            <span class="bi bi-pencil text-primary" title="Edit"></span><!-- Edit -->
+          </router-link>
+          </td>
+          <td>
+          <!--
+          <router-link class="btn btn-danger btn-xs" :to="{name: 'vehicle-delete', params: {vehicle_id: vehicle.id}}">
+          -->
+          <router-link :to="{name: 'vehicle-delete', params: {vehicle_id: vehicle.id}}">
+            <span class="bi bi-trash text-danger" title="Delete"></span><!-- delete -->
+          </router-link>
+          </td>
+          </tr>
+          </tbody>
+        </table>
+      </section>
+    </template>
+
+    <template id="vehicle-add">
+      <section>
+        <h2>Add new vehicle</h2>
+        <form @submit.prevent="createVehicle">
+
+          <div class="form-group">
+            <label for="add-manufactor">Vehicle manufactor</label>
+            <input type="text" class="form-control" id="add-manufactor" v-model="vehicle.manufactor" required/>
+          </div>
+
+          <div class="form-group">
+            <label for="add-model">Vehicle model</label>
+            <input type="text" class="form-control" id="add-model" v-model="vehicle.model" required/>
+          </div>
+
+          <div class="form-group">
+            <label for="add-made-year">Manufactored Year</label>
+            <input type="text" size="4" class="form-control" id="add-made-year" v-model="vehicle.madeYear"/>
+          </div>
+
+          <div class="form-group">
+            <label for="add-model-year">Model year</label>
+            <input type="text" size="4" class="form-control" id="add-model-year" v-model="vehicle.modelYear"/>
+          </div>
+
+          <div class="form-group">
+            <label for="add-license-plate">License plate</label>
+            <input type="text" size="10" class="form-control" id="add-license-plate" v-model="vehicle.licensePlate" required/>
+          </div>
+
+          <div class="form-group">
+            <label for="add-client-owner">Vehicle owner</label>
+            <select class="form-control" id="add-client-owner" v-model="vehicle.clientOwner.id">
+              <option selected disabled value="">Please select one</option>
+              <option v-for="owner in owners" :key="owner.id" :value="owner.id">
+                {{ owner.id }} - {{ owner.publicName }}
+              </option>
+
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="add-observations">Observations</label>
+            <textarea class="form-control" id="add-observations" rows="10"  placeholder="Put some observations" v-model="vehicle.observations"></textarea>
+          </div>
+
+
+          <div class="form-group">
+            <label for="add-status">Vehicle status</label>
+            <input type="checkbox" class="form-control" id="add-status" v-model="vehicle.status" required/>
+          </div>
+
+          <button type="submit" class="btn btn-primary">
+            <i class="bi bi-check"></i>
+            <!-- comment -->
+            Create
+          </button>
+          <button type="reset" class="btn btn-warning">
+            <router-link :to="{path: '/'}">Cancel</router-link>
+          </button>
+        </form>
+        </div>
+    </template>
+
+    <template id="vehicle-view">
+
+      <section>
+        <h2>View vehicle</h2>
+        <div v-if="vehicle == undefined" class="alert alert-warning">Vehicle id {{ vehicle_id }} not found</div>
+        <div v-else>
+          <h2><i class="glyphicon glyphicon-tint"></i>{{ vehicle.id }}</h2> / <h2>{{ vehicle.licensePlate }}</h2>
+          <b>Vehicle manufactor: </b>
+          <div><span class="glyphicon glyphicon-user" style="color:gold" aria-hidden="true"></span>{{ vehicle.manufactor }}</div>
+          <b>Vehicle model: </b>
+          <div><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>{{ vehicle.model }}</div>
+          <b>License plate: </b>
+          <div><span class="glyphicon glyphicon-file" aria-hidden="true"></span>{{ vehicle.licensePlate }}</div>
+          <b>Vehicle Manufactored Year: </b>
+          <div><span class="glyphicon glyphicon-time" style="color:lightcoral" aria-hidden="true"></span>{{ vehicle.madeYear }}</div>
+          <b>Vehicle Model Year: </b>
+          <div><span class="glyphicon glyphicon-user" style="color:lightblue" aria-hidden="true"></span>{{ vehicle.madelYear }}</div>
+          <b>Owner: </b>
+          <div><span class="glyphicon glyphicon-tint" style="color:lightblue" aria-hidden="true"></span>{{ vehicle.clientOwner.publicFantasyName }}</div>
+          <b>Vehicle observations: </b>
+          <div><span class="glyphicon glyphicon-comment" style="color:lightsalmon" aria-hidden="true"></span>{{ vehicle.observations }}</div>
+          <b>Status: </b>
+          <div><span class="glyphicon glyphicon-hourglass" style="color:lightyellow" aria-hidden="true"></span>{{ vehicle.status }}</div>
+          <br/>
+          <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+          <a>
+            <router-link to="/">Back to vehicle list</router-link>
+          </a>
+        </div>
+      </section>
+    </template>
+
+    <template id="vehicle-edit">
+      <section>
+        <h2>Edit vehicle</h2>
+        <div v-if="vehicle == undefined" class="alert alert-warning">Vehicle id {{ vehicle_id }} not found</div>
+        <div v-else>
+          <form @submit.prevent="updateVehicle">
+
+            <div class="form-group">
+              <label for="edit-manufactor">Vehicle manufactor</label>
+              <input type="text" class="form-control" id="edit-manufactor" v-model="vehicle.manufactor" />
+            </div>
+
+            <div class="form-group">
+              <label for="edit-model">Vehicle model</label>
+              <input type="text" class="form-control" id="edit-model" v-model="vehicle.model" required/>
+            </div>
+
+            <div class="form-group">
+              <label for="edit-madeYear">Manufactored Year</label>
+              <input type="text" size="4" class="form-control" id="edit-madeYear" v-model="vehicle.madeYear" />
+            </div>
+
+            <div class="form-group">
+              <label for="edit-modelYear">Model year</label>
+              <input type="text" size="4" class="form-control" id="edit-modelYear" v-model="vehicle.modelYear"/>
+            </div>
+
+            <div class="form-group">
+              <label for="edit-licensePlate">License plate</label>
+              <input type="text" size="10" class="form-control" id="edit-licensePlate" v-model="vehicle.licensePlate" />
+            </div>
+
+            <div class="form-group">
+              <label for="edit-clientOwner">Vehicle owner</label>
+              <select class="form-control" id="edit-client-owner" v-model="vehicle.clientOwner.id">
+                <option selected disabled value="">Please select one</option>
+                <option v-for="owner in owners" :key="owner.id" :value="owner.id">
+                  {{ owner.id }} - {{ owner.publicFantasyName }}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="edit-status">Vehicle status</label>
+              <input type="checkbox" class="form-control" id="edit-status" v-model="vehicle.status" />
+            </div>
+
+
+            <div class="form-group">
+              <label for="edit-description">Observations</label>
+              <textarea class="form-control" id="edit-observation" rows="10"  placeholder="Put some observations" v-model="vehicle.observations"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+              <i class="bi bi-check"></i>
+              Update
+            </button>
+            <a class="btn btn-default">
+              <router-link to="/">
+                <i class="glyphicon glyphicon-remove"></i>
+                Cancel
+              </router-link>
+            </a>
+
+          </form>
+        </div>
+      </section>
+    </template>
+
+    <template id="vehicle-delete">
+      <div>
+        <h2>Delete vehicle {{ vehicle.licensePlate }} (id:{{ vehicle.id }})</h2>
+        <form @submit.prevent="deleteVehicle">
+          <p>The action cannot be undone.</p>
+          <button type="submit" class="btn btn-danger">Delete</button>
+          <button type="submit" class="btn btn-danger">
+            <router-link :to="{path: '/'}">Cancel</router-link>
+          </button>
+        </form>
+      </div>
+    </template>
+
+    <script src="Vehicles.js"></script>
+
+  </body>
+</html>

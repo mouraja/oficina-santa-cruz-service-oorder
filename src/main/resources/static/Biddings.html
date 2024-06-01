@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+    <!--
+    <link href="https://unpkg.com/bootstrap@4.6.0/dist/css/bootstrap.css" rel="stylesheet">
+    <script src="https://unpkg.com/browse/jquery@3.6.0/dist/jquery.js"></script>
+    <script src="https://unpkg.com/bootstrap@4.6.0/dist/js/bootstrap.js"></script>
+    <script src="https://unpkg.com/browse/popper@1.16.1/dist/popper.js"></script>
+    -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.js"></script>
+    <!--	
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.6.0/css/bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.6.0/js/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.js"></script>
+    -->
+    <script src="https://unpkg.com/vue@2.6.12/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.5.1/dist/vue-router.js"></script>
+    <script src="https://unpkg.com/axios@0.21.1/dist/axios.js"></script>
+
+    <title>Oficina Santa Cruz</title>
+    <link rel="shortcut icon" href="./img/logo-imagem.ico" />
+    <link href="main.css" rel="stylesheet">
+    <link href="Biddings.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="app" class="container container-fluid">
+      <div class="container">
+        <div class="row" >
+          <div class="col-lg-5">
+            <div class="branding">
+              <img src="./img/logo-pinguim.png" alt="Logo" :title="company" class="logo"/>
+            </div>
+            <h4>{{ company }}</h4>
+          </div>
+          <div class="col-lg-7">
+            <div class="row">
+              <div class="col-lg-12">
+                <h3>{{ title }}</h3>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <!-- Navbar -->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                  <!-- Container wrapper -->
+                  <div class="container-fluid">
+                    <!-- Navbar brand -->
+                    <a class="navbar-brand" href="./index.html">
+                      <img src="./img/logo-imagem.png" :title="company" width="35%" height="35%" />
+                    </a>
+                    <!-- Toggle button -->
+                    <button
+                      class="navbar-toggle"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#navbarMainMenu"
+                      aria-controls="navbarMainMenu"
+                      aria-expanded="false"
+                      aria-label="Toggle navigation">
+                      <i class="fas fa-bars"></i>
+                    </button>
+                    <!-- Collapsible wrapper -->
+                    <div class="collapse navbar-collapse" id="navbarMainMenu">
+                      <!-- Left links -->
+                      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <!-- Navbar Home -->
+                        <li class="nav-item active">
+                          <a class="nav-link" aria-current="page" href="#">Home</a>
+                        </li>
+                        <!-- Navbar dropdown Services -->
+                        <li class="nav-item dropdown">
+                          <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="navbarService"
+                            role="button"
+                            data-toggle="dropdown"
+                            aria-expanded="false"
+                            >
+                            Services
+                          </a>
+                          <!-- Dropdown Manager -->
+                          <ul class="dropdown-menu" role="menu" aria-labelledby="navbarService">
+                            <li><a class="dropdown-item" href="ServiceOrders.html">Services Orders</a></li>
+                            <li><a class="dropdown-item" href="Autoparts.html">Autopart Buy Orders</a></li>
+                          </ul>
+                        </li>              
+                        <!-- Navbar dropdown Manager -->
+                        <li class="nav-item dropdown">
+                          <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="navbarManager"
+                            role="button"
+                            data-toggle="dropdown"
+                            aria-expanded="false"
+                            >
+                            Manager
+                          </a>
+                          <!-- Dropdown Manager -->
+                          <ul class="dropdown-menu" aria-labelledby="navbarManager">
+                            <li><a class="dropdown-item" href="Vehicles.html">Vehicles</a></li>
+                            <li><a class="dropdown-item" href="Biddings.html">Biddings</a></li>
+                          </ul>
+                        </li>
+
+                        <!-- Navbar dropdown Relationship -->
+                        <li class="nav-item dropdown">
+                          <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="navbarRelationship"
+                            role="button"
+                            data-toggle="dropdown"
+                            aria-expanded="false"
+                            >
+                            Relationship
+                          </a>
+                          <!-- Dropdown relationship -->
+                          <ul class="dropdown-menu" aria-labelledby="navbarRelationship">
+                            <li><a class="dropdown-item" href="PublicClients.html">Public clients</a></li>
+                            <li><a class="dropdown-item" href="LegalClients.html">Legal clients</a></li>
+                            <li><a class="dropdown-item" href="LegalClients.html">Clients</a></li>
+                            <li><hr class="dropdown-divider" /></li>
+                            <li>
+                              <a class="dropdown-item disabled" tabindex="-1" aria-disabled="true" href="#">Reserved</a>
+                            </li>
+                          </ul>
+                        </li>
+                        <!-- Navbar About -->
+                        <li class="nav-item">
+                          <a class="nav-link disabled" tabindex="-1" aria-disabled="true" href="#">About</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </nav>
+                <!-- Navbar -->
+              </div>
+            </div>
+            <div v-if='subtitle'>{{subtitle}}</div>
+          </div>
+        </div>
+      </div>
+      <router-view></router-view>
+    </div>
+
+
+    <template id="bidding-list">
+      <section>
+        <div class="actions">
+          <router-link class="btn btn-primary" :to="{name: 'bidding-add'}">
+            <span class="glyphicon glyphicon-plus"></span>
+            Add bidding
+          </router-link>
+        </div>
+        <div class="filters row">
+          <div class="form-group col-sm-5">
+            <label for="search-element">Seach</label>
+            <input v-model="searchKey" class="form-control" id="search-element" requred/>
+          </div>
+        </div>
+        <div v-if="biddings.length == 0"
+             class="alert alert-warning">No bidding found.</div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">id</th>
+              <th scope="col">Alias</th>
+              <th scope="col">Public institution</th>
+              <th scope="col">Initial date</th>
+              <th scope="col">Expire date</th>
+              <th scope="col">Status</th>
+              <th scope="colgroup" colspan="2">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+          <tr v-for="bidding in filteredBiddings">
+            <th scope="row">
+              <router-link :to="{name: 'bidding-view', params: {bidding_id: bidding.id}}">
+                {{ bidding.id }}
+              </router-link>
+            </th>
+            <td>{{ bidding.alias }}</td>
+            <td>{{ bidding.publicInstitution.publicFantasyName }}</td>
+            <td>{{ bidding.initialDate }}</td>
+            <td>{{ bidding.expirateDate }}</td>
+            <td>{{ bidding.status }}</td>
+            <td>
+              <router-link :to="{name: 'bidding-edit', params: {bidding_id: bidding.id}}">
+                <span class="bi bi-pencil text-primary" title="Edit"></span><!-- Edit -->
+              </router-link>
+            </td>
+            <td>
+              <router-link :to="{name: 'bidding-delete', params: {bidding_id: bidding.id}}">
+                <span class="bi bi-trash text-danger" title="Delete"></span><!-- delete -->
+              </router-link>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </section>
+    </template>
+
+    <template id="bidding-add">
+      <section>
+        <h2>Add new bidding</h2>
+        <form @submit.prevent="createBidding">
+
+          <div class="form-group">
+            <label for="add-alias">Bidding alias</label>
+            <input type="text" class="form-control" id="add-alias" v-model="bidding.alias" required/>
+          </div>
+
+          <div class="form-group">
+            <label for="add-description">Bidding description</label>
+            <input type="text" class="form-control" id="add-description" v-model="bidding.description" required/>
+          </div>
+
+          <div class="form-group">
+            <label for="add-initial-date">Initial date</label>
+            <input type="date" size="4" class="form-control" id="add-initial-date" v-model="bidding.initialDate"/>
+          </div>
+
+          <div class="form-group">
+            <label for="add-expirate-date">Exíre date</label>
+            <input type="date" size="4" class="form-control" id="add-expirate-date" v-model="bidding.expirateDate"/>
+          </div>
+
+          <div class="form-group">
+            <label for="add-institution">Public institution</label>
+            <select class="form-control" id="add-institution" v-model="bidding.publicInstitution.id">
+              <option selected disabled value="">Please select one</option>
+              <option v-for="institution in institutions" :key="institution.id" :value="institution.id">
+                {{ institution.id }} - {{ institution.publicFantasyName }}
+              </option>
+
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="add-observations">Observations</label>
+            <textarea class="form-control" id="add-observations" rows="10"  placeholder="Put some observations" v-model="bidding.observations"></textarea>
+          </div>
+
+
+          <div class="form-group">
+            <label for="add-status">Bidding status</label>
+            <input type="checkbox" class="form-control" id="add-status" v-model="bidding.status" required/>
+          </div>
+
+          <button type="submit" class="btn btn-primary">
+            <i class="bi bi-check"></i>
+            <!-- comment -->
+            Create
+          </button>
+          <button type="reset" class="btn btn-warning">
+            <router-link :to="{path: '/'}">Cancel</router-link>
+          </button>
+        </form>
+        </div>
+    </template>
+
+    
+    <template id="bidding-view">
+      <section>
+        <h2>View bidding</h2>
+        <div v-if="bidding == undefined" class="alert alert-warning">Bidding id {{ bidding_id }} not found</div>
+        <div v-else>
+          <b>Bidding id: </b>
+          <div>{{ bidding.id }}</div>
+          <b>Bidding alias: </b>
+          <div>{{ bidding.alias }}</div>
+          <b>Public institution: </b>
+          <div>{{ bidding.publicInstitution.publicFantasyName }}</div>
+          <b>Bidding description: </b>
+          <div>{{ bidding.description }}</div>
+          <b>Initial date: </b>
+          <div>{{ bidding.licensePlate }}</div>
+          <b>Expirate date: </b>
+          <div>{{ bidding.initialDate }}</div>
+          <b>Bidding observations: </b>
+          <div>{{ bidding.observations }}</div>
+          <b>Status: </b>
+          <div>{{ bidding.status }}</div>
+          <br/>
+          <a>
+            <router-link to="/">Back to bidding list</router-link>
+          </a>
+        </div>
+      </section>
+    </template>
+
+    <template id="bidding-edit">
+      <section>
+        <h2>Edit bidding</h2>
+        <div v-if="bidding == undefined" class="alert alert-warning">Bidding id {{ bidding_id }} not found</div>
+        <div v-else>
+          <form @submit.prevent="updateBidding">
+
+            <div class="form-group">
+              <label for="edit-alias">Bidding alias</label>
+              <input type="text" class="form-control" id="edit-alias" v-model="bidding.alias" required/>
+            </div>
+
+            <div class="form-group">
+              <label for="edit-description">Bidding description</label>
+              <input type="text" class="form-control" id="edit-description" v-model="bidding.description" required/>
+            </div>
+
+            <div class="form-group">
+              <label for="edit-initialDate">Bidding initial date</label>
+              <input type="date" size="4" class="form-control" id="edit-initialDate" v-model="bidding.initialDate" required/>
+            </div>
+
+            <div class="form-group">
+              <label for="edit-expirateDate">Bidding expirate date</label>
+              <input type="date" size="4" class="form-control" id="edit-expirateDate" v-model="bidding.expirateDate"/>
+            </div>
+
+            <div class="form-group">
+              <label for="edit-institution">Public institution</label>
+              <select class="form-control" id="edit-institution" v-model="bidding.publicInstitution.id">
+                <option selected disabled value="">Please select one</option>
+                <option v-for="institution in institutions" :key="institution.id" :value="institution.id">
+                  {{ institution.id }} - {{ institution.publicFantasyName }}
+                </option>
+              </select>
+            </div>
+
+
+            <div class="form-group">
+              <label for="edit-description">Observations</label>
+              <textarea class="form-control" id="edit-observation" rows="10"  placeholder="Put some observations" v-model="bidding.observations"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="edit-status">Bidding status</label>
+              <input type="checkbox" class="form-control" id="edit-status" v-model="bidding.status" required/>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+              <i class="bi bi-check"></i>
+              Update
+            </button>
+            <a class="btn btn-default">
+              <router-link to="/">
+                <i class="bi bi-x"></i>
+                Cancel
+              </router-link>
+            </a>
+
+          </form>
+        </div>
+      </section>
+    </template>
+
+    <template id="bidding-delete">
+      <div>
+        <h2>Delete bidding {{ bidding.licensePlate }} (id:{{ bidding.id }})</h2>
+        <form @submit.prevent="deleteBidding">
+          <p>The action cannot be undone.</p>
+          <button type="submit" class="btn btn-danger">Delete</button>
+          <button type="submit" class="btn btn-secundary">
+            <router-link :to="{path: '/'}">Cancel</router-link>
+          </button>
+        </form>
+      </div>
+    </template>
+
+    <script src="Biddings.js"></script>
+
+  </body>
+</html>

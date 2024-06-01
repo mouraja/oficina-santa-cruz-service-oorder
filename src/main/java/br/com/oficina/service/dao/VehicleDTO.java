@@ -14,11 +14,11 @@ import lombok.Data;
 @Data
 public class VehicleDTO {
     private Long id;
-    
     private String licensePlate;
-    
-    private String observations;
-    
+    private String manufactor;
     private String model;
-    
+    private String madeYear;
+    private String modelYear;
+    private String observations;
+    private Boolean status;
 }

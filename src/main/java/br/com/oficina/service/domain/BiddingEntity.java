@@ -6,17 +6,21 @@
 package br.com.oficina.service.domain;
 
 import br.com.oficina.utils.CommonAudityAttributeEntity;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.Calendar;
-import java.util.Set;
+import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,16 +39,33 @@ public class BiddingEntity extends CommonAudityAttributeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    private String biddingDescription;
+    @Column
+    private String description;
     
+    @Column
+    private String alias;    
+
+    @Column
+    @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Calendar initialDate;
+    
+    @Column    
+    @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Calendar expirateDate;
+    
+    @Column
+    private String observations;
+
+    @Column
+    private Boolean status;
+  
+    @JsonManagedReference
     @ManyToOne
+    @JoinColumn(name="idInstitution", referencedColumnName="id")
     private PublicClientEntity publicInstitution;
-    
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Calendar biddingInitialDate;
-    
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Calendar biddingExpirateDate;
+
 
 /*    
     @JsonBackReference
@@ -52,15 +73,18 @@ public class BiddingEntity extends CommonAudityAttributeEntity {
         targetEntity = BiddingItemEntity.class,
         mappedBy = "bidding",
         fetch = FetchType.EAGER)
-    private Set<BiddingItemEntity> biddingItems;
         
     @JsonBackReference
     @OneToMany(
         targetEntity = ServiceOrderEntity.class,
         mappedBy = "id",
         fetch = FetchType.EAGER)
-    private Set<ServiceOrderEntity> services;
-  */  
+*/
+    @JsonManagedReference
+    @OneToMany(
+            targetEntity = BiddingItemEntity.class,
+            mappedBy = "bidding",
+            fetch = FetchType.EAGER)
+    private List<BiddingItemEntity> biddingItems;
 
-    private boolean status;
 }

@@ -75,7 +75,7 @@ public class ServiceOrderEntity extends CommonAudityAttributeEntity {
     private Integer entryOdometerKm;
 
     @Column(nullable = false)
-    private String vehicleObservation;
+    private String observations;
 
 /*
     @JsonManagedReference

@@ -18,6 +18,8 @@ public interface BiddingItemUseCase {
     
     public List<BiddingItemEntity> findAll();
     
+    public List<BiddingItemEntity> findByBidding(Long biddingId);
+    
     public Optional<BiddingItemEntity> findById(Long id);
 
     public BiddingItemEntity save(BiddingItemEntity biddingItem);

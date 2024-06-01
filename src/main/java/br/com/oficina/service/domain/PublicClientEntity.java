@@ -6,14 +6,11 @@
 package br.com.oficina.service.domain;
 
 import br.com.oficina.utils.CommonAudityAttributeEntity;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -58,8 +55,11 @@ public class PublicClientEntity
     private String primarySupportContact;
 
     @Column(nullable = true)
-    private String observation;
-
+    private String observations;
+    
+    @Column(nullable = true)
+    private Boolean status;
+ 
 /*    
     @OneToMany(
             targetEntity = VehicleEntity.class,

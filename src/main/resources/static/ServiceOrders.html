@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--
+    <link href="https://unpkg.com/bootstrap@4.6.0/dist/css/bootstrap.css" rel="stylesheet">
+    <script src="https://unpkg.com/browse/jquery@3.6.0/dist/jquery.js"></script>
+    <script src="https://unpkg.com/bootstrap@4.6.0/dist/js/bootstrap.js"></script>
+    <script src="https://unpkg.com/browse/popper@1.16.1/dist/popper.js"></script>
+    -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.js"></script>
+    <!--	
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.6.0/css/bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.6.0/js/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.js"></script>
+    -->
+
+    <script src="https://unpkg.com/vue@2.6.12/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.5.1/dist/vue-router.js"></script>
+    <script src="https://unpkg.com/axios@0.21.1/dist/axios.js"></script>
+    <title>Service Order - Oficina Santa Cruz</title>
+    <link href="ServicOorders.css" rel="stylesheet"/>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Service Order CRUD</h1>
+      <main id="app">
+        <router-view></router-view>
+      </main>
+    </div>
+
+    <template id="serviceOrder">
+      <div>
+        <h2><i class="glyphicon glyphicon-tint"></i>{{ serviceOrder.serviceOrderYear }}</h2> / <h2>{{ serviceOrder.serviceOrderYear }}</h2>
+        <b>Vehicle observation: </b>
+        <div><span class="glyphicon glyphicon-comment" style="color:lightsalmon" aria-hidden="true"></span>{{ serviceOrder.vehicleObservation }}</div>
+        <b>Vehicle model: </b>
+        <div><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>{{ serviceOrder.vehicleModel }}</div>
+        <b>License plate: </b>
+        <div><span class="glyphicon glyphicon-file" aria-hidden="true"></span>{{ serviceOrder.licensePlate }}</div>
+        <b>Driver left vehicle: </b>
+        <div><span class="glyphicon glyphicon-user" style="color:gold" aria-hidden="true"></span>{{ serviceOrder.maintenanceRequester }}</div>
+        <b>Entry vehicle At: </b>
+        <div><span class="glyphicon glyphicon-time" style="color:lightcoral" aria-hidden="true"></span>{{ serviceOrder.entryVehicleDate }}</div>
+        <b>Vehicle Model: </b>
+        <div><span class="glyphicon glyphicon-user" style="color:lightblue" aria-hidden="true"></span>{{ serviceOrder.maintenanceAuthorizer }}</div>
+        <b>Request autopart at: </b>
+        <div><span class="glyphicon glyphicon-calendar" style="color:lightgreen" aria-hidden="true"></span>{{ serviceOrder.requestAutoPartDate }}</div>
+        <b>Entry water level: </b>
+        <div><span class="glyphicon glyphicon-tint" style="color:lightblue" aria-hidden="true"></span>{{ serviceOrder.entryWaterLevel }}</div>
+        <b>Entry oil level: </b>
+        <div><span class="glyphicon glyphicon-tint" style="color:darkslategray" aria-hidden="true"></span>{{ serviceOrder.entryOilLevel }}</div>
+        <b>Odometer Km: </b>
+        <div><span class="glyphicon glyphicon-road" style="color:gray" aria-hidden="true"></span>{{ serviceOrder.entryOdometerKm }}</div>
+        <b>Expected time duration: </b>
+        <div><span class="glyphicon glyphicon-hourglass" style="color:lightyellow" aria-hidden="true"></span>{{ serviceOrder.expectedTimeDuration }}</div>
+        <br/>
+        <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+        <a>
+          <router-link to="/">Back to serviceOrder list</router-link>
+        </a>
+      </div>
+    </template>
+
+    <template id="serviceOrder-list">
+      <div>
+        <div class="actions">
+          <a class="btn btn-default">
+            <router-link :to="{path: '/add-serviceOrder'}">
+              <span class="glyphicon glyphicon-plus"></span>
+              Add service order
+            </router-link>
+          </a>
+        </div>
+        <div class="filters row">
+          <div class="form-group col-sm-3">
+            <input placeholder="Search" v-model="searchKey" class="form-control" id="search-element" requred/>
+          </div>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ServiceOrder</th>
+              <th>Vehicle</th>
+              <th>Observation</th>
+              <th class="col-sm-2">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="serviceOrder in filteredServiceOrders">
+              <!-- tr v-for="serviceOrder in serviceOrders" -->
+              <!-- tr v-for="serviceOrder in serviceOrders | filterBy searchKey in 'name'" -->
+              <td>
+                <a>
+                  <router-link :to="{name: 'serviceOrder', params: {serviceOrder_id: serviceOrder.serviceOrderId}}">{{ serviceOrder.serviceOrderId }}/{{ serviceOrder.serviceOrderYear }}</router-link>
+                </a>
+              </td>
+              <td>
+                <span>{{ serviceOrder.licensePlate }}</span> - 
+                <span>{{ serviceOrder.vehicleModel }}</span><br/>
+                <span>{{ serviceOrder.driverLeftVehicle }}</span>
+              </td>
+              <td>
+                <span>{{ serviceOrder.entryVehicleDate }}</span> - 
+                <span>{{ serviceOrder.description }}</span>
+              </td>
+              <td>
+                <a class="btn btn-warning btn-xs">
+                  <router-link :to="{name: 'serviceOrder-edit', params: {serviceOrder_id: serviceOrder.serviceOrderId}}">Edit</router-link>
+                </a>
+                <a class="btn btn-danger btn-xs">
+                  <router-link :to="{name: 'serviceOrder-delete', params: {serviceOrder_id: serviceOrder.serviceOrderId}}">Delete</router-link>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </template>
+
+
+    <template id="add-serviceOrder">
+      <div>
+        <h2>Add new serviceOrder</h2>
+        <form @submit="createServiceOrder">
+          <div class="form-group">
+            <label for="add-year">Year</label>
+            <input type="number" class="form-control" id="add-year" v-model="serviceOrder.serviceOrderYear" required/>
+          </div>
+          <div class="form-group">
+            <label for="add-description">Observation</label>
+            <textarea class="form-control" id="add-observation" rows="10"  placeholder="Driver requests" v-model="serviceOrder.vehicleObservation"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="add-vehicle">Vehicle model</label>
+            <input size="128" class="form-control" id="add-vehicle" v-model="serviceOrder.vehicleModel"/>
+          </div>
+          <div class="form-group">
+            <label for="add-license">License plate</label>
+            <input size="10" class="form-control" id="add-license" v-model="serviceOrder.licensePlate" required/>
+          </div>
+          <div class="form-group">
+            <label for="add-entry">Entry date vehicle</label>
+            <input type="datetime-local" class="form-control" id="add-entry" v-model="serviceOrder.entryVehicleDate" required/>
+          </div>
+          <div class="form-group">
+            <label for="add-driver">Vehicle left by</label>
+            <input size="72" class="form-control" id="add-driver" v-model="serviceOrder.maintenanceRequester" required/>
+          </div>
+          <div class="form-group">
+            <label for="add-released">Released for maintenance by</label>
+            <input size="72" class="form-control" id="add-released" v-model="serviceOrder.maintenanceAuthorizer" />
+          </div>
+          <div class="form-group">
+            <label for="add-autopart">Request auto part at</label>
+            <input type="date" class="form-control" id="add-autopart" v-model="serviceOrder.requestAutoPartDate" />
+          </div>
+          <div class="form-group">
+            <label for="add-water-up">Water level up</label>
+            <input type="radio" class="form-control" id="add-water-up" value="Up" v-model="serviceOrder.entryWaterLevel" /><br/>
+            <label for="add-water-down">Water level down</label>
+            <input type="radio" class="form-control" id="add-water-down" value="Down" v-model="serviceOrder.entryWaterLevel" />
+          </div>
+          <div class="form-group">
+            <label for="add-oil-up">Oil level up</label>
+            <input type="radio" class="form-control" id="add-oil-up" value="Up" v-model="serviceOrder.entryOilLevel" /><br/>
+            <label for="add-oil-down">Oil level down</label>
+            <input type="radio" class="form-control" id="add-oil-down" value="Down" v-model="serviceOrder.entryOilLevel" />
+          </div>
+          <div class="form-group">
+            <label for="add-km">Odometer Km</label>
+            <input type="number" class="form-control" id="add-km" v-model="serviceOrder.entryOdometerKm" />
+          </div>
+          <button type="submit" class="btn btn-primary">Create</button>
+          <a class="btn btn-default">
+            <router-link to="/">Cancel</router-link>
+          </a>
+        </form>
+      </div>
+    </template>
+
+    <template id="serviceOrder-edit">
+      <div>
+        <h2>Edit serviceOrder</h2>
+        <form @submit="updateServiceOrder">
+          <div class="form-group">
+            <label for="edit-year">Year</label>
+            <input type="number" class="form-control" id="edit-year" v-model="serviceOrder.serviceOrderYear" required/>
+          </div>
+          <div class="form-group">
+            <label for="edit-description">Observation</label>
+            <textarea class="form-control" id="edit-observation" rows="3" v-model="serviceOrder.vehicleObservation"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="edit-vehicle">Vehicle model</label>
+            <input size="128" class="form-control" id="edit-vehicle" v-model="serviceOrder.vehicleModel"/>
+          </div>
+          <div class="form-group">
+            <label for="edit-license">License plate</label>
+            <input syze="10" class="form-control" id="edit-license" v-model="serviceOrder.licensePlate" required/>
+          </div>
+          <div class="form-group">
+            <label for="edit-entry">Entry date vehicle</label>
+            <input type="datetime-local" class="form-control" id="edit-entry" v-model="serviceOrder.entryVehicleDate" required/>
+          </div>
+          <div class="form-group">
+            <label for="edit-driver">Vehicle left by</label>
+            <input size="72" class="form-control" id="edit-driver" v-model="serviceOrder.maintenanceRequester" required/>
+          </div>
+          <div class="form-group">
+            <label for="edit-released">Released for maintenance by</label>
+            <input size="72" class="form-control" id="edit-released" v-model="serviceOrder.maintenanceAuthorizer" />
+          </div>
+          <div class="form-group">
+            <label for="edit-autopart">Request auto part at</label>
+            <input type="date" class="form-control" id="edit-autopart" v-model="serviceOrder.requestAutoPartDate" />
+          </div>
+          <div class="form-group">
+            <label for="edit-water-up">Water level up</label>
+            <input type="radio" class="form-control" id="edit-water-up" value="Up" v-model="serviceOrder.entryWaterLevel"/><br/>
+            <label for="edit-water-down">Water level down</label>
+            <input type="radio" class="form-control" id="edit-water-down" value="Down" v-model="serviceOrder.entryWaterLevel"/>
+          </div>
+          <div class="form-group">
+            <label for="edit-oil-up">Oil level up</label>
+            <input type="radio" class="form-control" id="edit-oil-up" value="Up" v-model="serviceOrder.entryOilLevel"/><br/>
+            <label for="edit-oil-down">Oil level down</label>
+            <input type="radio" class="form-control" id="edit-oil-down" value="Down" v-model="serviceOrder.entryOilLevel"/>
+          </div>
+          <div class="form-group">
+            <label for="edit-km">Odometer Km</label>
+            <input type="number" class="form-control" id="edit-km" v-model="serviceOrder.entryOdometerKm" />
+          </div>
+          <!--
+                  <div class="form-group">
+                    <label for="edit-name">Name</label>
+                    <input class="form-control" id="edit-name" v-model="serviceOrder.name" required/>
+                  </div>
+                  <div class="form-group">
+                    <label for="edit-description">Description</label>
+                    <textarea class="form-control" id="edit-description" rows="3" v-model="serviceOrder.description"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="edit-price">Price, <span class="glyphicon glyphicon-euro"></span></label>
+                    <input type="number" class="form-control" id="edit-price" v-model="serviceOrder.price"/>
+                  </div>
+          -->
+          <button type="submit" class="btn btn-primary">Save</button>
+          <a class="btn btn-default">
+            <router-link to="/">Cancel</router-link>
+          </a>
+        </form>
+      </div>
+    </template>
+
+    <template id="serviceOrder-delete">
+      <div>
+        <h2>Delete serviceOrder {{ serviceOrder.name }}</h2>
+        <form @submit="deleteServiceOrder">
+          <p>The action cannot be undone.</p>
+          <button type="submit" class="btn btn-danger">Delete</button>
+          <a class="btn btn-default">
+            <router-link to="/">Cancel</router-link>
+          </a>
+        </form>
+      </div>
+    </template>
+
+    <script src="ServiceOrders.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--
+    <link href="https://unpkg.com/bootstrap@4.6.0/dist/css/bootstrap.css" rel="stylesheet">
+    <script src="https://unpkg.com/browse/jquery@3.6.0/dist/jquery.js"></script>
+    <script src="https://unpkg.com/bootstrap@4.6.0/dist/js/bootstrap.js"></script>
+    <script src="https://unpkg.com/browse/popper@1.16.1/dist/popper.js"></script>
+    -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.js"></script>
+    <!--	
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.6.0/css/bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.6.0/js/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.js"></script>
+    -->
+    <script src="https://unpkg.com/vue@2.6.12/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.5.1/dist/vue-router.js"></script>
+    <script src="https://unpkg.com/axios@0.21.1/dist/axios.js"></script>
+
+    <title>Oficina Santa Cruz</title>
+    <link rel="shortcut icon" href="./img/logo-imagem.ico" />
+    <link href="main.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <div id="app" class="container container-fluid">
+      <div class="container">
+        <div class="row" >
+          <div class="col-lg-5">
+            <div class="branding">
+              <img src="./img/logo-pinguim.png" alt="Logo" :title="company" class="logo"/>
+            </div>
+            <h4>{{ company }}</h4>
+          </div>
+          <div class="col-lg-7">
+            <div class="row">
+              <div class="col-lg-12 bg-light">
+                <h3>{{ title }}</h3>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+
+                <!-- Navbar -->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                  <!-- Container wrapper -->
+                  <div class="container-fluid">
+                    <!-- Navbar brand -->
+                    <a class="navbar-brand" href="./index.html">
+                      <img src="./img/logo-imagem.png" :title="company" width="35%" height="35%" />
+                    </a>
+                    <!-- Toggle button -->
+                    <button
+                      class="navbar-toggle"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#navbarMainMenu"
+                      aria-controls="navbarMainMenu"
+                      aria-expanded="false"
+                      aria-label="Toggle navigation">
+                      <i class="fas fa-bars"></i>
+                    </button>
+                    <!-- Collapsible wrapper -->
+                    <div class="collapse navbar-collapse" id="navbarMainMenu">
+                      <!-- Left links -->
+                      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <!-- Navbar Home -->
+                        <li class="nav-item active">
+                          <a class="nav-link" aria-current="page" href="#">Home</a>
+                        </li>
+                        <!-- Navbar dropdown Services -->
+                        <li class="nav-item dropdown">
+                          <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="navbarService"
+                            role="button"
+                            data-toggle="dropdown"
+                            aria-expanded="false"
+                            >
+                            Services
+                          </a>
+                          <!-- Dropdown Manager -->
+                          <ul class="dropdown-menu" role="menu" aria-labelledby="navbarService">
+                            <li><a class="dropdown-item" href="ServiceOrders.html">Services Orders</a></li>
+                            <li><a class="dropdown-item" href="Autoparts.html">Autopart Buy Orders</a></li>
+                          </ul>
+                        </li>              
+                        <!-- Navbar dropdown Manager -->
+                        <li class="nav-item dropdown">
+                          <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="navbarManager"
+                            role="button"
+                            data-toggle="dropdown"
+                            aria-expanded="false"
+                            >
+                            Manager
+                          </a>
+                          <!-- Dropdown Manager -->
+                          <ul class="dropdown-menu" aria-labelledby="navbarManager">
+                            <li><a class="dropdown-item" href="Vehicles.html">Vehicles</a></li>
+                            <li><a class="dropdown-item" href="Biddings.html">Biddings</a></li>
+                          </ul>
+                        </li>
+
+                        <!-- Navbar dropdown Relationship -->
+                        <li class="nav-item dropdown">
+                          <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="navbarRelationship"
+                            role="button"
+                            data-toggle="dropdown"
+                            aria-expanded="false"
+                            >
+                            Relationship
+                          </a>
+                          <!-- Dropdown relationship -->
+                          <ul class="dropdown-menu" aria-labelledby="navbarRelationship">
+                            <li><a class="dropdown-item" href="PublicClients.html">Public clients</a></li>
+                            <li><a class="dropdown-item" href="LegalClients.html">Legal clients</a></li>
+                            <li><a class="dropdown-item" href="LegalClients.html">Clients</a></li>
+                            <li><hr class="dropdown-divider" /></li>
+                            <li>
+                              <a class="dropdown-item disabled" tabindex="-1" aria-disabled="true" href="#">Reserved</a>
+                            </li>
+                          </ul>
+                        </li>
+
+                        <!-- Navbar About -->
+                        <li class="nav-item">
+                          <a class="nav-link disabled" tabindex="-1" aria-disabled="true" href="#">About</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </nav>
+                <!-- Navbar -->
+              </div>
+            </div>
+            <div v-if='subtitle'>{{subtitle}}</div>
+          </div>
+        </div>
+      </div>
+      <router-view></router-view>
+    </div>
+
+    <template id="public-client-list">
+      <section>
+        <div class="actions">
+          <router-link class="btn btn-primary" :to="{name: 'public-client-add'}">
+            <span class="bi bi-plus"></span>
+            Add public client
+          </router-link>
+        </div>
+        <div class="filters row">
+          <div class="form-group col-sm-5">
+            <label for="search-element">Seach</label>
+            <input v-model="searchKey" class="form-control" id="search-element" requred/>
+          </div>
+        </div>
+        <div v-if="publicClients.length == 0"
+             class="alert alert-warning">No public client found.</div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">id</th>
+              <th scope="col">Public name</th>
+              <th scope="col">Fantasy name</th>
+              <th scope="col">Contact name</th>
+              <th scope="col">E-mail</th>
+              <th scope="col">Phone number</th>
+              <th scope="col">Contact support</th>
+              <th scope="colgroup" colspan="2">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="publicClient in filteredPublicClients">
+              <th scope="row">
+          <router-link :to="{name: 'public-client-view', params: {publicClient_id: publicClient.id}}">{{ publicClient.id }}</router-link>
+          </th>
+          <td>{{ publicClient.publicName }}</td>
+          <td>{{ publicClient.publicFantasyName }}</td>
+          <td>{{ publicClient.primaryContact }}</td>
+          <td>{{ publicClient.primaryEmail }}</td>
+          <td>{{ publicClient.primaryPhoneNumber }}</td>
+          <td>{{ publicClient.primarySupportContact }}</td>
+          <td>
+          <router-link class="btn btn-warning btn-xs" :to="{name: 'public-client-edit', params: {publicClient_id: publicClient.id}}">Edit</router-link>
+          </td>
+          <td>
+          <router-link class="btn btn-danger btn-xs" :to="{name: 'public-client-delete', params: {publicClient_id: publicClient.id}}">Delete</router-link>
+          </td>
+          </tr>
+          </tbody>
+        </table>
+      </section>
+    </template>
+
+    <template id="public-client-add">
+      <section>
+        <h2>Add new public client</h2>
+        <form v-on:submit.prevent="createPublicClient">
+          <div class="form-group">
+            <label for="add-public-name">Public name</label>
+            <input class="form-control" id="add-public-name" v-model="publicClient.publicName" required/>
+          </div>
+          <div class="form-group">
+            <label for="add-fantasy-name">Fantasy Name</label>
+            <input class="form-control" id="add-fantasy-name" v-model="publicClient.publicFantasyName"/>
+          </div>
+          <div class="form-group">
+            <label for="add-address-delivery">Address delivery</label>
+            <input class="form-control" id="add-address-delivery" v-model="publicClient.addressDelivery" required/>
+          </div>
+          <div class="form-group">
+            <label for="add-address-billing">Address billing</label>
+            <input class="form-control" id="add-address-billing" v-model="publicClient.addressBilling"/>
+          </div>
+          <div class="form-group">
+            <label for="add-primary-contact">Primary contact</label>
+            <input class="form-control" id="add-primary-contact" v-model="publicClient.primaryContact" required/>
+          </div>
+          <div class="form-group">
+            <label for="add-primary-email">Primary email</label>
+            <input class="form-control" id="add-fprimary-email" v-model="publicClient.primaryEmail"/>
+          </div>
+          <div class="form-group">
+            <label for="add-primary-phone-number">Primary phone number</label>
+            <input class="form-control" id="add-primary-phone-number" rows="10" v-model="publicClient.primaryPhoneNumber"/>
+          </div>
+          <div class="form-group">
+            <label for="add-primary-support-contact">Primary support contact</label>
+            <input class="form-control" id="add-primary-support-contact" v-model="publicClient.primarySupportContact"/>
+          </div>
+          <div class="form-group">
+            <label for="add-observations">Observations</label>
+            <textarea  rows="10" class="form-control" id="add-observation" v-model="publicClient.observations"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="add-status">Status</label>
+            <input type="checkbox" class="form-control" id="add-status" v-model="publicClient.status"/>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            <i class="bi bi.remove"></i>
+            Create
+          </button>
+          <button type="reset" class="btn btn-danger">
+            <router-link :to="{path: '/'}">Cancel</router-link>
+          </button>
+        </form>
+      </section>
+    </template>
+
+    <template id="public-client-view">
+      <section>
+        <h2>View public client</h2>
+        <div v-if="publicClient == undefined" class="alert alert-warning">Public client id {{ publicClient_id }} not found</div>
+        <div v-else>
+          <div>Id: {{ publicClient.Id }}</div>
+          <div>Public name: {{ publicClient.publicName }}</div>
+          <div>Fantasy name: {{ publicClient.publicFantasyName }}</div>
+          <div>Address delivery: {{ publicClient.addressDelivery }}</div>
+          <div>Address billing: {{ publicClient.addressBilling }}</div>
+          <div>Contact: {{ publicClient.primaryContact }}</div>
+          <div>E-mail: {{ publicClient.primaryEmail }}</div>
+          <div>Phone number: {{ publicClient.primaryPhoneNumber }}</div>
+          <div>Support contact: {{ publicClient.primarySupportContact }}</div>
+          <div>Observations: {{ publicClient.observations }}</div>
+          <div>Status: {{ publicClient.status ? "Active" : "Inactive" }}</div>
+          <br/>
+          <span class="bi bi-arrow-left" aria-hidden="true"></span>
+        </div>
+        <button class="btn btn-warning">
+          <router-link :to="{path: '/'}">
+            <i class="bi bi.list"></i>
+            Back
+          </router-link>
+        </button>
+      </section>
+    </template>
+
+    <template id="public-client-edit">
+      <section>
+        <h2>Edit public client</h2>
+        <div v-if="publicClient == undefined" class="alert alert-warning">Public client id {{ publicClient_id }} not found</div>
+        <form v-else v-on:submit.prevent="updatePublicClient">
+          <div class="form-group">
+            <label for="edit-public-name">Public name</label>
+            <input class="form-control" id="edit-public-name" v-model="publicClient.publicName" required/>
+          </div>
+          <div class="form-group">
+            <label for="edit-fantasy-name">Fantasy Name</label>
+            <input class="form-control" id="edit-fantasy-name" v-model="publicClient.publicFantasyName"></input>
+          </div>
+          <div class="form-group">
+            <label for="edit-address-delivery">Address delivery</label>
+            <input class="form-control" id="edit-address-delivery" v-model="publicClient.addressDelivery" required/>
+          </div>
+          <div class="form-group">
+            <label for="edit-address-billing">Address billing</label>
+            <input class="form-control" id="edit-address-billing" v-model="publicClient.addressBilling"></input>
+          </div>
+          <div class="form-group">
+            <label for="edit-primary-contact">Primary contact</label>
+            <input class="form-control" id="edit-primary-contact" v-model="publicClient.primaryContact" required/>
+          </div>
+          <div class="form-group">
+            <label for="edit-primary-email">Primary email</label>
+            <input class="form-control" id="edit-fprimary-email" v-model="publicClient.primaryEmail"></input>
+          </div>
+          <div class="form-group">
+            <label for="edit-primary-phone-number">Primary phone number</label>
+            <input class="form-control" id="edit-primary-phone-number" rows="10" v-model="publicClient.primaryPhoneNumber"></input>
+          </div>
+          <div class="form-group">
+            <label for="edit-primary-support-contact">Primary support contact</label>
+            <input class="form-control" id="edit-primary-support-contact" v-model="publicClient.primarySupportContact"/>
+          </div>
+          <div class="form-group">
+            <label for="edit-observations">Observations</label>
+            <textarea  rows="10" class="form-control" id="edit-observation" v-model="publicClient.observations"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="edit-status">Status</label>
+            <input type="checkbox" class="form-control" id="edit-status" v-model="publicClient.status"></input>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            <i class="bi bi.pencil"></i>
+            Update
+          </button>
+          <button type="submit" class="btn btn-danger">
+            <router-link :to="{path: '/'}">
+              <i class="bi bi.x"></i>
+              Cancel
+            </router-link>
+          </button>
+        </form>
+      </section>
+    </template>
+
+    <template id="public-client-delete">
+      <section>
+        <h2>Delete public client {{ publicClient.name }} (id:{{ publicClient.id }})</h2>
+        <form v-on:submit.prevent="deletePublicClient">
+          <p>The action cannot be undone.</p>
+          <button type="submit" class="btn btn-danger">
+            <i class="bi bi.trash"></i>
+            Delete
+          </button>
+          <button type="submit" class="btn btn-info">
+            <router-link :to="{path: '/'}">
+              <i class="bi bi.x"></i>
+              Cancel
+            </router-link>
+          </button>
+        </form>
+      </section>
+    </template>
+
+    <script src="PublicClients.js"></script>
+
+  </body>
+</html>

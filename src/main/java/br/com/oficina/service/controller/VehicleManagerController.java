@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author moura
  */
 @RestController
-@RequestMapping("/api/vehicles")
+@RequestMapping("/api/manager/vehicle")
 public class VehicleManagerController {
 
 	@Autowired
@@ -74,6 +74,7 @@ public class VehicleManagerController {
 	@PostMapping
 	public ResponseEntity<VehicleManagerDTO> create(@RequestBody VehicleManagerDTO vehicleDto) {
 
+            System.out.print("vehicleDto: " + vehicleDto.toString());
             // convert DTO to entity
             VehicleEntity request = modelMapper.map(vehicleDto, VehicleEntity.class);
 

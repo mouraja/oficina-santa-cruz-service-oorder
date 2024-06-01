@@ -13,11 +13,9 @@ import lombok.Data;
  */
 @Data
 public class PublicClientDTO {
-
     private Long id;
-
     private String publicName;
-
     private String publicFantasyName;
-
+    private String observations;    
+    private Boolean status;
 }
